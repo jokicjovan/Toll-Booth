@@ -15,7 +15,7 @@ namespace TollBoothManagementSystem.Core.Features.TransactionManagement.Model
         public VehicleType VehicleType { get => _vehicleType; set => OnPropertyChanged(ref _vehicleType, value); }
 
         private Currency _currency;
-        public Currency Currency { get => _currency; set => OnPropertyChanged(ref _currency, value); }
+        public virtual Currency Currency { get => _currency; set => OnPropertyChanged(ref _currency, value); }
 
         #endregion
 
