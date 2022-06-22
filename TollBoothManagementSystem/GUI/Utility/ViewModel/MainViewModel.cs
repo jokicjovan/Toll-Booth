@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Windows;
 using TollBoothManagementSystem.GUI.Features.Navigation;
 using TollBoothManagementSystem.GUI.Utility.WindowTitle;
 
@@ -20,7 +16,9 @@ namespace TollBoothManagementSystem.GUI.Utility.ViewModel
             _viewTitle = TitleManager.Title;
             OnPropertyChanged(nameof(ViewTitle));
         }
+
         public LoginViewModel Lvm { get; set; }
+
         public MainViewModel(LoginViewModel lvm)
         {
             TitleManager.TitleChanged += OnTitleChanged;

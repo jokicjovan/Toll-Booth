@@ -5,11 +5,15 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
-    <ApplicationIcon>GUI\Utility\Resources\road.ico</ApplicationIcon>
+    <ApplicationIcon>GUI\Utility\Resources\icon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="GUI\Utility\Resources\road.ico" />
+    <None Remove="GUI\Utility\Resources\logoImage.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="GUI\Utility\Resources\icon.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,6 +26,12 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Ninject" Version="3.3.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="GUI\Utility\Resources\logoImage.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

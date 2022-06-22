@@ -1,5 +1,6 @@
 ﻿using Ninject.Modules;
 using TollBoothManagementSystem.Core.Persistence;
+using TollBoothManagementSystem.GUI.Features.Navigation;
 
 namespace TollBoothManagementSystem.Core.Ninject
 {
@@ -8,7 +9,7 @@ namespace TollBoothManagementSystem.Core.Ninject
         public override void Load()
         {
             Bind<DatabaseContext>().To<DatabaseContext>().InSingletonScope().WithConstructorArgument(0);
-            //Bind<LoginViewModel>().To<LoginViewModel>();
+            Bind<LoginViewModel>().To<LoginViewModel>();
         }
     }
 }

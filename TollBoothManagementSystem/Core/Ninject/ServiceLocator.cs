@@ -1,4 +1,5 @@
 ﻿using Ninject;
+using TollBoothManagementSystem.GUI.Utility.ViewModel;
 
 namespace TollBoothManagementSystem.Core.Ninject
 {
@@ -8,10 +9,10 @@ namespace TollBoothManagementSystem.Core.Ninject
 
         public static T Get<T>() => _kernel.Get<T>();
 
-        //public MainViewModel MainViewModel
-        //{
-        //    get => _kernel.Get<MainViewModel>();
-        //}
+        public MainViewModel MainViewModel
+        {
+            get => _kernel.Get<MainViewModel>();
+        }
 
         public static void Reset()
         {

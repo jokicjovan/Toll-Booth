@@ -8,8 +8,8 @@
         mc:Ignorable="d"
         ResizeMode="CanMinimize"
         Title="{Binding ViewTitle}" Height="700" Width="1200">
-    
-    
+
+
     <Window.Resources>
         <ninject:ServiceLocator x:Key="ServiceLocator" />
     </Window.Resources>
@@ -17,6 +17,7 @@
     <Window.DataContext>
         <Binding Path="MainViewModel" Source="{StaticResource ServiceLocator}" />
     </Window.DataContext>
+
     <Grid>
         <ContentControl Content="{Binding CurrentViewModel}"/>
     </Grid>
