@@ -18,19 +18,16 @@ namespace TollBoothManagementSystem.Core.Persistence
             #region Users
 
             // Administrator
-            var ad1 = new Administrator { FirstName = "Velibor", LastName = "Stojkovic", EmailAddress = "veliborstojkovic@example.com", Password = "test123", DateOfBirth = DateTime.Now.AddYears(-40), Role = Role.Administrator };
-            
+            var ad1 = new Administrator { FirstName = "Velibor", LastName = "Stojkovic", EmailAddress = "veliborstojkovic@example.com", Password = "test123", DateOfBirth = DateTime.Now.AddYears(-40), Role = Role.Administrator, TollStation = null };
             context.Administrators.Add(ad1);
 
             // Manager
             var mn1 = new Manager { FirstName = "Igor", LastName = "Mirkovic", EmailAddress = "igormirkovic@example.com", Password = "test123", DateOfBirth = DateTime.Now.AddYears(-34), Role = Role.Manager };
 
-            context.Managers.Add(mn1);
-
             // Referent
             var rf1 = new Referent { FirstName = "Nikola", LastName = "Petrovic", EmailAddress = "nikolapetrovic@example.com", Password = "test123", DateOfBirth = DateTime.Now.AddYears(-25), Role = Role.Referent };
 
-            context.Referents.Add(rf1);
+            
 
             #endregion
 
@@ -525,6 +522,12 @@ namespace TollBoothManagementSystem.Core.Persistence
             context.TollStations.Add(ts24);
             context.TollStations.Add(ts25);
 
+            mn1.TollStation = ts01;
+            rf1.TollStation = ts01;
+
+            context.Managers.Add(mn1);
+            context.Referents.Add(rf1);
+
             #endregion
 
             #region Section
@@ -591,6 +594,16 @@ namespace TollBoothManagementSystem.Core.Persistence
 
             #endregion
 
+            #region PriceList
+
+            DateTime start = new DateTime(DateTime.Now.Year, 1, 1);
+            DateTime end = new DateTime(DateTime.Now.Year, 12, 31);
+
+            var priceL1 = new PriceList { ActivationDate = start, ExpirationDate = end, Section = sec1 };
+            var priceL2 = new PriceList { ActivationDate = start, ExpirationDate = end, Section = sec2 };
+            var priceL3 = new PriceList { ActivationDate = start, ExpirationDate = end, Section = sec3 };
+
+            #endregion
 
             context.SaveChanges();
         }
