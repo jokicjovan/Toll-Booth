@@ -23,8 +23,8 @@ namespace TollBoothManagementSystem.Core.Features.Infrastructure.Model
         private IList<TollBooth> _tollBooths;
         public virtual IList<TollBooth> TollBooths { get => _tollBooths; set => OnPropertyChanged(ref _tollBooths, value); }
 
-        private IList<User> _employees;
-        public virtual IList<User> Employees { get => _employees; set => OnPropertyChanged(ref _employees, value); }
+        private IList<Employee> _employees;
+        public virtual IList<Employee> Employees { get => _employees; set => OnPropertyChanged(ref _employees, value); }
 
         #endregion
 

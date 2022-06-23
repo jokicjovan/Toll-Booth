@@ -1,6 +1,6 @@
 ﻿namespace TollBoothManagementSystem.Core.Features.UserManagement.Model
 {
-    public class Referent : User
+    public class Referent : Employee
     {
         #region Constructors
 
