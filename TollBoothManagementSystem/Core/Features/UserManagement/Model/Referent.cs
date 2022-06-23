@@ -3,6 +3,7 @@
     public class Referent : User
     {
         #region Constructors
+
         public Referent() { }
 
         public Referent(Referent other) : base(other)
