@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using TollBoothManagementSystem.Core.Features.General;
+using TollBoothManagementSystem.Core.Features.General.Model;
 using TollBoothManagementSystem.Core.Features.UserManagement.Model;
 using TollBoothManagementSystem.Core.Utility.HelperClasses;
 
