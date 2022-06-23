@@ -23,8 +23,6 @@ namespace TollBoothManagementSystem.Core.Persistence
             // Referent
             var rf1 = new Referent { FirstName = "Nikola", LastName = "Petrovic", EmailAddress = "nikolapetrovic@example.com", Password = "test123", DateOfBirth = DateTime.Now.AddYears(-25), Role = Role.Referent };
 
-            
-
             #endregion
 
             #region Locations

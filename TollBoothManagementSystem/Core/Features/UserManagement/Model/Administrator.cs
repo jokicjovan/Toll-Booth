@@ -4,6 +4,7 @@
     {
 
         #region Constructors
+
         public Administrator() { }
 
         public Administrator(Administrator other) : base(other)
