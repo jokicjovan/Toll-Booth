@@ -1,12 +1,12 @@
 ﻿namespace TollBoothManagementSystem.Core.Features.UserManagement.Model
 {
-    public class Administrator : User
+    public class Employee : User
     {
         #region Constructors
 
-        public Administrator() { }
+        public Employee() { }
 
-        public Administrator(Administrator other) : base(other)
+        public Employee(Employee other) : base(other)
         {
 
         }

@@ -486,14 +486,7 @@ namespace TollBoothManagementSystem.Migrations
                     b.HasDiscriminator().HasValue("Administrator");
                 });
 
-            modelBuilder.Entity("TollBoothManagementSystem.Core.Features.UserManagement.Model.Manager", b =>
-                {
-                    b.HasBaseType("TollBoothManagementSystem.Core.Features.UserManagement.Model.User");
-
-                    b.HasDiscriminator().HasValue("Manager");
-                });
-
-            modelBuilder.Entity("TollBoothManagementSystem.Core.Features.UserManagement.Model.Referent", b =>
+            modelBuilder.Entity("TollBoothManagementSystem.Core.Features.UserManagement.Model.Employee", b =>
                 {
                     b.HasBaseType("TollBoothManagementSystem.Core.Features.UserManagement.Model.User");
 
@@ -501,6 +494,20 @@ namespace TollBoothManagementSystem.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasIndex("TollStationId");
+
+                    b.HasDiscriminator().HasValue("Employee");
+                });
+
+            modelBuilder.Entity("TollBoothManagementSystem.Core.Features.UserManagement.Model.Manager", b =>
+                {
+                    b.HasBaseType("TollBoothManagementSystem.Core.Features.UserManagement.Model.Employee");
+
+                    b.HasDiscriminator().HasValue("Manager");
+                });
+
+            modelBuilder.Entity("TollBoothManagementSystem.Core.Features.UserManagement.Model.Referent", b =>
+                {
+                    b.HasBaseType("TollBoothManagementSystem.Core.Features.UserManagement.Model.Employee");
 
                     b.HasDiscriminator().HasValue("Referent");
                 });
@@ -701,7 +708,7 @@ namespace TollBoothManagementSystem.Migrations
                     b.Navigation("ElectronicTollCollection");
                 });
 
-            modelBuilder.Entity("TollBoothManagementSystem.Core.Features.UserManagement.Model.Referent", b =>
+            modelBuilder.Entity("TollBoothManagementSystem.Core.Features.UserManagement.Model.Employee", b =>
                 {
                     b.HasOne("TollBoothManagementSystem.Core.Features.Infrastructure.Model.TollStation", null)
                         .WithMany("Employees")

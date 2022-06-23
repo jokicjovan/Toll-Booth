@@ -221,7 +221,7 @@ namespace TollBoothManagementSystem.Core.Persistence
 
             #region TollStation
 
-            var ts01 = new TollStation { Location = loc01, Name = loc01.Name, Boss = rf1, TollBooths = new List<TollBooth> { tb001, tb002, tb003, tb004 }, Employees = new List<User> { rf1, mn1 } };
+            var ts01 = new TollStation { Location = loc01, Name = loc01.Name, Boss = rf1, TollBooths = new List<TollBooth> { tb001, tb002, tb003, tb004 }, Employees = new List<Employee> { rf1, mn1 } };
             tb001.TollStation = ts01;
             tb002.TollStation = ts01;
             tb003.TollStation = ts01;
