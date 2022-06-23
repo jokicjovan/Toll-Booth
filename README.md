@@ -1,1 +1,1 @@
-# Toll-Booth - Projektni zadatak iz predmeta specifikacija i modeliranje sistema
+# Toll-Booth - Projektni zadatak iz predmeta specifikacija i modeliranje softvera
