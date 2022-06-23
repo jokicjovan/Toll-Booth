@@ -1,14 +1,9 @@
-﻿using TollBoothManagementSystem.Core.Features.UserManagement.Model;
-using TollBoothManagementSystem.Core.Utility;
+﻿using TollBoothManagementSystem.Core.Features.UserManagement.Repository;
 
 namespace TollBoothManagementSystem.Core.Features.UserManagement.Service
 {
-    public interface IUserService : ICrudRepository<User>
+    public interface IUserService : IUserRepository
     {
-        public User Authenticate(string email, string password);
 
-        public bool AlreadyInUse(string email);
-
-        public bool IsEmailUsed(string email);
     }
 }
