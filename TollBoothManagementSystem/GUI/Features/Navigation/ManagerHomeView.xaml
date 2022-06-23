@@ -10,6 +10,49 @@
              d:DesignHeight="450" d:DesignWidth="800"
              Background="White">
     <Grid>
-            
+        <Border Background="#5484ac">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="75" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="{Binding FirstName, StringFormat='Hello {0}'}"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"
+                       Foreground="White"
+                       FontSize="22"
+                       Margin="20,0,0,0" />
+
+                    <StackPanel Grid.Row="1">
+                        <RadioButton Content="🧑‍💼 Employee management"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding UserCrudCommand}" IsChecked="True"/>
+                    </StackPanel>
+
+                    <Button Content="Log out"
+                    Grid.Row="2"
+                    VerticalAlignment="Bottom"
+                    Command="{Binding LogOutCommand}"
+                    Margin="10,0,0,20"/>
+                </Grid>
+
+                <ContentControl Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="10"
+                            Content="{Binding CurrentViewModel}"/>
+
+            </Grid>
+        </Border>
     </Grid>
 </UserControl>

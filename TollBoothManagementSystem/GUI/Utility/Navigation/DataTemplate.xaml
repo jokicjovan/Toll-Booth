@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:navigation="clr-namespace:TollBoothManagementSystem.GUI.Features.Navigation">
+                    xmlns:navigation="clr-namespace:TollBoothManagementSystem.GUI.Features.Navigation"
+                    xmlns:usermanagement="clr-namespace:TollBoothManagementSystem.GUI.Features.UserManagement">
 
     <DataTemplate DataType="{x:Type navigation:LoginViewModel}">
         <navigation:LoginView/>
@@ -16,6 +17,10 @@
 
     <DataTemplate DataType="{x:Type navigation:ReferentHomeViewModel}">
         <navigation:ReferentHomeView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type usermanagement:EmployeesViewModel}">
+        <usermanagement:EmployeesView/>
     </DataTemplate>
 
 </ResourceDictionary>

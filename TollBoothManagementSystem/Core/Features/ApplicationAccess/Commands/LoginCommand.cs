@@ -51,18 +51,21 @@ namespace TollBoothManagementSystem.Core.Features.ApplicationAccess.Commands
                         EventBus.FireEvent("ManagerLogin");
                         TitleManager.Title = "Manager";
                         break;
+
                     case Role.Administrator:
-                        Administrator as = (Administrator)user;
-                        GlobalStore.AddObject("LoggedUser", as);
+                        Administrator admin = (Administrator)user;
+                        GlobalStore.AddObject("LoggedUser", admin);
                         EventBus.FireEvent("AdministratorLogin");
                         TitleManager.Title = "Referent";
                         break;
+
                     case Role.Referent:
                         Referent rf = (Referent)user;
                         GlobalStore.AddObject("LoggedUser", rf);
                         EventBus.FireEvent("PatientLogin");
                         TitleManager.Title = "Referent";
                         break;
+
                     default:
                         MessageBox.Show("ERR");
                         return;
