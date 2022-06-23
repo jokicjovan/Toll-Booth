@@ -1,6 +1,6 @@
 ﻿using TollBoothManagementSystem.Core.Utility.HelperClasses;
 
-namespace TollBoothManagementSystem.Core.Features.General
+namespace TollBoothManagementSystem.Core.Features.General.Model
 {
     public class Location : BaseObservableEntity
     {
