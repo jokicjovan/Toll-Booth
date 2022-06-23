@@ -14,15 +14,18 @@ namespace TollBoothManagementSystem.Core.Persistence
             #region Users
 
             // Administrator
-            var ad1 = new Administrator { FirstName = "Velibor", LastName = "Stojkovic", EmailAddress = "veliborstojkovic@example.com", Password = "test123", DateOfBirth = DateTime.Now.AddYears(-40), Role = Role.Administrator, TollStation = null };
-            context.Administrators.Add(ad1);
+            var ad1 = new Administrator { FirstName = "Velibor", LastName = "Stojkovic", EmailAddress = "veliborstojkovic@example.com", Password = "test123", DateOfBirth = DateTime.Now.AddYears(-40), Role = Role.Administrator };
+            context.Users.Add(ad1);
 
             // Manager
             var mn1 = new Manager { FirstName = "Igor", LastName = "Mirkovic", EmailAddress = "igormirkovic@example.com", Password = "test123", DateOfBirth = DateTime.Now.AddYears(-34), Role = Role.Manager };
-
+            context.Users.Add(mn1);
+            
             // Referent
             var rf1 = new Referent { FirstName = "Nikola", LastName = "Petrovic", EmailAddress = "nikolapetrovic@example.com", Password = "test123", DateOfBirth = DateTime.Now.AddYears(-25), Role = Role.Referent };
+            context.Users.Add(rf1);
 
+            context.SaveChanges();
             #endregion
 
             #region Locations
@@ -81,140 +84,144 @@ namespace TollBoothManagementSystem.Core.Persistence
             context.Locations.Add(loc24);
             context.Locations.Add(loc25);
 
+            context.SaveChanges();
+
             #endregion
 
             #region TollBooth
 
-            var tb001 = new TollBooth { IsETC = true, IsOpen = true };
-            var tb002 = new TollBooth { IsETC = true, IsOpen = false };
-            var tb003 = new TollBooth { IsETC = false, IsOpen = true };
-            var tb004 = new TollBooth { IsETC = false, IsOpen = false };
+            var tb001 = new TollBooth { IsETC = true, IsOpen = true, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb002 = new TollBooth { IsETC = true, IsOpen = false, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb003 = new TollBooth { IsETC = false, IsOpen = true, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb004 = new TollBooth { IsETC = false, IsOpen = false, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
 
-            var tb011 = new TollBooth { IsETC = true, IsOpen = true };
-            var tb012 = new TollBooth { IsETC = true, IsOpen = false };
-            var tb013 = new TollBooth { IsETC = false, IsOpen = true };
-            var tb014 = new TollBooth { IsETC = false, IsOpen = false };
+            var tb011 = new TollBooth { IsETC = true, IsOpen = true, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb012 = new TollBooth { IsETC = true, IsOpen = false, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb013 = new TollBooth { IsETC = false, IsOpen = true, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb014 = new TollBooth { IsETC = false, IsOpen = false, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
 
-            var tb021 = new TollBooth { IsETC = true, IsOpen = true };
-            var tb022 = new TollBooth { IsETC = true, IsOpen = false };
-            var tb023 = new TollBooth { IsETC = false, IsOpen = true };
-            var tb024 = new TollBooth { IsETC = false, IsOpen = false };
+            var tb021 = new TollBooth { IsETC = true, IsOpen = true, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb022 = new TollBooth { IsETC = true, IsOpen = false, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb023 = new TollBooth { IsETC = false, IsOpen = true, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb024 = new TollBooth { IsETC = false, IsOpen = false, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
 
-            var tb031 = new TollBooth { IsETC = true, IsOpen = true };
-            var tb032 = new TollBooth { IsETC = true, IsOpen = false };
-            var tb033 = new TollBooth { IsETC = false, IsOpen = true };
-            var tb034 = new TollBooth { IsETC = false, IsOpen = false };
+            var tb031 = new TollBooth { IsETC = true, IsOpen = true, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb032 = new TollBooth { IsETC = true, IsOpen = false, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb033 = new TollBooth { IsETC = false, IsOpen = true, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb034 = new TollBooth { IsETC = false, IsOpen = false, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
 
-            var tb041 = new TollBooth { IsETC = true, IsOpen = true };
-            var tb042 = new TollBooth { IsETC = true, IsOpen = false };
-            var tb043 = new TollBooth { IsETC = false, IsOpen = true };
-            var tb044 = new TollBooth { IsETC = false, IsOpen = false };
+            var tb041 = new TollBooth { IsETC = true, IsOpen = true, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb042 = new TollBooth { IsETC = true, IsOpen = false, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb043 = new TollBooth { IsETC = false, IsOpen = true, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb044 = new TollBooth { IsETC = false, IsOpen = false, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
 
-            var tb051 = new TollBooth { IsETC = true, IsOpen = true };
-            var tb052 = new TollBooth { IsETC = true, IsOpen = false };
-            var tb053 = new TollBooth { IsETC = false, IsOpen = true };
-            var tb054 = new TollBooth { IsETC = false, IsOpen = false };
+            var tb051 = new TollBooth { IsETC = true, IsOpen = true, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb052 = new TollBooth { IsETC = true, IsOpen = false, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb053 = new TollBooth { IsETC = false, IsOpen = true, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb054 = new TollBooth { IsETC = false, IsOpen = false, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
 
-            var tb061 = new TollBooth { IsETC = true, IsOpen = true };
-            var tb062 = new TollBooth { IsETC = true, IsOpen = false };
-            var tb063 = new TollBooth { IsETC = false, IsOpen = true };
-            var tb064 = new TollBooth { IsETC = false, IsOpen = false };
+            var tb061 = new TollBooth { IsETC = true, IsOpen = true, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb062 = new TollBooth { IsETC = true, IsOpen = false, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb063 = new TollBooth { IsETC = false, IsOpen = true, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb064 = new TollBooth { IsETC = false, IsOpen = false, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
 
-            var tb071 = new TollBooth { IsETC = true, IsOpen = true };
-            var tb072 = new TollBooth { IsETC = true, IsOpen = false };
-            var tb073 = new TollBooth { IsETC = false, IsOpen = true };
-            var tb074 = new TollBooth { IsETC = false, IsOpen = false };
+            var tb071 = new TollBooth { IsETC = true, IsOpen = true, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb072 = new TollBooth { IsETC = true, IsOpen = false, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb073 = new TollBooth { IsETC = false, IsOpen = true, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb074 = new TollBooth { IsETC = false, IsOpen = false, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
 
-            var tb081 = new TollBooth { IsETC = true, IsOpen = true };
-            var tb082 = new TollBooth { IsETC = true, IsOpen = false };
-            var tb083 = new TollBooth { IsETC = false, IsOpen = true };
-            var tb084 = new TollBooth { IsETC = false, IsOpen = false };
+            var tb081 = new TollBooth { IsETC = true, IsOpen = true, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb082 = new TollBooth { IsETC = true, IsOpen = false, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb083 = new TollBooth { IsETC = false, IsOpen = true, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb084 = new TollBooth { IsETC = false, IsOpen = false, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
 
-            var tb091 = new TollBooth { IsETC = true, IsOpen = true };
-            var tb092 = new TollBooth { IsETC = true, IsOpen = false };
-            var tb093 = new TollBooth { IsETC = false, IsOpen = true };
-            var tb094 = new TollBooth { IsETC = false, IsOpen = false };
+            var tb091 = new TollBooth { IsETC = true, IsOpen = true, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb092 = new TollBooth { IsETC = true, IsOpen = false, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb093 = new TollBooth { IsETC = false, IsOpen = true, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb094 = new TollBooth { IsETC = false, IsOpen = false, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
 
-            var tb101 = new TollBooth { IsETC = true, IsOpen = true };
-            var tb102 = new TollBooth { IsETC = true, IsOpen = false };
-            var tb103 = new TollBooth { IsETC = false, IsOpen = true };
-            var tb104 = new TollBooth { IsETC = false, IsOpen = false };
+            var tb101 = new TollBooth { IsETC = true, IsOpen = true, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb102 = new TollBooth { IsETC = true, IsOpen = false, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb103 = new TollBooth { IsETC = false, IsOpen = true, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb104 = new TollBooth { IsETC = false, IsOpen = false, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
 
-            var tb111 = new TollBooth { IsETC = true, IsOpen = true };
-            var tb112 = new TollBooth { IsETC = true, IsOpen = false };
-            var tb113 = new TollBooth { IsETC = false, IsOpen = true };
-            var tb114 = new TollBooth { IsETC = false, IsOpen = false };
+            var tb111 = new TollBooth { IsETC = true, IsOpen = true, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb112 = new TollBooth { IsETC = true, IsOpen = false, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb113 = new TollBooth { IsETC = false, IsOpen = true, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb114 = new TollBooth { IsETC = false, IsOpen = false, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
 
-            var tb121 = new TollBooth { IsETC = true, IsOpen = true };
-            var tb122 = new TollBooth { IsETC = true, IsOpen = false };
-            var tb123 = new TollBooth { IsETC = false, IsOpen = true };
-            var tb124 = new TollBooth { IsETC = false, IsOpen = false };
+            var tb121 = new TollBooth { IsETC = true, IsOpen = true, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb122 = new TollBooth { IsETC = true, IsOpen = false, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb123 = new TollBooth { IsETC = false, IsOpen = true, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb124 = new TollBooth { IsETC = false, IsOpen = false, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
 
-            var tb131 = new TollBooth { IsETC = true, IsOpen = true };
-            var tb132 = new TollBooth { IsETC = true, IsOpen = false };
-            var tb133 = new TollBooth { IsETC = false, IsOpen = true };
-            var tb134 = new TollBooth { IsETC = false, IsOpen = false };
+            var tb131 = new TollBooth { IsETC = true, IsOpen = true, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb132 = new TollBooth { IsETC = true, IsOpen = false, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb133 = new TollBooth { IsETC = false, IsOpen = true, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb134 = new TollBooth { IsETC = false, IsOpen = false, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
 
-            var tb141 = new TollBooth { IsETC = true, IsOpen = true };
-            var tb142 = new TollBooth { IsETC = true, IsOpen = false };
-            var tb143 = new TollBooth { IsETC = false, IsOpen = true };
-            var tb144 = new TollBooth { IsETC = false, IsOpen = false };
+            var tb141 = new TollBooth { IsETC = true, IsOpen = true, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb142 = new TollBooth { IsETC = true, IsOpen = false, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb143 = new TollBooth { IsETC = false, IsOpen = true, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb144 = new TollBooth { IsETC = false, IsOpen = false, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
 
-            var tb151 = new TollBooth { IsETC = true, IsOpen = true };
-            var tb152 = new TollBooth { IsETC = true, IsOpen = false };
-            var tb153 = new TollBooth { IsETC = false, IsOpen = true };
-            var tb154 = new TollBooth { IsETC = false, IsOpen = false };
+            var tb151 = new TollBooth { IsETC = true, IsOpen = true, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb152 = new TollBooth { IsETC = true, IsOpen = false, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb153 = new TollBooth { IsETC = false, IsOpen = true, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb154 = new TollBooth { IsETC = false, IsOpen = false, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
 
-            var tb161 = new TollBooth { IsETC = true, IsOpen = true };
-            var tb162 = new TollBooth { IsETC = true, IsOpen = false };
-            var tb163 = new TollBooth { IsETC = false, IsOpen = true };
-            var tb164 = new TollBooth { IsETC = false, IsOpen = false };
+            var tb161 = new TollBooth { IsETC = true, IsOpen = true, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb162 = new TollBooth { IsETC = true, IsOpen = false, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb163 = new TollBooth { IsETC = false, IsOpen = true, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb164 = new TollBooth { IsETC = false, IsOpen = false, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
 
-            var tb171 = new TollBooth { IsETC = true, IsOpen = true };
-            var tb172 = new TollBooth { IsETC = true, IsOpen = false };
-            var tb173 = new TollBooth { IsETC = false, IsOpen = true };
-            var tb174 = new TollBooth { IsETC = false, IsOpen = false };
+            var tb171 = new TollBooth { IsETC = true, IsOpen = true, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb172 = new TollBooth { IsETC = true, IsOpen = false, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb173 = new TollBooth { IsETC = false, IsOpen = true, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb174 = new TollBooth { IsETC = false, IsOpen = false, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
 
-            var tb181 = new TollBooth { IsETC = true, IsOpen = true };
-            var tb182 = new TollBooth { IsETC = true, IsOpen = false };
-            var tb183 = new TollBooth { IsETC = false, IsOpen = true };
-            var tb184 = new TollBooth { IsETC = false, IsOpen = false };
+            var tb181 = new TollBooth { IsETC = true, IsOpen = true, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb182 = new TollBooth { IsETC = true, IsOpen = false, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb183 = new TollBooth { IsETC = false, IsOpen = true, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb184 = new TollBooth { IsETC = false, IsOpen = false, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
 
-            var tb191 = new TollBooth { IsETC = true, IsOpen = true };
-            var tb192 = new TollBooth { IsETC = true, IsOpen = false };
-            var tb193 = new TollBooth { IsETC = false, IsOpen = true };
-            var tb194 = new TollBooth { IsETC = false, IsOpen = false };
+            var tb191 = new TollBooth { IsETC = true, IsOpen = true, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb192 = new TollBooth { IsETC = true, IsOpen = false, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb193 = new TollBooth { IsETC = false, IsOpen = true, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb194 = new TollBooth { IsETC = false, IsOpen = false, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
 
-            var tb201 = new TollBooth { IsETC = true, IsOpen = true };
-            var tb202 = new TollBooth { IsETC = true, IsOpen = false };
-            var tb203 = new TollBooth { IsETC = false, IsOpen = true };
-            var tb204 = new TollBooth { IsETC = false, IsOpen = false };
+            var tb201 = new TollBooth { IsETC = true, IsOpen = true, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb202 = new TollBooth { IsETC = true, IsOpen = false, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb203 = new TollBooth { IsETC = false, IsOpen = true, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb204 = new TollBooth { IsETC = false, IsOpen = false, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
 
-            var tb211 = new TollBooth { IsETC = true, IsOpen = true };
-            var tb212 = new TollBooth { IsETC = true, IsOpen = false };
-            var tb213 = new TollBooth { IsETC = false, IsOpen = true };
-            var tb214 = new TollBooth { IsETC = false, IsOpen = false };
+            var tb211 = new TollBooth { IsETC = true, IsOpen = true, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb212 = new TollBooth { IsETC = true, IsOpen = false, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb213 = new TollBooth { IsETC = false, IsOpen = true, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb214 = new TollBooth { IsETC = false, IsOpen = false, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
 
-            var tb221 = new TollBooth { IsETC = true, IsOpen = true };
-            var tb222 = new TollBooth { IsETC = true, IsOpen = false };
-            var tb223 = new TollBooth { IsETC = false, IsOpen = true };
-            var tb224 = new TollBooth { IsETC = false, IsOpen = false };
+            var tb221 = new TollBooth { IsETC = true, IsOpen = true, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb222 = new TollBooth { IsETC = true, IsOpen = false, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb223 = new TollBooth { IsETC = false, IsOpen = true, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb224 = new TollBooth { IsETC = false, IsOpen = false, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
 
-            var tb231 = new TollBooth { IsETC = true, IsOpen = true };
-            var tb232 = new TollBooth { IsETC = true, IsOpen = false };
-            var tb233 = new TollBooth { IsETC = false, IsOpen = true };
-            var tb234 = new TollBooth { IsETC = false, IsOpen = false };
+            var tb231 = new TollBooth { IsETC = true, IsOpen = true, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb232 = new TollBooth { IsETC = true, IsOpen = false, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb233 = new TollBooth { IsETC = false, IsOpen = true, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb234 = new TollBooth { IsETC = false, IsOpen = false, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
 
-            var tb241 = new TollBooth { IsETC = true, IsOpen = true };
-            var tb242 = new TollBooth { IsETC = true, IsOpen = false };
-            var tb243 = new TollBooth { IsETC = false, IsOpen = true };
-            var tb244 = new TollBooth { IsETC = false, IsOpen = false };
+            var tb241 = new TollBooth { IsETC = true, IsOpen = true, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb242 = new TollBooth { IsETC = true, IsOpen = false, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb243 = new TollBooth { IsETC = false, IsOpen = true, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+            var tb244 = new TollBooth { IsETC = false, IsOpen = false, IsTrafficLightFunctional = true, IsTollGateFunctional = true };
+
+            context.SaveChanges();
 
             #endregion
 
             #region TollStation
 
-            var ts01 = new TollStation { Location = loc01, Name = loc01.Name, Boss = rf1, TollBooths = new List<TollBooth> { tb001, tb002, tb003, tb004 } };
+            var ts01 = new TollStation { Location = loc01, Name = loc01.Name, Boss = rf1, TollBooths = new List<TollBooth> { tb001, tb002, tb003, tb004 }, Employees = new List<User> { rf1, mn1 } };
             tb001.TollStation = ts01;
             tb002.TollStation = ts01;
             tb003.TollStation = ts01;
@@ -516,11 +523,7 @@ namespace TollBoothManagementSystem.Core.Persistence
             context.TollStations.Add(ts24);
             context.TollStations.Add(ts25);
 
-            mn1.TollStation = ts01;
-            rf1.TollStation = ts01;
-
-            context.Managers.Add(mn1);
-            context.Referents.Add(rf1);
+            context.SaveChanges();
 
             #endregion
 
@@ -533,6 +536,8 @@ namespace TollBoothManagementSystem.Core.Persistence
             context.Sections.Add(sec1);
             context.Sections.Add(sec2);
             context.Sections.Add(sec3);
+
+            context.SaveChanges();
 
             #endregion
 
@@ -586,6 +591,8 @@ namespace TollBoothManagementSystem.Core.Persistence
             context.SectionInfos.Add(secInfo21);
             context.SectionInfos.Add(secInfo22);
 
+            context.SaveChanges();
+
             #endregion
 
             #region PriceList
@@ -601,6 +608,8 @@ namespace TollBoothManagementSystem.Core.Persistence
             context.PriceLists.Add(priceL2);
             context.PriceLists.Add(priceL3);
 
+            context.SaveChanges();
+
             #endregion
 
             #region Currency
@@ -610,6 +619,8 @@ namespace TollBoothManagementSystem.Core.Persistence
 
             context.Currencies.Add(cur1);
             context.Currencies.Add(cur2);
+
+            context.SaveChanges();
 
             #endregion
 
@@ -1141,6 +1152,8 @@ namespace TollBoothManagementSystem.Core.Persistence
             context.RoadTolls.Add(rt249);
             context.RoadTolls.Add(rt250);
 
+            context.SaveChanges();
+
             #endregion
 
             #region RoadTollPrice
@@ -1671,9 +1684,10 @@ namespace TollBoothManagementSystem.Core.Persistence
             context.RoadTollPrices.Add(rtp249);
             context.RoadTollPrices.Add(rtp250);
 
+            context.SaveChanges();
+
             #endregion
 
-            context.SaveChanges();
         }
     }
 }

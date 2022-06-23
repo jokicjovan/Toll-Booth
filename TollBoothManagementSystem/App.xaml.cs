@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using TollBoothManagementSystem.Core.Persistence;
 
 namespace TollBoothManagementSystem
@@ -18,7 +12,7 @@ namespace TollBoothManagementSystem
         {
             using (DatabaseContext db = new DatabaseContext(0))
             {
-                DatabaseContextSeed.Seed(db);
+                //DatabaseContextSeed.Seed(db);
             }
         }
     }

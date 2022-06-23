@@ -12,6 +12,14 @@ namespace TollBoothManagementSystem.Core.Persistence
     {
         public string DbPath { get; }
 
+        // User Management
+
+        public DbSet<User> Users { get; set; }
+        public DbSet<Administrator> Administrators { get; set; }
+        public DbSet<Manager> Managers { get; set; }
+        public DbSet<Referent> Referents { get; set; }
+        public DbSet<Shift> Shifts { get; set; }
+
         // General
         public DbSet<Currency> Currencies { get; set; }
         public DbSet<Location> Locations { get; set; }
@@ -32,14 +40,7 @@ namespace TollBoothManagementSystem.Core.Persistence
         public DbSet<Section> Sections { get; set; }
         public DbSet<SectionInfo> SectionInfos { get; set; }
 
-        // User Management
-        public DbSet<User> Users { get; set; }
-        public DbSet<Administrator> Administrators { get; set; }
-        public DbSet<Manager> Managers { get; set; }
-        public DbSet<Referent> Referents { get; set; }
-        public DbSet<Shift> Shifts { get; set; }
         
-
         public DatabaseContext()
         {
             var folder = Directory.GetCurrentDirectory();

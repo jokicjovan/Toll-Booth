@@ -1,5 +1,4 @@
 ﻿using System;
-using TollBoothManagementSystem.Core.Features.Infrastructure.Model;
 using TollBoothManagementSystem.Core.Utility.HelperClasses;
 
 namespace TollBoothManagementSystem.Core.Features.UserManagement.Model
@@ -26,9 +25,6 @@ namespace TollBoothManagementSystem.Core.Features.UserManagement.Model
 
         private Role _role;
         public Role Role { get => _role; set => OnPropertyChanged(ref _role, value); }
-
-        private TollStation? _tollStation;
-        public virtual TollStation? TollStation { get => _tollStation; set => OnPropertyChanged(ref _tollStation, value); }
 
         #endregion
 

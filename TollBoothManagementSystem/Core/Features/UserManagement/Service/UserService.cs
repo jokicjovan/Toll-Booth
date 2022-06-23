@@ -48,10 +48,6 @@ namespace TollBoothManagementSystem.Core.Features.UserManagement.Service
             return _userRepository.Authenticate(email, password);
         }
 
-        public bool AlreadyInUse(string email)
-        {
-            return _userRepository.AlreadyInUse(email);
-        }
 
         public bool IsEmailUsed(string email)
         {
