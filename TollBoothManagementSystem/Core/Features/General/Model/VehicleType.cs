@@ -1,4 +1,4 @@
-﻿namespace TollBoothManagementSystem.Core.Features.General
+﻿namespace TollBoothManagementSystem.Core.Features.General.Model
 {
     public enum VehicleType
     {
