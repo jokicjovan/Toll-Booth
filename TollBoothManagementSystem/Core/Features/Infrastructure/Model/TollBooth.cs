@@ -12,6 +12,12 @@ namespace TollBoothManagementSystem.Core.Features.Infrastructure.Model
         private bool _isOpen;
         public bool IsOpen { get => _isOpen; set => OnPropertyChanged(ref _isOpen, value); }
 
+        private bool _isTrafficLightFunctional;
+        public bool IsTrafficLightFunctional { get => _isTrafficLightFunctional; set => OnPropertyChanged(ref _isTrafficLightFunctional, value); }
+
+        private bool _isTollGateFunctional;
+        public bool IsTollGateFunctional { get => _isTollGateFunctional; set => OnPropertyChanged(ref _isTollGateFunctional, value); }
+
         private TollStation _tollStation;
         public virtual TollStation TollStation { get => _tollStation; set => OnPropertyChanged(ref _tollStation, value); }
 
@@ -25,6 +31,8 @@ namespace TollBoothManagementSystem.Core.Features.Infrastructure.Model
         {
             IsETC = other.IsETC;
             IsOpen = other.IsOpen;
+            IsTrafficLightFunctional = other.IsTrafficLightFunctional;
+            IsTollGateFunctional = other.IsTollGateFunctional;
             TollStation = other.TollStation;
         }
 

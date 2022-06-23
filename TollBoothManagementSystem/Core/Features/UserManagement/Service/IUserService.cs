@@ -7,8 +7,6 @@ namespace TollBoothManagementSystem.Core.Features.UserManagement.Service
     {
         public User Authenticate(string email, string password);
 
-        public bool AlreadyInUse(string email);
-
         public bool IsEmailUsed(string email);
     }
 }

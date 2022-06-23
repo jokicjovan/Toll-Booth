@@ -7,8 +7,6 @@ namespace TollBoothManagementSystem.Core.Features.UserManagement.Repository
     {
         User Authenticate(string username, string password);
 
-        bool AlreadyInUse(string username);
-
         bool IsEmailUsed(string email);
     }
 }
