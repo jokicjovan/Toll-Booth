@@ -1,8 +1,12 @@
 ﻿using Ninject.Modules;
 using TollBoothManagementSystem.Core.Features.General.Repository;
+using TollBoothManagementSystem.Core.Features.General.Service;
 using TollBoothManagementSystem.Core.Features.Infrastructure.Repository;
+using TollBoothManagementSystem.Core.Features.Infrastructure.Service;
 using TollBoothManagementSystem.Core.Features.TransactionManagement.Repository;
+using TollBoothManagementSystem.Core.Features.TransactionManagement.Service;
 using TollBoothManagementSystem.Core.Features.UserManagement.Repository;
+using TollBoothManagementSystem.Core.Features.UserManagement.Service;
 using TollBoothManagementSystem.Core.Persistence;
 using TollBoothManagementSystem.Core.Utility;
 using TollBoothManagementSystem.GUI.Features.Navigation;
@@ -35,6 +39,26 @@ namespace TollBoothManagementSystem.Core.Ninject
             Bind(typeof(IUserRepository)).To(typeof(UserRepository));
 
             Bind(typeof(ICrudRepository<>)).To(typeof(CrudRepository<>));
+
+            // Services
+            Bind<ICurrencyService>().To<CurrencyService>();
+            Bind<ILocationService>().To<LocationService>();
+
+            Bind<IFaultReportService>().To<FaultReportService>();
+            Bind<ITollBoothService>().To<TollBoothService>();
+            Bind<ITollStationService>().To<TollStationService>();
+
+            Bind<IElectronicTollCollectionService>().To<ElectronicTollCollectionService>();
+            Bind<IETCPaymentService>().To<ETCPaymentService>();
+            Bind<IPriceListService>().To<PriceListService>();
+            Bind<IRoadTollPaymentService>().To<RoadTollPaymentService>();
+            Bind<IRoadTollPriceService>().To<RoadTollPriceService>();
+            Bind<IRoadTollService>().To<RoadTollService>();
+            Bind<ISectionService>().To<SectionService>();
+            Bind<ISectionInfoService>().To<SectionInfoService>();
+
+            Bind(typeof(IShiftService)).To(typeof(ShiftService));
+            Bind(typeof(IUserService)).To(typeof(UserService));
 
             Bind<DatabaseContext>().To<DatabaseContext>().InSingletonScope().WithConstructorArgument(0);
             Bind<LoginViewModel>().To<LoginViewModel>();

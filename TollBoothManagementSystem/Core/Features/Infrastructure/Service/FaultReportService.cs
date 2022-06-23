@@ -1,18 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TollBoothManagementSystem.Core.Features.Infrastructure.Model;
 using TollBoothManagementSystem.Core.Features.Infrastructure.Repository;
 
 namespace TollBoothManagementSystem.Core.Features.Infrastructure.Service
 {
-    public class FaultRepostService : IFaultReportService
+    public class FaultReportService : IFaultReportService
     {
         private readonly IFaultReportRepository _faultReportRepository;
 
-        public FaultRepostService(IFaultReportRepository faultReportRepository)
+        public FaultReportService(IFaultReportRepository faultReportRepository)
         {
             _faultReportRepository = faultReportRepository;
         }
