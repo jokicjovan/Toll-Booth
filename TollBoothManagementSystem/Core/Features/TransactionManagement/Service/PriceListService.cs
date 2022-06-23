@@ -1,0 +1,46 @@
+﻿using System;
+using System.Collections.Generic;
+using TollBoothManagementSystem.Core.Features.TransactionManagement.Model;
+using TollBoothManagementSystem.Core.Features.TransactionManagement.Repository;
+
+namespace TollBoothManagementSystem.Core.Features.TransactionManagement.Service
+{
+    public class PriceListService : IPriceListService
+    {
+        private readonly IPriceListRepository _priceListRepository;
+
+        public PriceListService(IPriceListRepository priceListRepository)
+        {
+            _priceListRepository = priceListRepository;
+        }
+
+        #region CRUD methods
+
+        public IEnumerable<PriceList> ReadAll()
+        {
+            return _priceListRepository.ReadAll();
+        }
+
+        public PriceList Read(Guid priceListId)
+        {
+            return _priceListRepository.Read(priceListId);
+        }
+
+        public PriceList Create(PriceList newPriceList)
+        {
+            return _priceListRepository.Create(newPriceList);
+        }
+
+        public PriceList Update(PriceList priceListToUpdate)
+        {
+            return _priceListRepository.Update(priceListToUpdate);
+        }
+
+        public PriceList Delete(Guid prcieListId)
+        {
+            return _priceListRepository.Delete(prcieListId);
+        }
+
+        #endregion
+    }
+}
