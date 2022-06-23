@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 using TollBoothManagementSystem.Core.Utility.Commands;
-using TollBoothManagementSystem.Core.Utility.EventManipulation;
+using TollBoothManagementSystem.Core.Utility.HelperClasses;
 
 namespace TollBoothManagementSystem.Core.Features.ApplicationAccess.Commands
 {

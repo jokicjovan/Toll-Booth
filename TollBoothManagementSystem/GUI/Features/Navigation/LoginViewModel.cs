@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 using TollBoothManagementSystem.Core.Features.ApplicationAccess.Commands;
+using TollBoothManagementSystem.Core.Features.UserManagement.Repository;
 using TollBoothManagementSystem.GUI.Utility.ViewModel;
 
 namespace TollBoothManagementSystem.GUI.Features.Navigation
@@ -8,7 +9,7 @@ namespace TollBoothManagementSystem.GUI.Features.Navigation
     public class LoginViewModel : ViewModelBase
     {
 
-        //public readonly IUserRepository<User> _userRepository;
+        public readonly IUserRepository _userRepository;
 
         private string? _email = "@example.com";
         public string? Email
@@ -56,11 +57,11 @@ namespace TollBoothManagementSystem.GUI.Features.Navigation
 
         public ICommand? LoginCommand { get; }
 
-        public LoginViewModel()
+        public LoginViewModel(IUserRepository userRepository)
         {
             _errMsgVisibility = Visibility.Hidden;
             _errMsgText = "";
-            //_userRepository = userRepository;
+            _userRepository = userRepository;
             LoginCommand = new LoginCommand(this);
         }
 

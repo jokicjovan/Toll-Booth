@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace TollBoothManagementSystem.Core.Utility.EventManipulation
+namespace TollBoothManagementSystem.Core.Utility.HelperClasses
 {
     public static class EventBus
     {
