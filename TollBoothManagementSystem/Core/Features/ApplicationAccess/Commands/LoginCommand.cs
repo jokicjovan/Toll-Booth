@@ -62,7 +62,7 @@ namespace TollBoothManagementSystem.Core.Features.ApplicationAccess.Commands
                     case Role.Referent:
                         Referent rf = (Referent)user;
                         GlobalStore.AddObject("LoggedUser", rf);
-                        EventBus.FireEvent("PatientLogin");
+                        EventBus.FireEvent("ReferentLogin");
                         TitleManager.Title = "Referent";
                         break;
 

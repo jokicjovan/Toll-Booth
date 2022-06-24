@@ -35,6 +35,32 @@
 
     <Style BasedOn="{StaticResource {x:Type ToggleButton}}"
            TargetType="{x:Type RadioButton}"
+           x:Key="VehicleCategoryButtonTheme">
+        <Style.Setters>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Grid Background="{TemplateBinding Background}" HorizontalAlignment="Center">
+                            <TextBlock Text="{TemplateBinding Property=Content}"
+                                       VerticalAlignment="Center"
+                                       Name="tbBtn"
+                                       Padding="10"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background" Value="Transparent" />
+        </Style.Setters>
+        <Style.Triggers>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Background" Value="#10416b" />
+                <Setter Property="Foreground" Value="White" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style BasedOn="{StaticResource {x:Type ToggleButton}}"
+           TargetType="{x:Type RadioButton}"
            x:Key="Pera">
 
 
