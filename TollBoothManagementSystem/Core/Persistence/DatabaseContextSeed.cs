@@ -23,7 +23,13 @@ namespace TollBoothManagementSystem.Core.Persistence
             
             // Referent
             var rf1 = new Referent { FirstName = "Nikola", LastName = "Petrovic", EmailAddress = "nikolapetrovic@example.com", Password = "test123", DateOfBirth = DateTime.Now.AddYears(-25), Role = Role.Referent };
+            var rf2 = new Referent { FirstName = "Dzoni", LastName = "Petrovic", EmailAddress = "dzonipetrovic@example.com", Password = "test123", DateOfBirth = DateTime.Now.AddYears(-25), Role = Role.Referent };
+            var rf3 = new Referent { FirstName = "Dzonson", LastName = "Petrovic", EmailAddress = "dzonsonpetrovic@example.com", Password = "test123", DateOfBirth = DateTime.Now.AddYears(-25), Role = Role.Referent };
+            var rf4 = new Referent { FirstName = "Nidzo", LastName = "Petrovic", EmailAddress = "nidzopetrovic@example.com", Password = "test123", DateOfBirth = DateTime.Now.AddYears(-25), Role = Role.Referent };
             context.Users.Add(rf1);
+            context.Users.Add(rf2);
+            context.Users.Add(rf3);
+            context.Users.Add(rf4);
 
             context.SaveChanges();
             #endregion
@@ -221,7 +227,7 @@ namespace TollBoothManagementSystem.Core.Persistence
 
             #region TollStation
 
-            var ts01 = new TollStation { Location = loc01, Name = loc01.Name, Boss = rf1, TollBooths = new List<TollBooth> { tb001, tb002, tb003, tb004 }, Employees = new List<Employee> { rf1, mn1 } };
+            var ts01 = new TollStation { Location = loc01, Name = loc01.Name, Boss = rf1, TollBooths = new List<TollBooth> { tb001, tb002, tb003, tb004 }, Employees = new List<Employee> { rf1, rf2, rf3, rf4, mn1 } };
             tb001.TollStation = ts01;
             tb002.TollStation = ts01;
             tb003.TollStation = ts01;
@@ -529,9 +535,15 @@ namespace TollBoothManagementSystem.Core.Persistence
 
             mn1.TollStation = ts01;
             rf1.TollStation = ts01;
+            rf2.TollStation = ts01;
+            rf3.TollStation = ts01;
+            rf4.TollStation = ts01;
 
             context.Users.Update(mn1);
             context.Users.Update(rf1);
+            context.Users.Update(rf2);
+            context.Users.Update(rf3);
+            context.Users.Update(rf4);
 
             #region Section
 

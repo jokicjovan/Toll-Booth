@@ -19,7 +19,7 @@
 
                 <Grid Grid.Column="0">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="75" />
+                        <RowDefinition Height="90" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition />
                     </Grid.RowDefinitions>
@@ -32,12 +32,12 @@
                        Margin="20,0,0,0" />
 
                     <StackPanel Grid.Row="1">
-                        <RadioButton Content="🧑‍💼 Employee management"
+                        <RadioButton Content="🧑‍💼 Employees management"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
-                             Command="{Binding UserCrudCommand}" IsChecked="True"/>
+                             Command="{Binding OpenEmployeesManagementCommand}" IsChecked="True"/>
                     </StackPanel>
 
                     <Button Content="Log out"

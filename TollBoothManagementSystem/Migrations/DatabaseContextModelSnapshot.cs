@@ -488,12 +488,6 @@ namespace TollBoothManagementSystem.Migrations
                 {
                     b.HasBaseType("TollBoothManagementSystem.Core.Features.UserManagement.Model.User");
 
-                    b.Property<Guid?>("TollStationId")
-                        .HasColumnType("TEXT")
-                        .HasColumnName("Administrator_TollStationId");
-
-                    b.HasIndex("TollStationId");
-
                     b.HasDiscriminator().HasValue("Administrator");
                 });
 
@@ -721,15 +715,6 @@ namespace TollBoothManagementSystem.Migrations
                         .IsRequired();
 
                     b.Navigation("ElectronicTollCollection");
-                });
-
-            modelBuilder.Entity("TollBoothManagementSystem.Core.Features.UserManagement.Model.Administrator", b =>
-                {
-                    b.HasOne("TollBoothManagementSystem.Core.Features.Infrastructure.Model.TollStation", "TollStation")
-                        .WithMany()
-                        .HasForeignKey("TollStationId");
-
-                    b.Navigation("TollStation");
                 });
 
             modelBuilder.Entity("TollBoothManagementSystem.Core.Features.UserManagement.Model.Employee", b =>

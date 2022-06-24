@@ -11,7 +11,7 @@ using TollBoothManagementSystem.Core.Persistence;
 namespace TollBoothManagementSystem.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20220624013740_InitialCreate")]
+    [Migration("20220624020052_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -490,12 +490,6 @@ namespace TollBoothManagementSystem.Migrations
                 {
                     b.HasBaseType("TollBoothManagementSystem.Core.Features.UserManagement.Model.User");
 
-                    b.Property<Guid?>("TollStationId")
-                        .HasColumnType("TEXT")
-                        .HasColumnName("Administrator_TollStationId");
-
-                    b.HasIndex("TollStationId");
-
                     b.HasDiscriminator().HasValue("Administrator");
                 });
 
@@ -723,15 +717,6 @@ namespace TollBoothManagementSystem.Migrations
                         .IsRequired();
 
                     b.Navigation("ElectronicTollCollection");
-                });
-
-            modelBuilder.Entity("TollBoothManagementSystem.Core.Features.UserManagement.Model.Administrator", b =>
-                {
-                    b.HasOne("TollBoothManagementSystem.Core.Features.Infrastructure.Model.TollStation", "TollStation")
-                        .WithMany()
-                        .HasForeignKey("TollStationId");
-
-                    b.Navigation("TollStation");
                 });
 
             modelBuilder.Entity("TollBoothManagementSystem.Core.Features.UserManagement.Model.Employee", b =>

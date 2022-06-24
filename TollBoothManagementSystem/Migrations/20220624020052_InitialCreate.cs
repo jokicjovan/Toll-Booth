@@ -264,7 +264,6 @@ namespace TollBoothManagementSystem.Migrations
                     DateOfBirth = table.Column<DateTime>(type: "TEXT", nullable: false),
                     Role = table.Column<int>(type: "INTEGER", nullable: false),
                     Discriminator = table.Column<string>(type: "TEXT", nullable: false),
-                    Administrator_TollStationId = table.Column<Guid>(type: "TEXT", nullable: true),
                     TollStationId = table.Column<Guid>(type: "TEXT", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
                     IsActive = table.Column<bool>(type: "INTEGER", nullable: false)
@@ -272,11 +271,6 @@ namespace TollBoothManagementSystem.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Users_TollStations_Administrator_TollStationId",
-                        column: x => x.Administrator_TollStationId,
-                        principalTable: "TollStations",
-                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Users_TollStations_TollStationId",
                         column: x => x.TollStationId,
@@ -388,11 +382,6 @@ namespace TollBoothManagementSystem.Migrations
                 name: "IX_TollStations_SectionId",
                 table: "TollStations",
                 column: "SectionId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Users_Administrator_TollStationId",
-                table: "Users",
-                column: "Administrator_TollStationId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_TollStationId",
@@ -537,10 +526,6 @@ namespace TollBoothManagementSystem.Migrations
             migrationBuilder.DropForeignKey(
                 name: "FK_Sections_TollStations_OriginId",
                 table: "Sections");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Users_TollStations_Administrator_TollStationId",
-                table: "Users");
 
             migrationBuilder.DropForeignKey(
                 name: "FK_Users_TollStations_TollStationId",
