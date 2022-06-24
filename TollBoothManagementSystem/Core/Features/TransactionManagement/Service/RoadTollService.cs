@@ -4,6 +4,7 @@ using TollBoothManagementSystem.Core.Features.Infrastructure.Model;
 using TollBoothManagementSystem.Core.Features.TransactionManagement.Model;
 using TollBoothManagementSystem.Core.Features.TransactionManagement.Repository;
 using System.Linq;
+using TollBoothManagementSystem.Core.Features.General.Model;
 
 namespace TollBoothManagementSystem.Core.Features.TransactionManagement.Service
 {
@@ -31,6 +32,11 @@ namespace TollBoothManagementSystem.Core.Features.TransactionManagement.Service
         public List<RoadToll> RoadTollsForTollStation(TollStation tollStation)
         {
             return _roadTollRepository.ReadAll().Where(r => r.TollStation == tollStation).ToList();
+        }
+
+        public RoadToll GetRoadToll(VehicleType vehicleType, Currency currency, TollStation exitStation)
+        {
+            return _roadTollRepository.ReadAll().First(e => e.VehicleType == vehicleType && e.Currency == currency && e.TollStation == exitStation);
         }
 
         #region CRUD methods

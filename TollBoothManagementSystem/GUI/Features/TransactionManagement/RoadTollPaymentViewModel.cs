@@ -9,6 +9,10 @@ using TollBoothManagementSystem.Core.Features.General.Model;
 using TollBoothManagementSystem.Core.Features.General.Service;
 using TollBoothManagementSystem.Core.Features.Infrastructure.Model;
 using TollBoothManagementSystem.Core.Features.Infrastructure.Service;
+using TollBoothManagementSystem.Core.Features.TransactionManagement.Commands.ReferentCMD;
+using TollBoothManagementSystem.Core.Features.TransactionManagement.Model;
+using TollBoothManagementSystem.Core.Features.TransactionManagement.Service;
+using TollBoothManagementSystem.Core.Utility.HelperClasses;
 using TollBoothManagementSystem.GUI.Utility.ViewModel;
 
 namespace TollBoothManagementSystem.GUI.Features.TransactionManagement
@@ -18,35 +22,50 @@ namespace TollBoothManagementSystem.GUI.Features.TransactionManagement
         #region Atributes
         private readonly ICurrencyService _currencyService;
         private readonly ITollStationService _tollStationService;
+        private readonly ISectionService _sectionService;
+        private readonly IRoadTollPriceService _roadTollPriceService;
         private Currency _selectedCurrency;
         private TollStation _selectedStation;
-        private readonly TollStation _currentStation;
-        private double _price;
+        private readonly TollStation? _currentStation;
         private double _amountPayed;
         private double _change;
         private bool _isInsufficientAmount;
+        private Section _currentSection;
+        private VehicleType _selectedVehicleCategory;
+        private readonly PriceList _activePricelist;
         #endregion
 
         #region Properties
         public ICurrencyService CurrencyService => _currencyService;
         public ITollStationService TollStationService => _tollStationService;
-
-        public bool IsInsufficientAmount
+        public ISectionService SectionService => _sectionService;
+        public IRoadTollPriceService RoadTollPriceService => _roadTollPriceService;
+        public Section CurrentSection => _currentSection;
+        public PriceList ActivePricelist => _activePricelist;
+        public VehicleType SelectedVehicleCategory
         {
-            get => _isInsufficientAmount;
+            get => _selectedVehicleCategory;
             set
             {
-                _isInsufficientAmount = value;
+                _selectedVehicleCategory = value;
+                OnPropertyChanged(nameof(SelectedVehicleCategory));
+                OnPropertyChanged(nameof(Price));
+                OnPropertyChanged(nameof(Change));
                 OnPropertyChanged(nameof(IsInsufficientAmount));
+            }
+        }
+        public bool IsInsufficientAmount
+        {
+            get
+            {
+                return Price > AmountPayed;
             }
         }
         public double Change
         {
-            get => _change;
-            set
+            get
             {
-                _change = value;
-                OnPropertyChanged(nameof(Change));
+                return AmountPayed - Price;
             }
         }
         public double AmountPayed
@@ -56,25 +75,30 @@ namespace TollBoothManagementSystem.GUI.Features.TransactionManagement
             {
                 _amountPayed = value;
                 OnPropertyChanged(nameof(AmountPayed));
+                OnPropertyChanged(nameof(IsInsufficientAmount));
+                OnPropertyChanged(nameof(Change));
             }
         }
         public double Price
         {
-            get => _price;
-            set
+            get
             {
-                _price = value;
-                OnPropertyChanged(nameof(Price));
+                double price = RoadTollPriceService.CalculatePrice(ActivePricelist, SelectedVehicleCategory, SelectedCurrency, SelectedStation, CurrentStation);
+                return price;
             }
         }
-        public TollStation CurrentStation => _currentStation;
+        public TollStation? CurrentStation => _currentStation;
         public Currency SelectedCurrency
         {
             get => _selectedCurrency;
             set
             {
                 _selectedCurrency = value;
+                AmountPayed = 0;
                 OnPropertyChanged(nameof(SelectedCurrency));
+                OnPropertyChanged(nameof(Price));
+                OnPropertyChanged(nameof(Change));
+                OnPropertyChanged(nameof(IsInsufficientAmount));
             }
         }
         public TollStation SelectedStation
@@ -84,6 +108,9 @@ namespace TollBoothManagementSystem.GUI.Features.TransactionManagement
             {
                 _selectedStation = value;
                 OnPropertyChanged(nameof(SelectedStation));
+                OnPropertyChanged(nameof(Price));
+                OnPropertyChanged(nameof(Change));
+                OnPropertyChanged(nameof(IsInsufficientAmount));
             }
         }
         #endregion
@@ -101,10 +128,21 @@ namespace TollBoothManagementSystem.GUI.Features.TransactionManagement
         #region Commands
         public ICommand ConfirmPaymentCommand { get; }
         #endregion
-        public RoadTollPaymentViewModel(ICurrencyService currencyService, ITollStationService tollStationService)
+        public RoadTollPaymentViewModel(ICurrencyService currencyService, ITollStationService tollStationService, ISectionService sectionService, IRoadTollPriceService roadTollPriceService)
         {
+            _selectedVehicleCategory = VehicleType.Category1A;
+            _currentStation = GlobalStore.ReadObject<TollStation>("CurrentTollStation");
             _currencyService = currencyService;
             _tollStationService = tollStationService;
+            _sectionService = sectionService;
+            _roadTollPriceService = roadTollPriceService;
+            _currencies = new ObservableCollection<Currency>(currencyService.ReadAll());
+            _selectedCurrency = _currencies.First(e => e.Code == "RSD");
+            _currentSection = GlobalStore.ReadObject<Section>("CurrentSection");
+            _activePricelist = GlobalStore.ReadObject<PriceList>("ActivePricelist");
+            _tollStations = new ObservableCollection<TollStation>(_currentSection.TollStations.Where(e => e.Id != _currentStation.Id));
+            _selectedStation = _tollStations[0];
+            ConfirmPaymentCommand = new ConfirmPaymentCommand(this);
         }
     }
 }

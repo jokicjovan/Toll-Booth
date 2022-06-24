@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows;
+using TollBoothManagementSystem.Core.Features.Infrastructure.Model;
+using TollBoothManagementSystem.Core.Features.TransactionManagement.Model;
 using TollBoothManagementSystem.Core.Features.UserManagement.Model;
 using TollBoothManagementSystem.Core.Utility.Commands;
 using TollBoothManagementSystem.Core.Utility.HelperClasses;
@@ -42,12 +44,18 @@ namespace TollBoothManagementSystem.Core.Features.ApplicationAccess.Commands
             }
             else
             {
-                ViewModelBase viewModel;
+                Section currentSection;
+                PriceList pricelist;
                 switch (user.Role)
                 {
                     case Role.Manager:
                         Manager mn = (Manager)user;
                         GlobalStore.AddObject("LoggedUser", mn);
+                        GlobalStore.AddObject("CurrentTollStation", mn.TollStation);
+                        currentSection = _viewModel.SectionService.GetSection(mn.TollStation);
+                        GlobalStore.AddObject("CurrentSection", currentSection);
+                        pricelist = _viewModel.PriceListService.GetActivePricelist(currentSection);
+                        GlobalStore.AddObject("ActivePricelist", pricelist);
                         EventBus.FireEvent("ManagerLogin");
                         TitleManager.Title = "Manager";
                         break;
@@ -62,6 +70,11 @@ namespace TollBoothManagementSystem.Core.Features.ApplicationAccess.Commands
                     case Role.Referent:
                         Referent rf = (Referent)user;
                         GlobalStore.AddObject("LoggedUser", rf);
+                        GlobalStore.AddObject("CurrentTollStation", rf.TollStation);
+                        currentSection = _viewModel.SectionService.GetSection(rf.TollStation);
+                        GlobalStore.AddObject("CurrentSection", currentSection);
+                        pricelist = _viewModel.PriceListService.GetActivePricelist(currentSection);
+                        GlobalStore.AddObject("ActivePricelist", pricelist);
                         EventBus.FireEvent("ReferentLogin");
                         TitleManager.Title = "Referent";
                         break;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using TollBoothManagementSystem.Core.Features.TransactionManagement.Model;
 using TollBoothManagementSystem.Core.Features.TransactionManagement.Repository;
 
@@ -42,5 +43,10 @@ namespace TollBoothManagementSystem.Core.Features.TransactionManagement.Service
         }
 
         #endregion
+
+        public PriceList GetActivePricelist(Section section)
+        {
+            return _priceListRepository.ReadAll().First(e => e.Section.Id == section.Id && DateTime.Now >= e.ActivationDate && DateTime.Now <= e.ExpirationDate);
+        }
     }
 }

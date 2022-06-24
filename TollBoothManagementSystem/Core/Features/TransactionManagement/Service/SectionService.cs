@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using TollBoothManagementSystem.Core.Features.Infrastructure.Model;
 using TollBoothManagementSystem.Core.Features.TransactionManagement.Model;
 using TollBoothManagementSystem.Core.Features.TransactionManagement.Repository;
 
@@ -37,6 +39,11 @@ namespace TollBoothManagementSystem.Core.Features.TransactionManagement.Service
         public Section Update(Section entity)
         {
             return _sectionRepository.Update(entity);
+        }
+
+        public Section GetSection(TollStation tollStation)
+        {
+            return _sectionRepository.ReadAll().First(e => e.TollStations.Contains(tollStation));
         }
     }
 }

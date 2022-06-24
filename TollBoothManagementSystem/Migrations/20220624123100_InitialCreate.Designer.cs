@@ -11,7 +11,7 @@ using TollBoothManagementSystem.Core.Persistence;
 namespace TollBoothManagementSystem.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20220624020052_InitialCreate")]
+    [Migration("20220624123100_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
