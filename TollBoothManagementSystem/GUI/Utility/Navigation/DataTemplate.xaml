@@ -2,7 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:navigation="clr-namespace:TollBoothManagementSystem.GUI.Features.Navigation"
                     xmlns:transactionManagment="clr-namespace:TollBoothManagementSystem.GUI.Features.TransactionManagement"
-                    xmlns:usermanagement="clr-namespace:TollBoothManagementSystem.GUI.Features.UserManagement">
+                    xmlns:usermanagement="clr-namespace:TollBoothManagementSystem.GUI.Features.UserManagement"
+                    xmlns:userManagementDialog="clr-namespace:TollBoothManagementSystem.GUI.Features.UserManagement.Dialog">
 
     <DataTemplate DataType="{x:Type navigation:LoginViewModel}">
         <navigation:LoginView/>
@@ -27,5 +28,9 @@
     <DataTemplate DataType="{x:Type transactionManagment:RoadTollPaymentViewModel}">
         <transactionManagment:RoadTollPaymentView/>
     </DataTemplate>
-    
+
+    <DataTemplate DataType="{x:Type userManagementDialog:HandleEmployeeViewModel}">
+        <userManagementDialog:HandleEmployeeView/>
+    </DataTemplate>
+
 </ResourceDictionary>

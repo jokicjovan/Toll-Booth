@@ -5,6 +5,7 @@ using TollBoothManagementSystem.Core.Features.UserManagement.Commands;
 using TollBoothManagementSystem.Core.Features.UserManagement.Model;
 using TollBoothManagementSystem.Core.Features.UserManagement.Service;
 using TollBoothManagementSystem.Core.Utility.HelperClasses;
+using TollBoothManagementSystem.GUI.Utility.Dialog;
 using TollBoothManagementSystem.GUI.Utility.ViewModel;
 
 namespace TollBoothManagementSystem.GUI.Features.UserManagement
@@ -12,18 +13,27 @@ namespace TollBoothManagementSystem.GUI.Features.UserManagement
     public class EmployeesViewModel : ViewModelBase
     {
         #region services
+
         private readonly IEmployeeService _employeeService;
 
         public IEmployeeService EmployeeService => _employeeService;
+
+        private readonly IDialogService _dialogService;
+
         #endregion
 
         #region attributes
+
         private IList<Employee> _employees;
+
         private Employee _selectedEmployee;
+
         private string _searchText;
+
         #endregion
 
         #region properties
+
         public IList<Employee> Employees {
             get => _employees;
             set
@@ -52,13 +62,19 @@ namespace TollBoothManagementSystem.GUI.Features.UserManagement
                 OnPropertyChanged(nameof(SearchText));
             }
         }
+
         #endregion
 
         #region commands
+
         public ICommand AddEmployeeCommand { get; set; }
+
         public ICommand UpdateEmployeeCommand { get; set; }
+
         public ICommand DeleteEmployeeCommand { get; set; }
+
         public ICommand SearchEmployeeCommand { get; set; }
+
         #endregion
 
         #region methods
@@ -76,10 +92,13 @@ namespace TollBoothManagementSystem.GUI.Features.UserManagement
 
         #endregion
 
-        public EmployeesViewModel(IEmployeeService employeeService) {
+        public EmployeesViewModel(IEmployeeService employeeService, IDialogService dialogService) {
             _employeeService = employeeService;
+            _dialogService = dialogService;
 
             Employees = EmployeeService.getStationEmployees(GlobalStore.ReadObject<Manager>("LoggedUser").TollStation).ToList();
+            AddEmployeeCommand = new AddEmployeeCommand(_dialogService, this);
+            UpdateEmployeeCommand = new UpdateEmployeeCommand(_dialogService, this);
             SearchEmployeeCommand = new SearchEmployeeCommand(this);
             DeleteEmployeeCommand = new DeleteEmployeeCommand(this);
         }

@@ -48,7 +48,10 @@ namespace TollBoothManagementSystem.Core.Features.UserManagement.Service
 
         public IEnumerable<Employee> getStationEmployees(TollStation tollStation)
         {
-            return _employeeRepository.ReadAll().Where(employee => employee.TollStation.Id == tollStation.Id);
+            return _employeeRepository.ReadAll().Where(employee => { 
+                if (employee.TollStation != null)
+                    return employee.TollStation.Id == tollStation.Id;
+                else return false;  });
         }
 
         public IEnumerable<Employee> GetEmployeesBySearchText(string searchText)
