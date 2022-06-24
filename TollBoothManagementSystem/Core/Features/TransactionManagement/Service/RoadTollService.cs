@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using TollBoothManagementSystem.Core.Features.Infrastructure.Model;
 using TollBoothManagementSystem.Core.Features.TransactionManagement.Model;
 using TollBoothManagementSystem.Core.Features.TransactionManagement.Repository;
+using System.Linq;
 
 namespace TollBoothManagementSystem.Core.Features.TransactionManagement.Service
 {
@@ -12,6 +14,23 @@ namespace TollBoothManagementSystem.Core.Features.TransactionManagement.Service
         public RoadTollService(IRoadTollRepository roadTollRepository)
         {
             _roadTollRepository = roadTollRepository;
+        }
+
+        public List<RoadToll> RoadTollsForSection(Section section)
+        {
+            List<RoadToll> roadTolls = new List<RoadToll>();
+            foreach (TollStation tollStation in section.TollStations)
+            {
+                List<RoadToll> tollsForStation = RoadTollsForTollStation(tollStation);
+                roadTolls.Concat(tollsForStation);
+            }
+            return roadTolls;
+            
+        }
+
+        public List<RoadToll> RoadTollsForTollStation(TollStation tollStation)
+        {
+            return _roadTollRepository.ReadAll().Where(r => r.TollStation == tollStation).ToList();
         }
 
         #region CRUD methods

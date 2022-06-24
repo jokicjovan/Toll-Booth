@@ -156,11 +156,16 @@ namespace TollBoothManagementSystem.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<Guid?>("SectionId")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
 
                     b.HasIndex("BossId");
 
                     b.HasIndex("LocationId");
+
+                    b.HasIndex("SectionId");
 
                     b.ToTable("TollStations");
                 });
@@ -483,6 +488,12 @@ namespace TollBoothManagementSystem.Migrations
                 {
                     b.HasBaseType("TollBoothManagementSystem.Core.Features.UserManagement.Model.User");
 
+                    b.Property<Guid?>("TollStationId")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("Administrator_TollStationId");
+
+                    b.HasIndex("TollStationId");
+
                     b.HasDiscriminator().HasValue("Administrator");
                 });
 
@@ -555,6 +566,10 @@ namespace TollBoothManagementSystem.Migrations
                         .HasForeignKey("LocationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("TollBoothManagementSystem.Core.Features.TransactionManagement.Model.Section", null)
+                        .WithMany("TollStations")
+                        .HasForeignKey("SectionId");
 
                     b.Navigation("Boss");
 
@@ -708,11 +723,22 @@ namespace TollBoothManagementSystem.Migrations
                     b.Navigation("ElectronicTollCollection");
                 });
 
+            modelBuilder.Entity("TollBoothManagementSystem.Core.Features.UserManagement.Model.Administrator", b =>
+                {
+                    b.HasOne("TollBoothManagementSystem.Core.Features.Infrastructure.Model.TollStation", "TollStation")
+                        .WithMany()
+                        .HasForeignKey("TollStationId");
+
+                    b.Navigation("TollStation");
+                });
+
             modelBuilder.Entity("TollBoothManagementSystem.Core.Features.UserManagement.Model.Employee", b =>
                 {
-                    b.HasOne("TollBoothManagementSystem.Core.Features.Infrastructure.Model.TollStation", null)
+                    b.HasOne("TollBoothManagementSystem.Core.Features.Infrastructure.Model.TollStation", "TollStation")
                         .WithMany("Employees")
                         .HasForeignKey("TollStationId");
+
+                    b.Navigation("TollStation");
                 });
 
             modelBuilder.Entity("TollBoothManagementSystem.Core.Features.Infrastructure.Model.TollStation", b =>
@@ -720,6 +746,11 @@ namespace TollBoothManagementSystem.Migrations
                     b.Navigation("Employees");
 
                     b.Navigation("TollBooths");
+                });
+
+            modelBuilder.Entity("TollBoothManagementSystem.Core.Features.TransactionManagement.Model.Section", b =>
+                {
+                    b.Navigation("TollStations");
                 });
 #pragma warning restore 612, 618
         }
