@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using TollBoothManagementSystem.Core.Features.General.Model;
+using TollBoothManagementSystem.Core.Features.TransactionManagement.Model;
 using TollBoothManagementSystem.Core.Features.UserManagement.Model;
 using TollBoothManagementSystem.Core.Utility.HelperClasses;
 
@@ -25,6 +26,7 @@ namespace TollBoothManagementSystem.Core.Features.Infrastructure.Model
 
         private IList<Employee> _employees;
         public virtual IList<Employee> Employees { get => _employees; set => OnPropertyChanged(ref _employees, value); }
+
 
         #endregion
 

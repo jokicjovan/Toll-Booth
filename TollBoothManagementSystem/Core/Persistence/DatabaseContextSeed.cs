@@ -527,17 +527,26 @@ namespace TollBoothManagementSystem.Core.Persistence
 
             #endregion
 
+            mn1.TollStation = ts01;
+            rf1.TollStation = ts01;
+
+            context.Users.Update(mn1);
+            context.Users.Update(rf1);
+
             #region Section
 
-            var sec1 = new Section { Origin = ts01, Destination = ts07};
-            var sec2 = new Section { Origin = ts08, Destination = ts19};
-            var sec3 = new Section { Origin = ts20, Destination = ts25};
+            var sec1 = new Section { Origin = ts01, Destination = ts07, TollStations = new List<TollStation> { ts01, ts02, ts03, ts04, ts05, ts06, ts07 } };
+            var sec2 = new Section { Origin = ts08, Destination = ts19, TollStations = new List<TollStation> { ts08, ts09, ts10, ts11, ts12, ts13, ts14, ts15, ts16, ts17, ts18, ts19} };
+            var sec3 = new Section { Origin = ts20, Destination = ts25, TollStations = new List<TollStation> { ts20, ts21, ts22, ts23, ts24, ts25 } };
 
             context.Sections.Add(sec1);
             context.Sections.Add(sec2);
             context.Sections.Add(sec3);
 
+            
+
             context.SaveChanges();
+
 
             #endregion
 
