@@ -21,12 +21,32 @@ namespace TollBoothManagementSystem.GUI.Features.TransactionManagement
         private TollStation _selectedStation;
         private readonly TollStation _currentStation;
         private double _price;
+        private double _amountPayed;
+        private double _change;
         #endregion
 
         #region Properties
         public ICurrencyService CurrencyService => _currencyService;
         public ITollStationService TollStationService => _tollStationService;
 
+        public double Change
+        {
+            get => _change;
+            set
+            {
+                _change = value;
+                OnPropertyChanged(nameof(Change));
+            }
+        }
+        public double AmountPayed
+        {
+            get => _amountPayed;
+            set
+            {
+                _amountPayed = value;
+                OnPropertyChanged(nameof(AmountPayed));
+            }
+        }
         public double Price
         {
             get => _price;

@@ -9,7 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="GUI\Features\TransactionManagement\car.png" />
     <None Remove="GUI\Utility\Resources\logoImage.png" />
   </ItemGroup>
 
@@ -30,7 +29,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="GUI\Features\TransactionManagement\car.png" />
     <Resource Include="GUI\Utility\Resources\logoImage.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
