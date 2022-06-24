@@ -81,11 +81,12 @@
                   AutoGenerateColumns="False"
                   ItemsSource="{Binding Employees}"
                   SelectedItem="{Binding Path=SelectedEmployee, Mode=TwoWay}"
-                  SelectionMode="Single">
+                  SelectionMode="Single"
+                  Background="White">
 
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Email"
-                                    MinWidth="200"
+                                    MinWidth="250"
                                     Width="*"
                                     Binding="{Binding EmailAddress}"/>
 

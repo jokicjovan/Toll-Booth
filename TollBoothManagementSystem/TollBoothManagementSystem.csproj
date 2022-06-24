@@ -30,7 +30,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="GUI\Features\TransactionManagement\car.png" />
     <Resource Include="GUI\Utility\Resources\logoImage.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
