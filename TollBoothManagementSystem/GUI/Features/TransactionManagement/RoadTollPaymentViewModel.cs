@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using TollBoothManagementSystem.Core.Features.General.Model;
 using TollBoothManagementSystem.Core.Features.General.Service;
 using TollBoothManagementSystem.Core.Features.Infrastructure.Model;
@@ -23,12 +24,22 @@ namespace TollBoothManagementSystem.GUI.Features.TransactionManagement
         private double _price;
         private double _amountPayed;
         private double _change;
+        private bool _isInsufficientAmount;
         #endregion
 
         #region Properties
         public ICurrencyService CurrencyService => _currencyService;
         public ITollStationService TollStationService => _tollStationService;
 
+        public bool IsInsufficientAmount
+        {
+            get => _isInsufficientAmount;
+            set
+            {
+                _isInsufficientAmount = value;
+                OnPropertyChanged(nameof(IsInsufficientAmount));
+            }
+        }
         public double Change
         {
             get => _change;
@@ -85,6 +96,10 @@ namespace TollBoothManagementSystem.GUI.Features.TransactionManagement
         public IEnumerable<TollStation> TollStations => _tollStations;
 
 
+        #endregion
+
+        #region Commands
+        public ICommand ConfirmPaymentCommand { get; }
         #endregion
         public RoadTollPaymentViewModel(ICurrencyService currencyService, ITollStationService tollStationService)
         {

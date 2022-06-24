@@ -4,9 +4,24 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TollBoothManagementSystem.GUI.Features.TransactionManagement"
+             xmlns:validations="clr-namespace:TollBoothManagementSystem.GUI.Utility.Validation"
              Background="White"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Style x:Key="confirmButtonStyle" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding ElementName=payedAmountTextBox, Path=(Validation.HasError)}" Value="True">
+                        <Setter Property="IsEnabled" Value="False"/>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Path=IsInsufficientAmount}" Value="True">
+                        <Setter Property="IsEnabled" Value="False"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid Margin="15">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -15,7 +30,7 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <GroupBox Height="130" Header="Vehicle category" FontSize="16" Grid.Row="0">
             <Grid>
@@ -38,7 +53,7 @@
             <ComboBox ItemsSource="{Binding Currencies}" SelectedItem="{Binding SelectedCurrency}" Grid.Row="2" BorderThickness="0" TabIndex="5"/>
         </Border>
         <TextBlock Text="Enter station:" FontSize="16" Grid.Row="3" Margin="0 15 0 0"/>
-        <Border Grid.Row="4" BorderThickness="2" BorderBrush="#10416b"  Width="150" HorizontalAlignment="Left" Margin="0 5 0 0">
+        <Border Grid.Row="4" BorderThickness="2" BorderBrush="#10416b"  Width="250" HorizontalAlignment="Left" Margin="0 5 0 0">
             <ComboBox ItemsSource="{Binding TollStations}" SelectedItem="{Binding SelectedStation}"  BorderThickness="0" TabIndex="6"/>
         </Border>
         <Grid Grid.Row="5" Margin="0 15 0 0">
@@ -54,11 +69,22 @@
             <TextBlock Text="Total:" Grid.Column="0" Grid.Row="0" FontSize="16" Margin="0 0 10 0"/>
             <TextBox IsEnabled="True" IsReadOnly="True" Grid.Column="0" Grid.Row="1" FontSize="16" Text="{Binding Price}" Margin="0 0 10 0"/>
 
-            <TextBlock Text="Payed:" Grid.Column="1" Grid.Row="0" FontSize="16" Margin="5 0 5 0"/>
-            <TextBox Grid.Column="1" Grid.Row="1" FontSize="16" Margin="5 0 5 0" Text="{Binding AmountPayed}" TabIndex="7"/>
+            <TextBlock Text="Payed amount:" Grid.Column="1" Grid.Row="0" FontSize="16" Margin="5 0 5 0"/>
+            <TextBox Grid.Column="1" Grid.Row="1" FontSize="16" Margin="5 0 5 0" TabIndex="7" Name="payedAmountTextBox">
+                <TextBox.Text>
+                    <Binding Path="AmountPayed" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <validations:IsPositiveNumericValidation ValidatesOnTargetUpdated="True"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
 
             <TextBlock Text="Change:" Grid.Column="2" Grid.Row="0" FontSize="16" Margin="10 0 0 0"/>
             <TextBox Grid.Column="2" IsReadOnly="True" Grid.Row="1" FontSize="16" Margin="10 0 0 0" Text="{Binding Change}"/>
         </Grid>
+        <StackPanel Grid.Row="6" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+            <Button Content="Confirm payment" Command="{Binding ConfirmPaymentCommand}" Style="{StaticResource confirmButtonStyle}"/>
+        </StackPanel>
     </Grid>
 </UserControl>
