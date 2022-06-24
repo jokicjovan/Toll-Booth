@@ -37,6 +37,7 @@ namespace TollBoothManagementSystem.Core.Ninject
 
             Bind(typeof(IShiftRepository)).To(typeof(ShiftRepository));
             Bind(typeof(IUserRepository)).To(typeof(UserRepository));
+            Bind(typeof(IEmployeeRepository)).To(typeof(EmployeeRepository));
 
             Bind(typeof(ICrudRepository<>)).To(typeof(CrudRepository<>));
 
@@ -59,6 +60,7 @@ namespace TollBoothManagementSystem.Core.Ninject
 
             Bind(typeof(IShiftService)).To(typeof(ShiftService));
             Bind(typeof(IUserService)).To(typeof(UserService));
+            Bind(typeof(IEmployeeService)).To(typeof(EmployeeService));
 
             Bind<DatabaseContext>().To<DatabaseContext>().InSingletonScope().WithConstructorArgument(0);
             Bind<LoginViewModel>().To<LoginViewModel>();
