@@ -140,7 +140,7 @@ namespace TollBoothManagementSystem.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("BossId")
+                    b.Property<Guid?>("BossId")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("CreatedAt")
@@ -551,9 +551,7 @@ namespace TollBoothManagementSystem.Migrations
                 {
                     b.HasOne("TollBoothManagementSystem.Core.Features.UserManagement.Model.Referent", "Boss")
                         .WithMany()
-                        .HasForeignKey("BossId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BossId");
 
                     b.HasOne("TollBoothManagementSystem.Core.Features.General.Model.Location", "Location")
                         .WithMany()

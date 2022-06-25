@@ -10,6 +10,7 @@ using TollBoothManagementSystem.Core.Features.UserManagement.Service;
 using TollBoothManagementSystem.Core.Persistence;
 using TollBoothManagementSystem.Core.Utility;
 using TollBoothManagementSystem.GUI.Features.Navigation;
+using TollBoothManagementSystem.GUI.Utility.Dialog;
 
 namespace TollBoothManagementSystem.Core.Ninject
 {
@@ -42,25 +43,27 @@ namespace TollBoothManagementSystem.Core.Ninject
             Bind(typeof(ICrudRepository<>)).To(typeof(CrudRepository<>));
 
             // Services
-            Bind<ICurrencyService>().To<CurrencyService>();
-            Bind<ILocationService>().To<LocationService>();
+            Bind(typeof(ICurrencyService)).To(typeof(CurrencyService));
+            Bind(typeof(ILocationService)).To(typeof(LocationService));
 
-            Bind<IFaultReportService>().To<FaultReportService>();
-            Bind<ITollBoothService>().To<TollBoothService>();
-            Bind<ITollStationService>().To<TollStationService>();
+            Bind(typeof(IFaultReportService)).To(typeof(FaultReportService));
+            Bind(typeof(ITollBoothService)).To(typeof(TollBoothService));
+            Bind(typeof(ITollStationService)).To(typeof(TollStationService));
 
-            Bind<IElectronicTollCollectionService>().To<ElectronicTollCollectionService>();
-            Bind<IETCPaymentService>().To<ETCPaymentService>();
-            Bind<IPriceListService>().To<PriceListService>();
-            Bind<IRoadTollPaymentService>().To<RoadTollPaymentService>();
-            Bind<IRoadTollPriceService>().To<RoadTollPriceService>();
-            Bind<IRoadTollService>().To<RoadTollService>();
-            Bind<ISectionService>().To<SectionService>();
-            Bind<ISectionInfoService>().To<SectionInfoService>();
+            Bind(typeof(IElectronicTollCollectionService)).To(typeof(ElectronicTollCollectionService));
+            Bind(typeof(IETCPaymentService)).To(typeof(ETCPaymentService));
+            Bind(typeof(IPriceListService)).To(typeof(PriceListService));
+            Bind(typeof(IRoadTollPaymentService)).To(typeof(RoadTollPaymentService));
+            Bind(typeof(IRoadTollPriceService)).To(typeof(RoadTollPriceService));
+            Bind(typeof(IRoadTollService)).To(typeof(RoadTollService));
+            Bind(typeof(ISectionService)).To(typeof(SectionService));
+            Bind(typeof(ISectionInfoService)).To(typeof(SectionInfoService));
 
             Bind(typeof(IShiftService)).To(typeof(ShiftService));
             Bind(typeof(IUserService)).To(typeof(UserService));
             Bind(typeof(IEmployeeService)).To(typeof(EmployeeService));
+
+            Bind(typeof(IDialogService)).To(typeof(DialogService));
 
             Bind<DatabaseContext>().To<DatabaseContext>().InSingletonScope().WithConstructorArgument(0);
             Bind<LoginViewModel>().To<LoginViewModel>();

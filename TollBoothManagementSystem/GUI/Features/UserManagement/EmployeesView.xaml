@@ -112,6 +112,5 @@
 
             </DataGrid.Columns>
         </DataGrid>
-
     </Grid>
 </UserControl>

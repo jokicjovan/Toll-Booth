@@ -231,7 +231,7 @@ namespace TollBoothManagementSystem.Migrations
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     LocationId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    BossId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    BossId = table.Column<Guid>(type: "TEXT", nullable: true),
                     SectionId = table.Column<Guid>(type: "TEXT", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
                     IsActive = table.Column<bool>(type: "INTEGER", nullable: false)
@@ -513,8 +513,7 @@ namespace TollBoothManagementSystem.Migrations
                 table: "TollStations",
                 column: "BossId",
                 principalTable: "Users",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                principalColumn: "Id");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

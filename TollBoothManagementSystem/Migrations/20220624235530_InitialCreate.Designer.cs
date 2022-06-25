@@ -11,7 +11,7 @@ using TollBoothManagementSystem.Core.Persistence;
 namespace TollBoothManagementSystem.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20220624123100_InitialCreate")]
+    [Migration("20220624235530_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -142,7 +142,7 @@ namespace TollBoothManagementSystem.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("BossId")
+                    b.Property<Guid?>("BossId")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("CreatedAt")
@@ -553,9 +553,7 @@ namespace TollBoothManagementSystem.Migrations
                 {
                     b.HasOne("TollBoothManagementSystem.Core.Features.UserManagement.Model.Referent", "Boss")
                         .WithMany()
-                        .HasForeignKey("BossId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BossId");
 
                     b.HasOne("TollBoothManagementSystem.Core.Features.General.Model.Location", "Location")
                         .WithMany()
