@@ -14,7 +14,7 @@ namespace TollBoothManagementSystem.Core.Features.UserManagement.Repository
 
         public User Authenticate(string email, string password)
         {
-            return _entities.FirstOrDefault(u => u.EmailAddress == email && u.Password == password);
+            return _entities.FirstOrDefault(u => u.IsActive && u.EmailAddress == email && u.Password == password);
         }
 
         public bool IsEmailUsed(string email)
