@@ -3,6 +3,7 @@
                     xmlns:navigation="clr-namespace:TollBoothManagementSystem.GUI.Features.Navigation"
                     xmlns:transactionManagment="clr-namespace:TollBoothManagementSystem.GUI.Features.TransactionManagement"
                     xmlns:usermanagement="clr-namespace:TollBoothManagementSystem.GUI.Features.UserManagement"
+                    xmlns:infrastructure="clr-namespace:TollBoothManagementSystem.GUI.Features.Infrastructure"
                     xmlns:userManagementDialog="clr-namespace:TollBoothManagementSystem.GUI.Features.UserManagement.Dialog">
 
     <DataTemplate DataType="{x:Type navigation:LoginViewModel}">
@@ -23,6 +24,10 @@
 
     <DataTemplate DataType="{x:Type usermanagement:EmployeesViewModel}">
         <usermanagement:EmployeesView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type infrastructure:TollStationsViewModel}">
+        <infrastructure:TollStationsView/>
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type transactionManagment:RoadTollPaymentViewModel}">
