@@ -28,20 +28,83 @@ namespace TollBoothManagementSystem.GUI.Features.TransactionManagement
         private TollStation _selectedStation;
         private readonly TollStation? _currentStation;
         private double _amountPayed;
-        private double _change;
-        private bool _isInsufficientAmount;
         private Section _currentSection;
         private VehicleType _selectedVehicleCategory;
         private readonly PriceList _activePricelist;
+        private DateTime _enterDate;
+        private DateTime _enterTime;
+        private string _lpnLeft = "";
+        private string _lpnMiddle = "";
+        private string _lpnRight = "";
         #endregion
 
         #region Properties
         public ICurrencyService CurrencyService => _currencyService;
         public ITollStationService TollStationService => _tollStationService;
+        public string LpnLeft
+        {
+            get => _lpnLeft;
+            set
+            {
+                _lpnLeft = value.ToString().ToUpper();
+                OnPropertyChanged(nameof(LpnLeft));
+            }
+        }
+        public string LpnMiddle
+        {
+            get => _lpnMiddle;
+            set
+            {
+                _lpnMiddle = value;
+                OnPropertyChanged(nameof(LpnMiddle));
+            }
+        }
+        public string LpnRight
+        {
+            get => _lpnRight;
+            set
+            {
+                _lpnRight = value.ToString().ToUpper();
+                OnPropertyChanged(nameof(LpnRight));
+            }
+        }
+        public string LicencePlateNumber
+        {
+            get
+            {
+                return LpnLeft + LpnMiddle + LpnRight;
+            }
+        }
+        public DateTime EnterDate
+        {
+            get => _enterDate;
+            set
+            {
+                _enterDate = value;
+                OnPropertyChanged(nameof(EnterDate));
+            }
+        }
+        public DateTime EnterTime
+        {
+            get => _enterTime;
+            set
+            {
+                _enterTime = value;
+                OnPropertyChanged(nameof(EnterTime));
+            }
+        }
+        public DateTime EnterDateTime
+        {
+            get
+            {                
+                return EnterDate.Add(EnterTime.TimeOfDay);
+            }
+        }
         public ISectionService SectionService => _sectionService;
         public IRoadTollPriceService RoadTollPriceService => _roadTollPriceService;
         public Section CurrentSection => _currentSection;
         public PriceList ActivePricelist => _activePricelist;
+        public static DateTime Today => DateTime.Today;
         public VehicleType SelectedVehicleCategory
         {
             get => _selectedVehicleCategory;
@@ -130,6 +193,7 @@ namespace TollBoothManagementSystem.GUI.Features.TransactionManagement
         #endregion
         public RoadTollPaymentViewModel(ICurrencyService currencyService, ITollStationService tollStationService, ISectionService sectionService, IRoadTollPriceService roadTollPriceService)
         {
+            _enterDate = Today;
             _selectedVehicleCategory = VehicleType.Category1A;
             _currentStation = GlobalStore.ReadObject<TollStation>("CurrentTollStation");
             _currencyService = currencyService;
