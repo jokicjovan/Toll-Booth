@@ -13,9 +13,6 @@ namespace TollBoothManagementSystem.Core.Features.TransactionManagement.Model
         private double _credit;
         public double Credit { get => _credit; set => OnPropertyChanged(ref _credit, value); }
 
-        private TollStation _lastEnteredStation;
-        public virtual TollStation LastEnteredStation { get => _lastEnteredStation; set => OnPropertyChanged(ref _lastEnteredStation, value); }
-
         #endregion
 
         #region Constructors
@@ -26,7 +23,6 @@ namespace TollBoothManagementSystem.Core.Features.TransactionManagement.Model
         {
             LicencePlateNumber = other.LicencePlateNumber;
             Credit = other.Credit;
-            LastEnteredStation = other.LastEnteredStation;
         }
 
         #endregion
