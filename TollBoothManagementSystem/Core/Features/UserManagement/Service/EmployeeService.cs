@@ -45,21 +45,5 @@ namespace TollBoothManagementSystem.Core.Features.UserManagement.Service
         }
 
         #endregion
-
-        public IEnumerable<Employee> getStationEmployees(TollStation tollStation)
-        {
-            return _employeeRepository.ReadAll().Where(employee => { 
-                if (employee.TollStation != null)
-                    return employee.TollStation.Id == tollStation.Id;
-                else return false;  });
-        }
-
-        public IEnumerable<Employee> GetEmployeesBySearchText(string searchText)
-        {
-            searchText = searchText.ToLower();
-            var roles = Enum.GetValues(typeof(Role)).Cast<Role>().Where(text => Enum.GetName(typeof(Role), text).ToLower().Contains(searchText));
-            return _employeeRepository.ReadAll().Where(employee => employee.FirstName.ToLower().Contains(searchText)
-           || employee.LastName.ToLower().Contains(searchText) || roles.Contains(employee.Role));
-        }
     }
 }

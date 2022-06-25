@@ -18,8 +18,8 @@ namespace TollBoothManagementSystem.Core.Features.Infrastructure.Model
         private Location _location;
         public virtual Location Location { get => _location; set => OnPropertyChanged(ref _location, value); }
 
-        private Referent _boss;
-        public virtual Referent Boss { get => _boss; set => OnPropertyChanged(ref _boss, value); }
+        private Referent? _boss;
+        public virtual Referent? Boss { get => _boss; set => OnPropertyChanged(ref _boss, value); }
 
         private IList<TollBooth> _tollBooths;
         public virtual IList<TollBooth> TollBooths { get => _tollBooths; set => OnPropertyChanged(ref _tollBooths, value); }
