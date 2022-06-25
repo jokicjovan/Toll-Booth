@@ -53,7 +53,6 @@ namespace TollBoothManagementSystem.Core.Utility.HelperClasses
                 handler.Invoke(parameter);
             }
         }
-
         public static void Clear()
         {
             _eventHandlers.Clear();

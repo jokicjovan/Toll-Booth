@@ -1,11 +1,12 @@
 ﻿using System.Windows.Input;
 using TollBoothManagementSystem.Core.Features.ApplicationAccess.Commands;
 using TollBoothManagementSystem.Core.Features.Infrastructure.Commands;
+using TollBoothManagementSystem.Core.Features.Infrastructure.Service;
 using TollBoothManagementSystem.Core.Features.UserManagement.Model;
 using TollBoothManagementSystem.Core.Ninject;
 using TollBoothManagementSystem.Core.Utility.HelperClasses;
 using TollBoothManagementSystem.GUI.Features.Infrastructure;
-using TollBoothManagementSystem.GUI.Features.UserManagement;
+using TollBoothManagementSystem.GUI.Utility.Dialog;
 using TollBoothManagementSystem.GUI.Utility.ViewModel;
 
 namespace TollBoothManagementSystem.GUI.Features.Navigation
@@ -28,7 +29,7 @@ namespace TollBoothManagementSystem.GUI.Features.Navigation
             LogOutCommand = new LogOutCommand();
             OpenTollStationsManagementCommand = new OpenTollStationsManagementCommand();
             RegisterHandler();
-            SwitchCurrentViewModel(ServiceLocator.Get<TollStationsViewModel>());
+            EventBus.FireEvent("TollStationsManagement");
         }
 
         #region handlers
@@ -38,6 +39,15 @@ namespace TollBoothManagementSystem.GUI.Features.Navigation
             {
                 TollStationsViewModel Tsvm = ServiceLocator.Get<TollStationsViewModel>();
                 SwitchCurrentViewModel(Tsvm);
+
+                EventBus.RegisterHandler("TollBoothsManagement", () =>
+                {
+                    var tollBoothService = ServiceLocator.Get<TollBoothService>();
+                    var tollStationService = ServiceLocator.Get<TollStationService>();
+                    var dialogService = ServiceLocator.Get<DialogService>();
+                    TollBoothsViewModel Tbvm = new TollBoothsViewModel(tollBoothService, tollStationService, dialogService, Tsvm.SelectedTollStation.Id);
+                    SwitchCurrentViewModel(Tbvm);
+                });
             });
         }
         #endregion

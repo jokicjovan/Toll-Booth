@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
 using TollBoothManagementSystem.Core.Features.Infrastructure.Commands;
@@ -75,6 +74,8 @@ namespace TollBoothManagementSystem.GUI.Features.Infrastructure
 
         public ICommand SearchTollStationCommand { get; set; }
 
+        public ICommand ShowTollBoothsCommand { get; set; }
+
         #endregion
 
         #region methods
@@ -103,7 +104,8 @@ namespace TollBoothManagementSystem.GUI.Features.Infrastructure
             //AddTollStationCommand = new AddTollStationCommand(_dialogService, this);
             //UpdateTollStationCommand = new UpdateTollStationCommand(_dialogService, this);
             //DeleteTollStationCommand = new DeleteTollStationCommand(this);
-            SearchTollStationCommand = new SearchTollStationCommand(this);
+            ShowTollBoothsCommand = new ShowTollBoothsCommand(this);
+            //SearchTollStationCommand = new SearchTollStationCommand(this);
         }
     }
 }

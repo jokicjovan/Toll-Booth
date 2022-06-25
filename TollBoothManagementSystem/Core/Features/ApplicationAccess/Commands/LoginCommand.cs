@@ -1,12 +1,10 @@
 ﻿using System.ComponentModel;
 using System.Windows;
-using TollBoothManagementSystem.Core.Features.Infrastructure.Model;
 using TollBoothManagementSystem.Core.Features.TransactionManagement.Model;
 using TollBoothManagementSystem.Core.Features.UserManagement.Model;
 using TollBoothManagementSystem.Core.Utility.Commands;
 using TollBoothManagementSystem.Core.Utility.HelperClasses;
 using TollBoothManagementSystem.GUI.Features.Navigation;
-using TollBoothManagementSystem.GUI.Utility.ViewModel;
 using TollBoothManagementSystem.GUI.Utility.WindowTitle;
 
 namespace TollBoothManagementSystem.Core.Features.ApplicationAccess.Commands

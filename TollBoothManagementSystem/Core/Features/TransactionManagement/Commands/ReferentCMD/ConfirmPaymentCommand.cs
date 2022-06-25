@@ -20,8 +20,8 @@ namespace TollBoothManagementSystem.Core.Features.TransactionManagement.Commands
         public override void Execute(object? parameter)
         {
             DateTime enterDateTime = _viewModel.EnterDateTime;
-            
-            RoadTollPayment payment = new RoadTollPayment { }
+
+            RoadTollPayment payment = new RoadTollPayment { };
         }
     }
 }

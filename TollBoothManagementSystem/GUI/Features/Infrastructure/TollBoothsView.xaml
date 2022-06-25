@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="TollBoothManagementSystem.GUI.Features.Infrastructure.TollStationsView"
+﻿<UserControl x:Class="TollBoothManagementSystem.GUI.Features.Infrastructure.TollBoothsView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -13,6 +13,7 @@
             <RowDefinition Height="75" />
             <RowDefinition />
         </Grid.RowDefinitions>
+
 
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
@@ -41,22 +42,7 @@
                     Grid.Column="1"
                     Content="Search"
                     Margin="0,5,10,0"
-                    Command="{Binding SearchTollStationCommand}"/>
-            </Grid>
-
-            <Grid Grid.Column="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-
-                <Button Width="90"
-                        Margin="10"
-                        Grid.Column="2"
-                        Content="Manage"
-                        HorizontalAlignment="Center"
-                        Command="{Binding ShowTollBoothsCommand}"/>
+                    Command="{Binding SearchEmployeeCommand}"/>
             </Grid>
 
             <Grid Grid.Column="2">
@@ -71,59 +57,59 @@
                         Grid.Column="0"
                         Content="➕"
                         HorizontalAlignment="Center"
-                        Command="{Binding AddTollStationCommand}"/>
+                        Command="{Binding AddEmployeeCommand}"/>
 
                 <Button Width="70"
                         Margin="10"
                         Grid.Column="1"
                         Content="✏️"
                         HorizontalAlignment="Center"
-                        Command="{Binding UpdateTollStationCommand}"/>
+                        Command="{Binding UpdateEmployeeCommand}"/>
 
                 <Button Width="70"
                         Margin="10"
                         Grid.Column="2"
                         Content="❌"
                         HorizontalAlignment="Center"
-                        Command="{Binding DeleteTollStationCommand}"/>
+                        Command="{Binding DeleteEmployeeCommand}"/>
             </Grid>
         </Grid>
 
 
-        <DataGrid x:Name="TollStations"
+        <DataGrid x:Name="Employees"
                   Grid.Row="1"
                   IsReadOnly="True"
                   AutoGenerateColumns="False"
-                  ItemsSource="{Binding TollStations}"
-                  SelectedItem="{Binding Path=SelectedTollStation, Mode=TwoWay}"
+                  ItemsSource="{Binding TollBooths}"
+                  SelectedItem="{Binding Path=SelectedEmployee, Mode=TwoWay}"
                   SelectionMode="Single"
                   Background="White">
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name"
-                                    MinWidth="120"
+                <DataGridTextColumn Header="Code"
+                                    MinWidth="100"
                                     Width="*"
-                                    Binding="{Binding Name}"/>
+                                    Binding="{Binding EmailAddress}"/>
 
-                <DataGridTextColumn Header="Location"
-                                    MinWidth="120"
+                <DataGridTextColumn Header="Is ETC"
+                                    MinWidth="100"
                                     Width="*"
-                                    Binding="{Binding Location.Name}"/>
+                                    Binding="{Binding IsETC}"/>
 
-                <DataGridTextColumn Header="Boss"
-                                    MinWidth="120"
+                <DataGridTextColumn Header="Is open"
+                                    MinWidth="100"
                                     Width="*"
-                                    Binding="{Binding Boss.FullName}"/>
+                                    Binding="{Binding IsOpen}"/>
 
-                <DataGridTextColumn Header="Number of tollbooths"
-                                    MinWidth="120"
+                <DataGridTextColumn Header="Traffic functional"
+                                    MinWidth="100"
                                     Width="*"
-                                    Binding="{Binding TollBooths.Count}"/>
+                                    Binding="{Binding IsTrafficLightFunctional}"/>
 
-                <DataGridTextColumn Header="Number of employees"
-                                    MinWidth="120"
+                <DataGridTextColumn Header="Toll gate functional"
+                                    MinWidth="100"
                                     Width="*"
-                                    Binding="{Binding Employees.Count}"/>
+                                    Binding="{Binding DateOfBirth, StringFormat=\{0:dd.MM.yyyy\}}"/>
 
             </DataGrid.Columns>
         </DataGrid>

@@ -30,6 +30,10 @@
         <infrastructure:TollStationsView/>
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type infrastructure:TollBoothsViewModel}">
+        <infrastructure:TollBoothsView/>
+    </DataTemplate>
+
     <DataTemplate DataType="{x:Type transactionManagment:RoadTollPaymentViewModel}">
         <transactionManagment:RoadTollPaymentView/>
     </DataTemplate>
