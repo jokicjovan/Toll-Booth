@@ -32,7 +32,7 @@
                        Margin="20,0,0,0" />
 
                     <StackPanel Grid.Row="1">
-                        <RadioButton Content="Toll stations management"
+                        <RadioButton Content="🛣️ Toll stations"
                              Height="50"
                              Foreground="White"
                              FontSize="14"

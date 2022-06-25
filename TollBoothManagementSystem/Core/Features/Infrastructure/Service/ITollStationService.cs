@@ -7,5 +7,6 @@ namespace TollBoothManagementSystem.Core.Features.Infrastructure.Service
     public interface ITollStationService : ICrudRepository<TollStation>
     {
         public void FireEmployee(TollStation tollStation, Employee employee);
+        public void FireAllEmployees(TollStation tollStation);
     }
 }
