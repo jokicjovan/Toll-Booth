@@ -5,5 +5,6 @@ namespace TollBoothManagementSystem.Core.Features.UserManagement.Repository
 {
     public interface IEmployeeRepository : ICrudRepository<Employee>
     {
+
     }
 }

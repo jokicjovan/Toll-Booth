@@ -31,14 +31,7 @@ namespace TollBoothManagementSystem.Core.Features.UserManagement.Commands
 
         public override void Execute(object? parameter)
         {
-            if (_viewModel.TollStation.Boss != null && _viewModel.SelectedEmployee.Id == _viewModel.TollStation.Boss.Id)
-            {
-                //_viewModel.TollStation.Employees.Remove(_viewModel.SelectedEmployee);
-                //_viewModel.TollStation.Boss = null;
-                //_viewModel.TollStationService.Update(_viewModel.TollStation);
-                MessageBox.Show("You can't delete Boss");
-                return;
-            }
+            _viewModel.TollStationService.FireEmployee(_viewModel.TollStation, _viewModel.SelectedEmployee);
             _viewModel.EmployeeService.Delete(_viewModel.SelectedEmployee.Id);
             _viewModel.SearchEmployee();
             MessageBox.Show("Employee deleted successfully");

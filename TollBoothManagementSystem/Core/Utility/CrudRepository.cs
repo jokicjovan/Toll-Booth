@@ -20,12 +20,12 @@ namespace TollBoothManagementSystem.Core.Utility
 
         public virtual IEnumerable<T> ReadAll()
         {
-            return _entities.ToList();
+            return _entities.Where(ent => ent.IsActive).ToList();
         }
 
         public virtual T Read(Guid id)
         {
-            return _entities.FirstOrDefault(e => e.Id == id);
+            return _entities.Where(ent => ent.IsActive).FirstOrDefault(e => e.Id == id);
         }
 
         public virtual T Create(T entity)
@@ -53,8 +53,8 @@ namespace TollBoothManagementSystem.Core.Utility
             var entityToDelete = Read(id);
             if (entityToDelete != null)
             {
-                _context.Remove(entityToDelete);
-                _context.SaveChanges();
+                entityToDelete.IsActive = false;
+                Update(entityToDelete);
             }
 
             return entityToDelete;
