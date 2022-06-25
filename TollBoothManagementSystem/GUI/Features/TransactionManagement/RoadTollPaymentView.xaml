@@ -4,16 +4,26 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TollBoothManagementSystem.GUI.Features.TransactionManagement"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:validations="clr-namespace:TollBoothManagementSystem.GUI.Utility.Validation"
              xmlns:converters="clr-namespace:TollBoothManagementSystem.GUI.Utility.Converter"
              Background="White"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="610" d:DesignWidth="800">
     <UserControl.Resources>
         <ResourceDictionary>
             <Style x:Key="confirmButtonStyle" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
                 <Style.Triggers>
                     <DataTrigger Binding="{Binding ElementName=payedAmountTextBox, Path=(Validation.HasError)}" Value="True">
+                        <Setter Property="IsEnabled" Value="False"/>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding ElementName=LpnLeft, Path=(Validation.HasError)}" Value="True">
+                        <Setter Property="IsEnabled" Value="False"/>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding ElementName=LpnMiddle, Path=(Validation.HasError)}" Value="True">
+                        <Setter Property="IsEnabled" Value="False"/>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding ElementName=LpnRight, Path=(Validation.HasError)}" Value="True">
                         <Setter Property="IsEnabled" Value="False"/>
                     </DataTrigger>
                     <DataTrigger Binding="{Binding Path=IsInsufficientAmount, Mode=OneWay}" Value="True">
@@ -33,9 +43,10 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <GroupBox Height="130" Header="Vehicle category" FontSize="16" Grid.Row="0">
+        <GroupBox Grid.Row="0" Height="130" Header="Vehicle category" FontSize="16">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -51,21 +62,85 @@
                 <RadioButton Content="Category 4" TabIndex="4" IsChecked="{Binding SelectedVehicleCategory, Converter={StaticResource ResourceKey=ParameterToCategory}, ConverterParameter=Category4}" Grid.Column="4" Style="{StaticResource VehicleCategoryButtonTheme}"/>
             </Grid>
         </GroupBox>
-        <TextBlock Text="Currency:" FontSize="16" Grid.Row="1" Margin="0 15 0 0"/>
+        <TextBlock Grid.Row="1" Text="Currency:" FontSize="16" Margin="0 15 0 0"/>
         <Border Grid.Row="2" BorderThickness="2" BorderBrush="#10416b"  Width="150" HorizontalAlignment="Left" Margin="0 5 0 0">
             <ComboBox FontSize="16" ItemsSource="{Binding Currencies}" DisplayMemberPath="Code" SelectedItem="{Binding SelectedCurrency}" Grid.Row="2" BorderThickness="0" TabIndex="5"/>
         </Border>
-        <TextBlock Text="Enter station:" FontSize="16" Grid.Row="3" Margin="0 15 0 0"/>
-        <Border Grid.Row="4" BorderThickness="2" BorderBrush="#10416b"  Width="250" HorizontalAlignment="Left" Margin="0 5 0 0">
-            <ComboBox FontSize="16" ItemsSource="{Binding TollStations}" SelectedItem="{Binding SelectedStation}" DisplayMemberPath="Name" BorderThickness="0" TabIndex="6"/>
-        </Border>
-        <Grid Grid.Row="5" Margin="0 15 0 0">
+        <Grid Grid.Row="3"  Margin="0 15 0 0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="250"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Enter station:" FontSize="16" Grid.Row="0" Grid.Column="0"/>
+            <Border Grid.Row="1" Grid.Column="0" BorderThickness="2" BorderBrush="#10416b"  Width="250" HorizontalAlignment="Left" Margin="0 5 0 0">
+                <ComboBox FontSize="16" ItemsSource="{Binding TollStations}" SelectedItem="{Binding SelectedStation}" DisplayMemberPath="Name" BorderThickness="0" TabIndex="6"/>
+            </Border>
+            <TextBlock Text="Exit station:" FontSize="16" Grid.Row="0" Grid.Column="1" Margin="20 0 0 0"/>
+            <TextBox Text="{Binding CurrentStation.Name}" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" IsEnabled="False" IsReadOnly="False" FontSize="16" Grid.Row="1" Grid.Column="1" Margin="20 0 0 0"/>
+        </Grid>
+        <Grid Grid.Row="4"  Margin="0 15 0 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="150"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Enter date:" FontSize="16" Grid.Row="0" Grid.Column="0"/>
+            <DatePicker Grid.Row="1" Grid.Column="0" SelectedDateFormat="Long" SelectedDate="{Binding EnterDate}" DisplayDateEnd="{Binding Today, Mode=OneWay}" TabIndex="7"/>
+            <TextBlock Text="Enter time:" FontSize="16" Grid.Row="0" Grid.Column="1" Margin="20 0 0 0"/>
+            <materialDesign:TimePicker Grid.Row="1" Grid.Column="1" Margin="20 0 0 0" SelectedTimeFormat="Long" Is24Hours="True" SelectedTime="{Binding EnterTime}" TabIndex="8"/>
+        </Grid>
+        <Grid Grid.Row="5" Margin="0 15 0 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Text="Licenece plate number:" FontSize="16"/>
+            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0 5 0 0">
+                <TextBox Name="LpnLeft" BorderBrush="#10416b" BorderThickness="2" Width="55" FontSize="16" HorizontalContentAlignment="Center" TabIndex="9">
+                    <TextBox.Text>
+                        <Binding Path="LpnLeft" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <validations:IsEmptyStringValidation ValidatesOnTargetUpdated="True"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <TextBlock Text=" - " FontWeight="Black" FontSize="20" VerticalAlignment="Center"/>
+                <TextBox Name="LpnMiddle" BorderBrush="#10416b" BorderThickness="2" Width="80" FontSize="16" HorizontalContentAlignment="Center" TabIndex="10">
+                    <TextBox.Text>
+                        <Binding Path="LpnMiddle" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <validations:IsEmptyStringValidation ValidatesOnTargetUpdated="True"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <TextBlock Text=" - " FontWeight="Black" FontSize="20" VerticalAlignment="Center"/>
+                <TextBox Name="LpnRight" BorderBrush="#10416b" BorderThickness="2" Width="55" FontSize="16" HorizontalContentAlignment="Center" TabIndex="11">
+                    <TextBox.Text>
+                        <Binding Path="LpnRight" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <validations:IsEmptyStringValidation ValidatesOnTargetUpdated="True"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="6" Margin="0 50 0 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
@@ -73,7 +148,7 @@
             <TextBox IsEnabled="False" IsReadOnly="True" Grid.Column="0" Grid.Row="1" FontSize="16" Text="{Binding Price, Mode=OneWay}" Margin="0 0 10 0"/>
 
             <TextBlock Text="Payed amount:" Grid.Column="1" Grid.Row="0" FontSize="16" Margin="5 0 5 0"/>
-            <TextBox Grid.Column="1" Grid.Row="1" FontSize="16" Margin="5 0 5 0" TabIndex="7" Name="payedAmountTextBox">
+            <TextBox Grid.Column="1" Grid.Row="1" FontSize="16" Margin="5 0 5 0" TabIndex="12" Name="payedAmountTextBox">
                 <TextBox.Text>
                     <Binding Path="AmountPayed" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
@@ -86,8 +161,8 @@
             <TextBlock Text="Change:" Grid.Column="2" Grid.Row="0" FontSize="16" Margin="10 0 0 0"/>
             <TextBox IsEnabled="False" Grid.Column="2" IsReadOnly="True" Grid.Row="1" FontSize="16" Margin="10 0 0 0" Text="{Binding Change, Mode=OneWay}"/>
         </Grid>
-        <StackPanel Grid.Row="6" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Left">
-            <Button Content="Confirm payment" Command="{Binding ConfirmPaymentCommand}" Style="{StaticResource confirmButtonStyle}"/>
+        <StackPanel Grid.Row="7" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+            <Button Content="Confirm payment" Command="{Binding ConfirmPaymentCommand}" Style="{StaticResource confirmButtonStyle}" IsDefault="True" TabIndex="13"/>
         </StackPanel>
     </Grid>
 </UserControl>
