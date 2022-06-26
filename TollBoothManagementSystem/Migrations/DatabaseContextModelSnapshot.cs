@@ -106,6 +106,10 @@ namespace TollBoothManagementSystem.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("TEXT");
 
@@ -124,7 +128,7 @@ namespace TollBoothManagementSystem.Migrations
                     b.Property<bool>("IsTrafficLightFunctional")
                         .HasColumnType("INTEGER");
 
-                    b.Property<Guid>("TollStationId")
+                    b.Property<Guid?>("TollStationId")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -185,16 +189,11 @@ namespace TollBoothManagementSystem.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("INTEGER");
 
-                    b.Property<Guid>("LastEnteredStationId")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("LicencePlateNumber")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("LastEnteredStationId");
 
                     b.ToTable("ElectronicTollCollections");
                 });
@@ -205,6 +204,9 @@ namespace TollBoothManagementSystem.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
+                    b.Property<double>("AvarageSpeed")
+                        .HasColumnType("REAL");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("TEXT");
 
@@ -212,7 +214,13 @@ namespace TollBoothManagementSystem.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<double>("Distance")
+                        .HasColumnType("REAL");
+
                     b.Property<DateTime>("EnterTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("EnterTollStationId")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("ExitTime")
@@ -221,15 +229,18 @@ namespace TollBoothManagementSystem.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("INTEGER");
 
-                    b.Property<Guid>("RoadTollPriceId")
-                        .HasColumnType("TEXT");
+                    b.Property<double>("Price")
+                        .HasColumnType("REAL");
 
                     b.Property<Guid>("TollBoothId")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("VehicleType")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("RoadTollPriceId");
+                    b.HasIndex("EnterTollStationId");
 
                     b.HasIndex("TollBoothId");
 
@@ -540,9 +551,7 @@ namespace TollBoothManagementSystem.Migrations
                 {
                     b.HasOne("TollBoothManagementSystem.Core.Features.Infrastructure.Model.TollStation", "TollStation")
                         .WithMany("TollBooths")
-                        .HasForeignKey("TollStationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TollStationId");
 
                     b.Navigation("TollStation");
                 });
@@ -568,22 +577,11 @@ namespace TollBoothManagementSystem.Migrations
                     b.Navigation("Location");
                 });
 
-            modelBuilder.Entity("TollBoothManagementSystem.Core.Features.TransactionManagement.Model.ElectronicTollCollection", b =>
-                {
-                    b.HasOne("TollBoothManagementSystem.Core.Features.Infrastructure.Model.TollStation", "LastEnteredStation")
-                        .WithMany()
-                        .HasForeignKey("LastEnteredStationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("LastEnteredStation");
-                });
-
             modelBuilder.Entity("TollBoothManagementSystem.Core.Features.TransactionManagement.Model.Payment", b =>
                 {
-                    b.HasOne("TollBoothManagementSystem.Core.Features.TransactionManagement.Model.RoadTollPrice", "RoadTollPrice")
+                    b.HasOne("TollBoothManagementSystem.Core.Features.Infrastructure.Model.TollStation", "EnterTollStation")
                         .WithMany()
-                        .HasForeignKey("RoadTollPriceId")
+                        .HasForeignKey("EnterTollStationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -593,7 +591,7 @@ namespace TollBoothManagementSystem.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("RoadTollPrice");
+                    b.Navigation("EnterTollStation");
 
                     b.Navigation("TollBooth");
                 });

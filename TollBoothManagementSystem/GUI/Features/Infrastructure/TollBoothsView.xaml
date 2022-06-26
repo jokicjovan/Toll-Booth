@@ -42,7 +42,16 @@
                     Grid.Column="1"
                     Content="Search"
                     Margin="0,5,10,0"
-                    Command="{Binding SearchEmployeeCommand}"/>
+                    Command="{Binding SearchTollBoothCommand}"/>
+            </Grid>
+
+            <Grid Grid.Column="1">
+                <TextBlock Grid.Row="0" Text="{Binding TollStation.Name}"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       Foreground="White"
+                       FontSize="22"
+                       Margin="0,0,0,0" />
             </Grid>
 
             <Grid Grid.Column="2">
@@ -57,31 +66,31 @@
                         Grid.Column="0"
                         Content="➕"
                         HorizontalAlignment="Center"
-                        Command="{Binding AddEmployeeCommand}"/>
+                        Command="{Binding AddTollBoothCommand}"/>
 
                 <Button Width="70"
                         Margin="10"
                         Grid.Column="1"
                         Content="✏️"
                         HorizontalAlignment="Center"
-                        Command="{Binding UpdateEmployeeCommand}"/>
+                        Command="{Binding UpdateTollBoothCommand}"/>
 
                 <Button Width="70"
                         Margin="10"
                         Grid.Column="2"
                         Content="❌"
                         HorizontalAlignment="Center"
-                        Command="{Binding DeleteEmployeeCommand}"/>
+                        Command="{Binding DeleteTollBoothCommand}"/>
             </Grid>
         </Grid>
 
 
-        <DataGrid x:Name="Employees"
+        <DataGrid x:Name="TollBooths"
                   Grid.Row="1"
                   IsReadOnly="True"
                   AutoGenerateColumns="False"
                   ItemsSource="{Binding TollBooths}"
-                  SelectedItem="{Binding Path=SelectedEmployee, Mode=TwoWay}"
+                  SelectedItem="{Binding Path=SelectedTollBooth, Mode=TwoWay}"
                   SelectionMode="Single"
                   Background="White">
 
@@ -89,7 +98,7 @@
                 <DataGridTextColumn Header="Code"
                                     MinWidth="100"
                                     Width="*"
-                                    Binding="{Binding EmailAddress}"/>
+                                    Binding="{Binding Code}"/>
 
                 <DataGridTextColumn Header="Is ETC"
                                     MinWidth="100"
@@ -101,7 +110,7 @@
                                     Width="*"
                                     Binding="{Binding IsOpen}"/>
 
-                <DataGridTextColumn Header="Traffic functional"
+                <DataGridTextColumn Header="Traffic light functional"
                                     MinWidth="100"
                                     Width="*"
                                     Binding="{Binding IsTrafficLightFunctional}"/>
@@ -109,7 +118,7 @@
                 <DataGridTextColumn Header="Toll gate functional"
                                     MinWidth="100"
                                     Width="*"
-                                    Binding="{Binding DateOfBirth, StringFormat=\{0:dd.MM.yyyy\}}"/>
+                                    Binding="{Binding IsTollGateFunctional}"/>
 
             </DataGrid.Columns>
         </DataGrid>

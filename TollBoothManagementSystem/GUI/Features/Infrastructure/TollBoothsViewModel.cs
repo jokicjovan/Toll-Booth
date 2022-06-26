@@ -2,9 +2,9 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
+using TollBoothManagementSystem.Core.Features.Infrastructure.Commands;
 using TollBoothManagementSystem.Core.Features.Infrastructure.Model;
 using TollBoothManagementSystem.Core.Features.Infrastructure.Service;
-using TollBoothManagementSystem.Core.Features.UserManagement.Model;
 using TollBoothManagementSystem.GUI.Utility.Dialog;
 using TollBoothManagementSystem.GUI.Utility.ViewModel;
 
@@ -44,7 +44,7 @@ namespace TollBoothManagementSystem.GUI.Features.Infrastructure
             set
             {
                 _tollBooths = value;
-                OnPropertyChanged(nameof(_tollBooths));
+                OnPropertyChanged(nameof(TollBooths));
             }
         }
 
@@ -54,7 +54,7 @@ namespace TollBoothManagementSystem.GUI.Features.Infrastructure
             set
             {
                 _selectedTollBooth = value;
-                OnPropertyChanged(nameof(_selectedTollBooth));
+                OnPropertyChanged(nameof(SelectedTollBooth));
             }
         }
 
@@ -81,32 +81,28 @@ namespace TollBoothManagementSystem.GUI.Features.Infrastructure
 
         #region commands
 
-        public ICommand AddEmployeeCommand { get; set; }
+        public ICommand AddTollBoothCommand { get; set; }
 
-        public ICommand UpdateEmployeeCommand { get; set; }
+        public ICommand UpdateTollBoothCommand { get; set; }
 
-        public ICommand DeleteEmployeeCommand { get; set; }
+        public ICommand DeleteTollBoothCommand { get; set; }
 
-        public ICommand SearchEmployeeCommand { get; set; }
-
-        public ICommand Return { get; set; }
+        public ICommand SearchTollBoothCommand { get; set; }
 
         #endregion
 
         #region methods
-        public void SearchEmployee()
+        public void SearchTollBooth()
         {
             if (!string.IsNullOrEmpty(SearchText))
             {
                 var searchText = SearchText.ToLower();
-                var roles = Enum.GetValues(typeof(Role)).Cast<Role>().Where(text => Enum.GetName(typeof(Role), text).ToLower().Contains(searchText));
 
-                //Employees = new ObservableCollection<Employee>(TollStation.Employees.Where(employee => employee.FirstName.ToLower().Contains(searchText)
-               //|| employee.LastName.ToLower().Contains(searchText) || roles.Contains(employee.Role)));
+                TollBooths = new ObservableCollection<TollBooth>(TollStation.TollBooths.Where(tollBooth => tollBooth.Code.ToLower().Contains(searchText)));
             }
             else
             {
-                //Employees = new ObservableCollection<Employee>(TollStation.Employees);
+                TollBooths = new ObservableCollection<TollBooth>(TollStation.TollBooths);
             }
         }
 
@@ -120,14 +116,11 @@ namespace TollBoothManagementSystem.GUI.Features.Infrastructure
 
             _tollStation = _tollStationService.Read(tollStationId);
             TollBooths = new ObservableCollection<TollBooth>(_tollStation.TollBooths);
-        }
 
-        void InitiateCommands()
-        {
             //AddEmployeeCommand = new AddEmployeeCommand(_dialogService, this);
             //UpdateEmployeeCommand = new UpdateEmployeeCommand(_dialogService, this);
-            //SearchEmployeeCommand = new SearchEmployeeCommand(this);
-            //DeleteEmployeeCommand = new DeleteEmployeeCommand(this);
+            SearchTollBoothCommand = new SearchTollBoothCommand(this);
+            DeleteTollBoothCommand = new DeleteTollBoothCommand(this);
         }
     }
 }
