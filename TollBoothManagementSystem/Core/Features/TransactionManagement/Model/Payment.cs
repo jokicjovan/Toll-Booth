@@ -24,8 +24,8 @@ namespace TollBoothManagementSystem.Core.Features.TransactionManagement.Model
         private DateTime _enterTime;
         public DateTime EnterTime { get => _enterTime; set => OnPropertyChanged(ref _enterTime, value); }
 
-        private VehicleType _vehicleType;
-        public VehicleType VehicleType { get => _vehicleType; set => OnPropertyChanged(ref _vehicleType, value); }
+        private VehicleType _vehicleCategory;
+        public VehicleType VehicleCategory { get => _vehicleCategory; set => OnPropertyChanged(ref _vehicleCategory, value); }
 
         private double _distance;
         public double Distance { get => _distance; set => OnPropertyChanged(ref _distance, value); }
@@ -33,6 +33,8 @@ namespace TollBoothManagementSystem.Core.Features.TransactionManagement.Model
         private double _avarageSpeed;
         public double AvarageSpeed { get => _avarageSpeed; set => OnPropertyChanged(ref _avarageSpeed, value); }
 
+        private Currency _currency;
+        public virtual Currency Currency { get => _currency; set => OnPropertyChanged(ref _currency, value); }
 
         #endregion
 
@@ -47,7 +49,7 @@ namespace TollBoothManagementSystem.Core.Features.TransactionManagement.Model
             Price = other.Price;
             Distance = other.Distance;
             AvarageSpeed = other.AvarageSpeed;
-            VehicleType = other.VehicleType;
+            VehicleCategory = other.VehicleCategory;
             ExitTime = other.ExitTime;
             EnterTime = other.EnterTime;
         }

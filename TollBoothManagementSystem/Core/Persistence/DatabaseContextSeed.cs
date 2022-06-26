@@ -564,6 +564,7 @@ namespace TollBoothManagementSystem.Core.Persistence
 
             #region SectionInfo
 
+            var secInfo1X = new SectionInfo { Section = sec1, TollStation = ts01, Distance = 0 };
             var secInfo01 = new SectionInfo { Section = sec1, TollStation = ts02, Distance = 12.5 };
             var secInfo02 = new SectionInfo { Section = sec1, TollStation = ts03, Distance = 25.9 };
             var secInfo03 = new SectionInfo { Section = sec1, TollStation = ts04, Distance = 46.6 };
@@ -571,6 +572,7 @@ namespace TollBoothManagementSystem.Core.Persistence
             var secInfo05 = new SectionInfo { Section = sec1, TollStation = ts06, Distance = 79.0 };
             var secInfo06 = new SectionInfo { Section = sec1, TollStation = ts07, Distance = 84.7 };
 
+            var secInfo2X = new SectionInfo { Section = sec2, TollStation = ts08, Distance = 0 };
             var secInfo07 = new SectionInfo { Section = sec2, TollStation = ts09, Distance = 10.5 };
             var secInfo08 = new SectionInfo { Section = sec2, TollStation = ts10, Distance = 19.5 };
             var secInfo09 = new SectionInfo { Section = sec2, TollStation = ts11, Distance = 26.0 };
@@ -583,6 +585,7 @@ namespace TollBoothManagementSystem.Core.Persistence
             var secInfo16 = new SectionInfo { Section = sec2, TollStation = ts18, Distance = 124.0 };
             var secInfo17 = new SectionInfo { Section = sec2, TollStation = ts19, Distance = 139.0 };
 
+            var secInfo3X = new SectionInfo { Section = sec3, TollStation = ts20, Distance = 0 };
             var secInfo18 = new SectionInfo { Section = sec3, TollStation = ts21, Distance = 24.6 };
             var secInfo19 = new SectionInfo { Section = sec3, TollStation = ts22, Distance = 37.8 };
             var secInfo20 = new SectionInfo { Section = sec3, TollStation = ts23, Distance = 61.8 };
@@ -611,6 +614,10 @@ namespace TollBoothManagementSystem.Core.Persistence
             context.SectionInfos.Add(secInfo20);
             context.SectionInfos.Add(secInfo21);
             context.SectionInfos.Add(secInfo22);
+
+            context.SectionInfos.Add(secInfo1X);
+            context.SectionInfos.Add(secInfo2X);
+            context.SectionInfos.Add(secInfo3X);
 
             context.SaveChanges();
 

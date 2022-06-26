@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 using TollBoothManagementSystem.Core.Features.ApplicationAccess.Commands;
+using TollBoothManagementSystem.Core.Features.Infrastructure.Service;
 using TollBoothManagementSystem.Core.Features.TransactionManagement.Service;
 using TollBoothManagementSystem.Core.Features.UserManagement.Repository;
 using TollBoothManagementSystem.GUI.Utility.ViewModel;
@@ -13,6 +14,7 @@ namespace TollBoothManagementSystem.GUI.Features.Navigation
         public readonly IUserRepository _userRepository;
         private readonly ISectionService _sectionService;
         private readonly IPriceListService _priceListService;
+        private readonly ITollBoothService _tollBoothService;
 
         private string? _email = "@example.com";
         public string? Email
@@ -61,10 +63,11 @@ namespace TollBoothManagementSystem.GUI.Features.Navigation
         public ICommand? LoginCommand { get; }
 
         public ISectionService SectionService => _sectionService;
+        public ITollBoothService TollBoothService => _tollBoothService;
 
         public IPriceListService PriceListService => _priceListService;
 
-        public LoginViewModel(IUserRepository userRepository, ISectionService sectionService, IPriceListService priceListService)
+        public LoginViewModel(IUserRepository userRepository, ISectionService sectionService, IPriceListService priceListService, ITollBoothService tollBoothService)
         {
             _errMsgVisibility = Visibility.Hidden;
             _errMsgText = "";
@@ -72,6 +75,7 @@ namespace TollBoothManagementSystem.GUI.Features.Navigation
             _sectionService = sectionService;
             LoginCommand = new LoginCommand(this);
             _priceListService = priceListService;
+            _tollBoothService = tollBoothService;
         }
 
     }

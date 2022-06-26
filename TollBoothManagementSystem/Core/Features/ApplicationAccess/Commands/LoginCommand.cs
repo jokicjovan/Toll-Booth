@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Windows;
 using TollBoothManagementSystem.Core.Features.Infrastructure.Model;
 using TollBoothManagementSystem.Core.Features.TransactionManagement.Model;
@@ -44,18 +45,26 @@ namespace TollBoothManagementSystem.Core.Features.ApplicationAccess.Commands
             }
             else
             {
+                Guid guid = GlobalStore.ReadObject<Guid>("CurrentTollBooth");
+                TollBooth currentTollBooth;
+                TollStation currentTollStation;
                 Section currentSection;
                 PriceList pricelist;
+
                 switch (user.Role)
                 {
                     case Role.Manager:
                         Manager mn = (Manager)user;
                         GlobalStore.AddObject("LoggedUser", mn);
-                        GlobalStore.AddObject("CurrentTollStation", mn.TollStation);
-                        currentSection = _viewModel.SectionService.GetSection(mn.TollStation);
-                        GlobalStore.AddObject("CurrentSection", currentSection);
+
+                        currentTollBooth = _viewModel.TollBoothService.Read(guid);
+                        currentTollStation = currentTollBooth.TollStation;
+                        currentSection = _viewModel.SectionService.GetSection(currentTollStation);
                         pricelist = _viewModel.PriceListService.GetActivePricelist(currentSection);
+                        GlobalStore.AddObject("CurrentTollStation", currentTollStation);
+                        GlobalStore.AddObject("CurrentSection", currentSection);
                         GlobalStore.AddObject("ActivePricelist", pricelist);
+
                         EventBus.FireEvent("ManagerLogin");
                         TitleManager.Title = "Manager";
                         break;
@@ -70,11 +79,15 @@ namespace TollBoothManagementSystem.Core.Features.ApplicationAccess.Commands
                     case Role.Referent:
                         Referent rf = (Referent)user;
                         GlobalStore.AddObject("LoggedUser", rf);
-                        GlobalStore.AddObject("CurrentTollStation", rf.TollStation);
-                        currentSection = _viewModel.SectionService.GetSection(rf.TollStation);
-                        GlobalStore.AddObject("CurrentSection", currentSection);
+
+                        currentTollBooth = _viewModel.TollBoothService.Read(guid);
+                        currentTollStation = currentTollBooth.TollStation;
+                        currentSection = _viewModel.SectionService.GetSection(currentTollStation);
                         pricelist = _viewModel.PriceListService.GetActivePricelist(currentSection);
+                        GlobalStore.AddObject("CurrentTollStation", currentTollStation);
+                        GlobalStore.AddObject("CurrentSection", currentSection);
                         GlobalStore.AddObject("ActivePricelist", pricelist);
+
                         EventBus.FireEvent("ReferentLogin");
                         TitleManager.Title = "Referent";
                         break;

@@ -25,6 +25,21 @@ namespace TollBoothManagementSystem.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ElectronicTollCollections",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    LicencePlateNumber = table.Column<string>(type: "TEXT", nullable: false),
+                    Credit = table.Column<double>(type: "REAL", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    IsActive = table.Column<bool>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ElectronicTollCollections", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Locations",
                 columns: table => new
                 {
@@ -37,22 +52,6 @@ namespace TollBoothManagementSystem.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Locations", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ElectronicTollCollections",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    LicencePlateNumber = table.Column<string>(type: "TEXT", nullable: false),
-                    Credit = table.Column<double>(type: "REAL", nullable: false),
-                    LastEnteredStationId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    IsActive = table.Column<bool>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ElectronicTollCollections", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -78,9 +77,14 @@ namespace TollBoothManagementSystem.Migrations
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     TollBoothId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    RoadTollPriceId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    EnterTollStationId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Price = table.Column<double>(type: "REAL", nullable: false),
                     ExitTime = table.Column<DateTime>(type: "TEXT", nullable: false),
                     EnterTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    VehicleCategory = table.Column<int>(type: "INTEGER", nullable: false),
+                    Distance = table.Column<double>(type: "REAL", nullable: false),
+                    AvarageSpeed = table.Column<double>(type: "REAL", nullable: false),
+                    CurrencyId = table.Column<Guid>(type: "TEXT", nullable: false),
                     Discriminator = table.Column<string>(type: "TEXT", nullable: false),
                     ElectronicTollCollectionId = table.Column<Guid>(type: "TEXT", nullable: true),
                     LicencePlateNumber = table.Column<string>(type: "TEXT", nullable: true),
@@ -90,6 +94,12 @@ namespace TollBoothManagementSystem.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Payments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Payments_Currencies_CurrencyId",
+                        column: x => x.CurrencyId,
+                        principalTable: "Currencies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Payments_ElectronicTollCollections_ElectronicTollCollectionId",
                         column: x => x.ElectronicTollCollectionId,
@@ -279,11 +289,6 @@ namespace TollBoothManagementSystem.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ElectronicTollCollections_LastEnteredStationId",
-                table: "ElectronicTollCollections",
-                column: "LastEnteredStationId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_FaultReports_ReporterId",
                 table: "FaultReports",
                 column: "ReporterId");
@@ -294,14 +299,19 @@ namespace TollBoothManagementSystem.Migrations
                 column: "TollBoothId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Payments_CurrencyId",
+                table: "Payments",
+                column: "CurrencyId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Payments_ElectronicTollCollectionId",
                 table: "Payments",
                 column: "ElectronicTollCollectionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Payments_RoadTollPriceId",
+                name: "IX_Payments_EnterTollStationId",
                 table: "Payments",
-                column: "RoadTollPriceId");
+                column: "EnterTollStationId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Payments_TollBoothId",
@@ -389,14 +399,6 @@ namespace TollBoothManagementSystem.Migrations
                 column: "TollStationId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_ElectronicTollCollections_TollStations_LastEnteredStationId",
-                table: "ElectronicTollCollections",
-                column: "LastEnteredStationId",
-                principalTable: "TollStations",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
                 name: "FK_FaultReports_TollBooths_TollBoothId",
                 table: "FaultReports",
                 column: "TollBoothId",
@@ -413,18 +415,18 @@ namespace TollBoothManagementSystem.Migrations
                 onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Payments_RoadTollPrices_RoadTollPriceId",
-                table: "Payments",
-                column: "RoadTollPriceId",
-                principalTable: "RoadTollPrices",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
                 name: "FK_Payments_TollBooths_TollBoothId",
                 table: "Payments",
                 column: "TollBoothId",
                 principalTable: "TollBooths",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Payments_TollStations_EnterTollStationId",
+                table: "Payments",
+                column: "EnterTollStationId",
+                principalTable: "TollStations",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
 
@@ -519,6 +521,10 @@ namespace TollBoothManagementSystem.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
+                name: "FK_TollStations_Users_BossId",
+                table: "TollStations");
+
+            migrationBuilder.DropForeignKey(
                 name: "FK_Sections_TollStations_DestinationId",
                 table: "Sections");
 
@@ -526,15 +532,14 @@ namespace TollBoothManagementSystem.Migrations
                 name: "FK_Sections_TollStations_OriginId",
                 table: "Sections");
 
-            migrationBuilder.DropForeignKey(
-                name: "FK_Users_TollStations_TollStationId",
-                table: "Users");
-
             migrationBuilder.DropTable(
                 name: "FaultReports");
 
             migrationBuilder.DropTable(
                 name: "Payments");
+
+            migrationBuilder.DropTable(
+                name: "RoadTollPrices");
 
             migrationBuilder.DropTable(
                 name: "SectionInfos");
@@ -546,19 +551,19 @@ namespace TollBoothManagementSystem.Migrations
                 name: "ElectronicTollCollections");
 
             migrationBuilder.DropTable(
-                name: "RoadTollPrices");
-
-            migrationBuilder.DropTable(
-                name: "TollBooths");
-
-            migrationBuilder.DropTable(
                 name: "PriceLists");
 
             migrationBuilder.DropTable(
                 name: "RoadTolls");
 
             migrationBuilder.DropTable(
+                name: "TollBooths");
+
+            migrationBuilder.DropTable(
                 name: "Currencies");
+
+            migrationBuilder.DropTable(
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "TollStations");
@@ -568,9 +573,6 @@ namespace TollBoothManagementSystem.Migrations
 
             migrationBuilder.DropTable(
                 name: "Sections");
-
-            migrationBuilder.DropTable(
-                name: "Users");
         }
     }
 }

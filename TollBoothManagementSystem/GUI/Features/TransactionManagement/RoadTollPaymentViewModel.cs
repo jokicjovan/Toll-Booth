@@ -24,6 +24,9 @@ namespace TollBoothManagementSystem.GUI.Features.TransactionManagement
         private readonly ITollStationService _tollStationService;
         private readonly ISectionService _sectionService;
         private readonly IRoadTollPriceService _roadTollPriceService;
+        private readonly ISectionInfoService _sectionInfoService;
+        private readonly ITollBoothService _tollBoothService;
+        private readonly IRoadTollPaymentService _roadTollPaymentService;
         private Currency _selectedCurrency;
         private TollStation _selectedStation;
         private readonly TollStation? _currentStation;
@@ -41,6 +44,9 @@ namespace TollBoothManagementSystem.GUI.Features.TransactionManagement
         #region Properties
         public ICurrencyService CurrencyService => _currencyService;
         public ITollStationService TollStationService => _tollStationService;
+        public ISectionInfoService SectionInfoService => _sectionInfoService;
+        public ITollBoothService TollBoothService => _tollBoothService;
+        public IRoadTollPaymentService RoadTollPaymentService => _roadTollPaymentService;
         public string LpnLeft
         {
             get => _lpnLeft;
@@ -191,7 +197,7 @@ namespace TollBoothManagementSystem.GUI.Features.TransactionManagement
         #region Commands
         public ICommand ConfirmPaymentCommand { get; }
         #endregion
-        public RoadTollPaymentViewModel(ICurrencyService currencyService, ITollStationService tollStationService, ISectionService sectionService, IRoadTollPriceService roadTollPriceService)
+        public RoadTollPaymentViewModel(ICurrencyService currencyService, ITollStationService tollStationService, ISectionService sectionService, IRoadTollPriceService roadTollPriceService, ISectionInfoService sectionInfoService, ITollBoothService tollBoothService, IRoadTollPaymentService roadTollPaymentService)
         {
             _enterDate = Today;
             _selectedVehicleCategory = VehicleType.Category1A;
@@ -200,6 +206,9 @@ namespace TollBoothManagementSystem.GUI.Features.TransactionManagement
             _tollStationService = tollStationService;
             _sectionService = sectionService;
             _roadTollPriceService = roadTollPriceService;
+            _sectionInfoService = sectionInfoService;
+            _tollBoothService = tollBoothService;
+            _roadTollPaymentService = roadTollPaymentService;
             _currencies = new ObservableCollection<Currency>(currencyService.ReadAll());
             _selectedCurrency = _currencies.First(e => e.Code == "RSD");
             _currentSection = GlobalStore.ReadObject<Section>("CurrentSection");
