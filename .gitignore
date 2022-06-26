@@ -3,6 +3,12 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+TollBoothConfiguration.txt
+*.db
+*InitialCreate.cs
+*Designer.cs
+*Snapshot.cs
+
 # SQLite specific files
 *.db-shm
 *.db-wal
