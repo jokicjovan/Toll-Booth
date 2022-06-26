@@ -36,14 +36,24 @@ namespace TollBoothManagementSystem.GUI.Utility.ViewModel
 
         private void LoadConfiguration()
         {
-            var fileStream = new FileStream("./../../../Core/Configuration/TollBoothConfiguration.txt", FileMode.Open, FileAccess.Read);       
-            using (var streamReader = new StreamReader(fileStream, Encoding.UTF8))
+            try
             {
-                string guidStr = streamReader.ReadLine();
-                Guid guid = Guid.Parse(guidStr);
-                GlobalStore.AddObject("CurrentTollBooth", guid);
+                var fileStream = new FileStream("./../../../Core/Configuration/TollBoothConfiguration.txt",
+                                                FileMode.Open,
+                                                FileAccess.Read);
+                using (var streamReader = new StreamReader(fileStream, Encoding.UTF8))
+                {
+                    string? guidStr = streamReader.ReadLine();
+                    GlobalStore.AddObject("CurrentTollBoothID", guidStr);
+                    return;
+                }
+            }
+            catch (FileNotFoundException)
+            {
+                GlobalStore.AddObject("CurrentTollBooth", null);
                 return;
             }
+
         }
         private void RegisterHandler()
         {
