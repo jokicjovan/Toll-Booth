@@ -1,26 +1,24 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
 using TollBoothManagementSystem.Core.Features.Infrastructure.Commands;
 using TollBoothManagementSystem.Core.Features.Infrastructure.Model;
 using TollBoothManagementSystem.Core.Features.Infrastructure.Service;
-using TollBoothManagementSystem.GUI.Utility.Dialog;
+using TollBoothManagementSystem.Core.Features.UserManagement.Model;
+using TollBoothManagementSystem.Core.Utility.HelperClasses;
 using TollBoothManagementSystem.GUI.Utility.ViewModel;
 
 namespace TollBoothManagementSystem.GUI.Features.Infrastructure
 {
-    public class TollBoothsViewModel : ViewModelBase, ISearchViewModel
+    public class FaultReportViewModel : ViewModelBase, ISearchViewModel
     {
         #region services
 
         private readonly ITollBoothService _tollBoothService;
         private readonly ITollStationService _tollStationService;
-        private readonly IDialogService _dialogService;
 
         public ITollBoothService TollBoothService => _tollBoothService;
         public ITollStationService TollStationService => _tollStationService;
-        public IDialogService DialogService => _dialogService;
 
         #endregion
 
@@ -81,13 +79,9 @@ namespace TollBoothManagementSystem.GUI.Features.Infrastructure
 
         #region commands
 
-        public ICommand AddTollBoothCommand { get; set; }
-
-        public ICommand UpdateTollBoothCommand { get; set; }
-
-        public ICommand DeleteTollBoothCommand { get; set; }
-
         public ICommand SearchTollBoothCommand { get; set; }
+        public ICommand ReportTrafficLightFaultCommand { get; set; }
+        public ICommand ReportGateFaultCommand { get; set; }
 
         #endregion
 
@@ -108,19 +102,17 @@ namespace TollBoothManagementSystem.GUI.Features.Infrastructure
 
         #endregion
 
-        public TollBoothsViewModel(ITollBoothService tollBoothService, ITollStationService tollStationService, IDialogService dialogService, Guid tollStationId)
+        public FaultReportViewModel(ITollBoothService tollBoothService, ITollStationService tollStationService)
         {
             _tollBoothService = tollBoothService;
             _tollStationService = tollStationService;
-            _dialogService = dialogService;
 
-            _tollStation = _tollStationService.Read(tollStationId);
+            _tollStation = _tollStationService.Read(GlobalStore.ReadObject<Manager>("LoggedUser").TollStation.Id);
             TollBooths = new ObservableCollection<TollBooth>(_tollStation.TollBooths);
 
-            //AddEmployeeCommand = new AddEmployeeCommand(_dialogService, this);
-            //UpdateEmployeeCommand = new UpdateEmployeeCommand(_dialogService, this);
             SearchTollBoothCommand = new SearchCommand(this);
-            DeleteTollBoothCommand = new DeleteTollBoothCommand(this);
+            ReportTrafficLightFaultCommand = new ReportTrafficLightFaultCommand(this);
+            ReportGateFaultCommand = new ReportGateFaultCommand(this);
         }
     }
 }

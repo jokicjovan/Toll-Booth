@@ -10,7 +10,7 @@ using TollBoothManagementSystem.GUI.Utility.ViewModel;
 
 namespace TollBoothManagementSystem.GUI.Features.Infrastructure
 {
-    public class TollBoothStatusViewModel : ViewModelBase
+    public class FixTollBoothViewModel : ViewModelBase, ISearchViewModel
     {
         #region services
 
@@ -80,11 +80,13 @@ namespace TollBoothManagementSystem.GUI.Features.Infrastructure
         #region commands
 
         public ICommand SearchTollBoothCommand { get; set; }
+        public ICommand FixTrafficLightCommand { get; set; }
+        public ICommand FixGateCommand { get; set; }
 
         #endregion
 
         #region methods
-        public void SearchTollBooth()
+        public void Search()
         {
             if (!string.IsNullOrEmpty(SearchText))
             {
@@ -100,7 +102,7 @@ namespace TollBoothManagementSystem.GUI.Features.Infrastructure
 
         #endregion
 
-        public TollBoothStatusViewModel(ITollBoothService tollBoothService, ITollStationService tollStationService)
+        public FixTollBoothViewModel(ITollBoothService tollBoothService, ITollStationService tollStationService)
         {
             _tollBoothService = tollBoothService;
             _tollStationService = tollStationService;
@@ -108,9 +110,9 @@ namespace TollBoothManagementSystem.GUI.Features.Infrastructure
             _tollStation = _tollStationService.Read(GlobalStore.ReadObject<Manager>("LoggedUser").TollStation.Id);
             TollBooths = new ObservableCollection<TollBooth>(_tollStation.TollBooths);
 
-            //AddEmployeeCommand = new AddEmployeeCommand(_dialogService, this);
-            //UpdateEmployeeCommand = new UpdateEmployeeCommand(_dialogService, this);
-            SearchTollBoothCommand = new SearchTollBoothStatusCommand(this);
+            SearchTollBoothCommand = new SearchCommand(this);
+            FixTrafficLightCommand = new FixTrafficLightCommand(this);
+            FixGateCommand = new FixGateCommand(this);
         }
     }
 }

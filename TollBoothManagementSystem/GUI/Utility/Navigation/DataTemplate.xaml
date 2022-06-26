@@ -34,8 +34,8 @@
         <infrastructure:TollBoothsView/>
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type infrastructure:TollBoothStatusViewModel}">
-        <infrastructure:TollBoothStatusView/>
+    <DataTemplate DataType="{x:Type infrastructure:FixTollBoothViewModel}">
+        <infrastructure:FixTollBoothView/>
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type transactionManagment:RoadTollPaymentViewModel}">

@@ -53,19 +53,19 @@
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding OpenEmployeesManagementCommand}" IsChecked="True"/>
-                        <RadioButton Content="🛣️ Toll Booths statuses"
+                        <RadioButton Content="🛣️ Toll Booths overview"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
-                             Command="{Binding OpenTollBoothStatusesCommand}" IsChecked="False"/>
+                             Command="{Binding OpenFixTollBoothCommand}" IsChecked="False"/>
                     </StackPanel>
 
                     <Button Content="Log out"
                     Grid.Row="2"
                     VerticalAlignment="Bottom"
                     Command="{Binding LogOutCommand}"
-                    Margin="10,0,0,20"/>
+                    Margin="10,0,10,20"/>
                 </Grid>
 
                 <ContentControl Grid.Row="1"

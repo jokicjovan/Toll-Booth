@@ -3,17 +3,17 @@ using TollBoothManagementSystem.GUI.Features.Infrastructure;
 
 namespace TollBoothManagementSystem.Core.Features.Infrastructure.Commands
 {
-    public class SearchTollBoothCommand : CommandBase
+    public class SearchCommand : CommandBase
     {
-        TollBoothsViewModel _viewModel;
-        public SearchTollBoothCommand(TollBoothsViewModel viewModel)
+        ISearchViewModel _viewModel;
+        public SearchCommand(ISearchViewModel viewModel)
         {
             _viewModel = viewModel;
         }
 
         public override void Execute(object? parameter)
         {
-            _viewModel.SearchTollBooth();
+            _viewModel.Search();
         }
     }
 }

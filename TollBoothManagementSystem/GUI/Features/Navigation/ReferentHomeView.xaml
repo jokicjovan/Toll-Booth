@@ -74,7 +74,7 @@
                     Grid.Row="5"
                     VerticalAlignment="Bottom"
                     Command="{Binding LogOutCommand}"
-                    Margin="10,0,0,20"/>
+                    Margin="10,0,10,20"/>
                 </Grid>
 
                 <ContentControl Grid.Row="1"
