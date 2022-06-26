@@ -15,5 +15,18 @@ namespace TollBoothManagementSystem.Core.Features.Infrastructure.Repository
         {
 
         }
+
+        public override TollBooth Delete(Guid id)
+        {
+            var entityToDelete = Read(id);
+            if (entityToDelete != null)
+            {
+                entityToDelete.IsActive = false;
+                entityToDelete.TollStation = null;
+                Update(entityToDelete);
+            }
+
+            return entityToDelete;
+        }
     }
 }

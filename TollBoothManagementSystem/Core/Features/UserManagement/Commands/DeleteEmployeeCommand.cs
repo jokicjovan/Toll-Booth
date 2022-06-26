@@ -32,7 +32,6 @@ namespace TollBoothManagementSystem.Core.Features.UserManagement.Commands
         public override void Execute(object? parameter)
         {
             _viewModel.TollStationService.FireEmployee(_viewModel.TollStation, _viewModel.SelectedEmployee);
-            _viewModel.EmployeeService.Delete(_viewModel.SelectedEmployee.Id);
             _viewModel.SearchEmployee();
             MessageBox.Show("Employee deleted successfully");
         }

@@ -6,15 +6,17 @@ using System.Threading.Tasks;
 using TollBoothManagementSystem.Core.Features.Infrastructure.Model;
 using TollBoothManagementSystem.Core.Features.Infrastructure.Repository;
 using TollBoothManagementSystem.Core.Features.UserManagement.Model;
+using TollBoothManagementSystem.Core.Features.UserManagement.Service;
 
 namespace TollBoothManagementSystem.Core.Features.Infrastructure.Service
 {
     public class TollStationService : ITollStationService
     {
         private readonly ITollStationRepository _tollStationRepository;
-
-        public TollStationService(ITollStationRepository tollStationRepository)
+        private readonly IEmployeeService _employeeService;
+        public TollStationService(ITollStationRepository tollStationRepository, IEmployeeService employeeService)
         {
+            _employeeService = employeeService;
             _tollStationRepository = tollStationRepository;
         }
 
@@ -49,6 +51,18 @@ namespace TollBoothManagementSystem.Core.Features.Infrastructure.Service
             }
 
             tollStation.Employees.Remove(employee);
+            Update(tollStation);
+            _employeeService.Delete(employee.Id);
+        }
+
+        public void FireAllEmployees(TollStation tollStation) 
+        {
+            while (tollStation.Employees.Count > 0) {
+                _employeeService.Delete(tollStation.Employees[0].Id);
+            }
+
+            tollStation.Boss = null;
+            tollStation.Employees.Clear();
             Update(tollStation);
         }
     }

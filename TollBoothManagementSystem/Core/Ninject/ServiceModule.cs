@@ -63,7 +63,7 @@ namespace TollBoothManagementSystem.Core.Ninject
             Bind(typeof(IUserService)).To(typeof(UserService));
             Bind(typeof(IEmployeeService)).To(typeof(EmployeeService));
 
-            Bind(typeof(IDialogService)).To(typeof(DialogService));
+            Bind(typeof(IDialogService)).To(typeof(GUI.Utility.Dialog.DialogService));
 
             Bind<DatabaseContext>().To<DatabaseContext>().InSingletonScope().WithConstructorArgument(0);
             Bind<LoginViewModel>().To<LoginViewModel>();

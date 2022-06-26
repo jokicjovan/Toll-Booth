@@ -32,12 +32,12 @@
                        Margin="20,0,0,0" />
 
                     <StackPanel Grid.Row="1">
-                        <RadioButton Content="🧑‍💼 Employee management"
+                        <RadioButton Content="🛣️ Toll stations"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
-                             Command="{Binding UserCrudCommand}" IsChecked="True"/>
+                             Command="{Binding OpenTollStationsManagementCommand}" IsChecked="True"/>
                     </StackPanel>
 
                     <Button Content="Log out"

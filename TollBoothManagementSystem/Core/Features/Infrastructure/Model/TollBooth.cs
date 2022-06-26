@@ -6,6 +6,9 @@ namespace TollBoothManagementSystem.Core.Features.Infrastructure.Model
     {
         #region Properties
 
+        private string _code;
+        public string Code { get => _code; set => OnPropertyChanged(ref _code, value); }
+
         private bool _isETC;
         public bool IsETC { get => _isETC; set => OnPropertyChanged(ref _isETC, value); }
 
@@ -18,8 +21,8 @@ namespace TollBoothManagementSystem.Core.Features.Infrastructure.Model
         private bool _isTollGateFunctional;
         public bool IsTollGateFunctional { get => _isTollGateFunctional; set => OnPropertyChanged(ref _isTollGateFunctional, value); }
 
-        private TollStation _tollStation;
-        public virtual TollStation TollStation { get => _tollStation; set => OnPropertyChanged(ref _tollStation, value); }
+        private TollStation? _tollStation;
+        public virtual TollStation? TollStation { get => _tollStation; set => OnPropertyChanged(ref _tollStation, value); }
 
         #endregion
 
