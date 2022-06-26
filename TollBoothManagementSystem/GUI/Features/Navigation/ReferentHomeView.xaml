@@ -19,8 +19,8 @@
 
                 <Grid Grid.Column="0">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="75" />
-                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="90" />
+                        <RowDefinition Height="*" />
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
@@ -31,7 +31,7 @@
                        FontSize="22"
                        Margin="20,0,0,0" />
 
-                    <StackPanel Grid.Row="1">
+                    <StackPanel Grid.Row="1" VerticalAlignment="Center">
                         <RadioButton Content="Payment"
                              Height="50"
                              Foreground="White"
@@ -49,7 +49,7 @@
 
                 <ContentControl Grid.Row="1"
                             Grid.Column="1"
-                            Margin="10"
+                            Margin="0,10,10,10"
                             Content="{Binding CurrentViewModel}"/>
 
             </Grid>

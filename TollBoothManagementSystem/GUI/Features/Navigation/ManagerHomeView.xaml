@@ -20,24 +20,45 @@
                 <Grid Grid.Column="0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="90" />
-                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="0" Text="{Binding FirstName, StringFormat='Hello {0}'}"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Left"
-                       Foreground="White"
-                       FontSize="22"
-                       Margin="20,0,0,0" />
+                    <StackPanel Grid.Row="0" >
+                        <TextBlock Text="{Binding Manager.FirstName, StringFormat='Hello {0}'}"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left"
+                           Foreground="White"
+                           FontSize="22"
+                           Margin="20,15,0,5" />
 
-                    <StackPanel Grid.Row="1">
+                        <Separator BorderBrush="White" BorderThickness="2" Margin="20,5,20,5"></Separator>
+
+                        <TextBlock Text="{Binding Manager.TollStation.Name, StringFormat='Toll station: {0}'}"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left"
+                           Foreground="White"
+                           FontSize="16"
+                           Margin="20,0,0,5" />
+                        
+                        <Separator BorderBrush="White" BorderThickness="2" Margin="20,0,20,0">
+                        </Separator>
+                    </StackPanel>
+
+
+                    <StackPanel Grid.Row="1" VerticalAlignment="Center">
                         <RadioButton Content="🧑‍💼 Employees management"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding OpenEmployeesManagementCommand}" IsChecked="True"/>
+                        <RadioButton Content="🛣️ Toll Booths statuses"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding OpenTollBoothStatusesCommand}" IsChecked="False"/>
                     </StackPanel>
 
                     <Button Content="Log out"
@@ -49,7 +70,7 @@
 
                 <ContentControl Grid.Row="1"
                             Grid.Column="1"
-                            Margin="10"
+                            Margin="0,10,10,10"
                             Content="{Binding CurrentViewModel}"/>
 
             </Grid>

@@ -1,9 +1,11 @@
 ﻿using System.Windows.Input;
 using TollBoothManagementSystem.Core.Features.ApplicationAccess.Commands;
+using TollBoothManagementSystem.Core.Features.Infrastructure.Commands;
 using TollBoothManagementSystem.Core.Features.UserManagement.Commands;
 using TollBoothManagementSystem.Core.Features.UserManagement.Model;
 using TollBoothManagementSystem.Core.Ninject;
 using TollBoothManagementSystem.Core.Utility.HelperClasses;
+using TollBoothManagementSystem.GUI.Features.Infrastructure;
 using TollBoothManagementSystem.GUI.Features.UserManagement;
 using TollBoothManagementSystem.GUI.Utility.ViewModel;
 
@@ -14,22 +16,30 @@ namespace TollBoothManagementSystem.GUI.Features.Navigation
         #region commands
         public ICommand LogOutCommand { get; set; }
         public ICommand OpenEmployeesManagementCommand { get; set; }
+        public ICommand OpenTollBoothStatusesCommand { get; set; }
         #endregion
 
         #region properties
-        public string FirstName
+        private Manager _manager;
+        public Manager Manager
         {
-            get => GlobalStore.ReadObject<Manager>("LoggedUser").FirstName;
+            get => _manager;
+            set
+            {
+                _manager = value;
+                OnPropertyChanged(nameof(Manager));
+            }
         }
         #endregion
 
         public ManagerHomeViewModel()
         {
-            LogOutCommand = new LogOutCommand();
+            _manager = GlobalStore.ReadObject<Manager>("LoggedUser");
             RegisterHandler();
             SwitchCurrentViewModel(ServiceLocator.Get<EmployeesViewModel>());
             LogOutCommand = new LogOutCommand();
             OpenEmployeesManagementCommand = new OpenEmployeesManagementCommand();
+            OpenTollBoothStatusesCommand = new OpenTollBoothStatusesCommand();
         }
 
         #region handlers
@@ -39,6 +49,12 @@ namespace TollBoothManagementSystem.GUI.Features.Navigation
             {
                 EmployeesViewModel Evm = ServiceLocator.Get<EmployeesViewModel>();
                 SwitchCurrentViewModel(Evm);
+            });
+
+            EventBus.RegisterHandler("TollBoothStatuses", () =>
+            {
+                TollBoothStatusViewModel Tbsvm = ServiceLocator.Get<TollBoothStatusViewModel>();
+                SwitchCurrentViewModel(Tbsvm);
             });
         }
         #endregion
