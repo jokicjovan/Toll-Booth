@@ -19,8 +19,11 @@
 
                 <Grid Grid.Column="0">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="90" />
-                        <RowDefinition Height="*" />
+                        <RowDefinition Height="90"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
@@ -31,7 +34,34 @@
                        FontSize="22"
                        Margin="20,0,0,0" />
 
-                    <StackPanel Grid.Row="1" VerticalAlignment="Center">
+                    <TextBlock Grid.Row="1" Text="Current station:"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"
+                       Foreground="White"
+                       FontSize="16"
+                       Margin="5,0,0,0" />
+
+                    <TextBlock Grid.Row="2" Text="{Binding CurrentStation.Name}"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"
+                       Foreground="White"
+                       FontSize="16"
+                       Margin="5,0,0,0" />
+
+                    <Button Grid.Row="3" Content="{Binding ButtonContent, Mode=OneWay}" Command="{Binding SwitchTollBoothStatusCommand}" BorderThickness="0" Margin="0 15 0 0 ">
+                        <Button.Style>
+                            <Style BasedOn="{StaticResource {x:Type Button}}" TargetType="Button">
+                                <Setter Property="Background" Value="#db4a2e"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsOpen}" Value="True">
+                                        <Setter Property="Background" Value="#54ac7c"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+                    <StackPanel Grid.Row="4" VerticalAlignment="Center">
                         <RadioButton Content="Payment"
                              Height="50"
                              Foreground="White"
@@ -41,10 +71,10 @@
                     </StackPanel>
 
                     <Button Content="Log out"
-                    Grid.Row="2"
+                    Grid.Row="5"
                     VerticalAlignment="Bottom"
                     Command="{Binding LogOutCommand}"
-                    Margin="10,0,0,20"/>
+                    Margin="10,0,10,20"/>
                 </Grid>
 
                 <ContentControl Grid.Row="1"

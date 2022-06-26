@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using System.Windows;
 using TollBoothManagementSystem.Core.Utility.Commands;
 using TollBoothManagementSystem.GUI.Features.Infrastructure;
 
 namespace TollBoothManagementSystem.Core.Features.Infrastructure.Commands
 {
-    public class DeleteTollBoothCommand : CommandBase
+    public class FixTrafficLightCommand : CommandBase
     {
-        private TollBoothsViewModel _viewModel;
-        public DeleteTollBoothCommand(TollBoothsViewModel viewModel)
+        private FixTollBoothViewModel _viewModel;
+        public FixTrafficLightCommand(FixTollBoothViewModel viewModel)
         {
             _viewModel = viewModel;
             _viewModel.PropertyChanged += OnViewModelPropertyChanged;
@@ -29,14 +24,16 @@ namespace TollBoothManagementSystem.Core.Features.Infrastructure.Commands
 
         public override bool CanExecute(object? parameter)
         {
-            return !(_viewModel.SelectedTollBooth == null) && base.CanExecute(parameter);
+            return !(_viewModel.SelectedTollBooth == null) && !(_viewModel.SelectedTollBooth.IsTrafficLightFunctional == true) && base.CanExecute(parameter);
         }
 
         public override void Execute(object? parameter)
         {
-            _viewModel.TollBoothService.Delete(_viewModel.SelectedTollBooth.Id);
+            _viewModel.SelectedTollBooth.IsTrafficLightFunctional = true;
+            _viewModel.TollBoothService.Update(_viewModel.SelectedTollBooth);
+            _viewModel.SelectedTollBooth = null;
             _viewModel.Search();
-            MessageBox.Show("TollBooth deleted successfully");
+            MessageBox.Show("TollBooth traffic light fixed successfully");
         }
     }
 }

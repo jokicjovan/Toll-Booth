@@ -24,6 +24,11 @@ namespace TollBoothManagementSystem.Core.Features.TransactionManagement.Commands
         public override void Execute(object? parameter)
         {
             DateTime enterDateTime = _viewModel.EnterDateTime;
+            if(enterDateTime > DateTime.Now.AddMinutes(-1))
+            {
+                MessageBox.Show("Enter time error", "Enter time error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
 
             TollStation enterStation = _viewModel.SelectedStation;
 
@@ -57,6 +62,7 @@ namespace TollBoothManagementSystem.Core.Features.TransactionManagement.Commands
                 Currency = currency
             };
             _viewModel.RoadTollPaymentService.Create(payment);
+            _viewModel.ResetForm();
             MessageBox.Show("Payment has been processed.");
         }
     }

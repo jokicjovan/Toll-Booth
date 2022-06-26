@@ -217,5 +217,14 @@ namespace TollBoothManagementSystem.GUI.Features.TransactionManagement
             _selectedStation = _tollStations[0];
             ConfirmPaymentCommand = new ConfirmPaymentCommand(this);
         }
+
+        public void ResetForm()
+        {
+            LpnLeft = "";
+            LpnMiddle = "";
+            LpnRight = "";
+            EnterDate = Today;
+            AmountPayed = 0;
+        }
     }
 }

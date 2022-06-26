@@ -115,7 +115,7 @@
                                     Width="*"
                                     Binding="{Binding Boss.FullName}"/>
 
-                <DataGridTextColumn Header="Number of tollbooths"
+                <DataGridTextColumn Header="Number of toll booths"
                                     MinWidth="120"
                                     Width="*"
                                     Binding="{Binding TollBooths.Count}"/>

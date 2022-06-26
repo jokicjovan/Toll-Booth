@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace TollBoothManagementSystem.GUI.Features.Infrastructure
 {
     /// <summary>
-    /// Interaction logic for TollBoothStatusView.xaml
+    /// Interaction logic for FaultReportView.xaml
     /// </summary>
-    public partial class TollBoothStatusView : UserControl
+    public partial class FaultReportView : UserControl
     {
-        public TollBoothStatusView()
+        public FaultReportView()
         {
             InitializeComponent();
         }

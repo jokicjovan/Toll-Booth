@@ -81,7 +81,7 @@ namespace TollBoothManagementSystem.Core.Features.ApplicationAccess.Commands
                             MessageBox.Show("Configuration file not set properly", "Configuration file error", MessageBoxButton.OK, MessageBoxImage.Error);
                             return;
                         }
-
+                        GlobalStore.AddObject("CurrentTollBooth", guid);
                         Referent rf = (Referent)user;
                         GlobalStore.AddObject("LoggedUser", rf);
 

@@ -3,16 +3,16 @@ using TollBoothManagementSystem.Core.Utility.HelperClasses;
 
 namespace TollBoothManagementSystem.Core.Features.Infrastructure.Commands
 {
-    public class OpenTollBoothStatusesCommand : CommandBase
+    public class OpenFixTollBoothCommand : CommandBase
     {
-        public OpenTollBoothStatusesCommand()
+        public OpenFixTollBoothCommand()
         {
 
         }
 
         public override void Execute(object? parameter)
         {
-            EventBus.FireEvent("TollBoothStatuses");
+            EventBus.FireEvent("FixTollBooth");
         }
     }
 }

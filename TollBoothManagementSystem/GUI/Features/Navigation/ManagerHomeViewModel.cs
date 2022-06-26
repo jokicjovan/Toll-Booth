@@ -16,7 +16,7 @@ namespace TollBoothManagementSystem.GUI.Features.Navigation
         #region commands
         public ICommand LogOutCommand { get; set; }
         public ICommand OpenEmployeesManagementCommand { get; set; }
-        public ICommand OpenTollBoothStatusesCommand { get; set; }
+        public ICommand OpenFixTollBoothCommand { get; set; }
         #endregion
 
         #region properties
@@ -39,7 +39,7 @@ namespace TollBoothManagementSystem.GUI.Features.Navigation
             SwitchCurrentViewModel(ServiceLocator.Get<EmployeesViewModel>());
             LogOutCommand = new LogOutCommand();
             OpenEmployeesManagementCommand = new OpenEmployeesManagementCommand();
-            OpenTollBoothStatusesCommand = new OpenTollBoothStatusesCommand();
+            OpenFixTollBoothCommand = new OpenFixTollBoothCommand();
         }
 
         #region handlers
@@ -51,9 +51,9 @@ namespace TollBoothManagementSystem.GUI.Features.Navigation
                 SwitchCurrentViewModel(Evm);
             });
 
-            EventBus.RegisterHandler("TollBoothStatuses", () =>
+            EventBus.RegisterHandler("FixTollBooth", () =>
             {
-                TollBoothStatusViewModel Tbsvm = ServiceLocator.Get<TollBoothStatusViewModel>();
+                FixTollBoothViewModel Tbsvm = ServiceLocator.Get<FixTollBoothViewModel>();
                 SwitchCurrentViewModel(Tbsvm);
             });
         }
