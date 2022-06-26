@@ -33,7 +33,7 @@ namespace TollBoothManagementSystem.Core.Features.Infrastructure.Commands
             {
                 _viewModel.TollStationService.FireAllEmployees(_viewModel.SelectedTollStation);
                 _viewModel.TollStationService.Delete(_viewModel.SelectedTollStation.Id);
-                _viewModel.SearchTollStation();
+                _viewModel.Search();
                 MessageBox.Show("TollStation deleted successfully");
             }
         }

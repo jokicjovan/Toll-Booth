@@ -10,7 +10,7 @@ using TollBoothManagementSystem.GUI.Utility.ViewModel;
 
 namespace TollBoothManagementSystem.GUI.Features.Infrastructure
 {
-    public class TollStationsViewModel : ViewModelBase
+    public class TollStationsViewModel : ViewModelBase, ISearchViewModel
     {
         #region services
         private readonly IEmployeeService _employeeService;
@@ -82,13 +82,13 @@ namespace TollBoothManagementSystem.GUI.Features.Infrastructure
         #endregion
 
         #region methods
-        public void SearchTollStation()
+        public void Search()
         {
             if (!string.IsNullOrEmpty(SearchText))
             {
                 var searchText = SearchText.ToLower();
                 TollStations = new ObservableCollection<TollStation>(TollStationService.ReadAll().Where(tollStation => tollStation.Name.ToLower().Contains(searchText)
-               || tollStation.Location.Name.ToLower().Contains(searchText) || (tollStation.Boss != null && tollStation.Boss.FullName.ToLower().Contains(searchText))));
+               || tollStation.Location.Name.ToLower().Contains(searchText)));
             }
             else
             {
@@ -109,7 +109,7 @@ namespace TollBoothManagementSystem.GUI.Features.Infrastructure
             //UpdateTollStationCommand = new UpdateTollStationCommand(_dialogService, this);
             ShowTollBoothsCommand = new ShowTollBoothsCommand(this);
             DeleteTollStationCommand = new DeleteTollStationCommand(this);
-            SearchTollStationCommand = new SearchTollStationCommand(this);
+            SearchTollStationCommand = new SearchCommand(this);
         }
     }
 }
