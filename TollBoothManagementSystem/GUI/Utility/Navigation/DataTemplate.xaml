@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:navigation="clr-namespace:TollBoothManagementSystem.GUI.Features.Navigation"
-                    xmlns:transactionManagment="clr-namespace:TollBoothManagementSystem.GUI.Features.TransactionManagement"
+                    xmlns:transactionManagement="clr-namespace:TollBoothManagementSystem.GUI.Features.TransactionManagement"
                     xmlns:usermanagement="clr-namespace:TollBoothManagementSystem.GUI.Features.UserManagement"
                     xmlns:infrastructure="clr-namespace:TollBoothManagementSystem.GUI.Features.Infrastructure"
                     xmlns:userManagementDialog="clr-namespace:TollBoothManagementSystem.GUI.Features.UserManagement.Dialog">
@@ -38,12 +38,18 @@
         <infrastructure:TollBoothStatusView/>
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type transactionManagment:RoadTollPaymentViewModel}">
-        <transactionManagment:RoadTollPaymentView/>
+    <DataTemplate DataType="{x:Type transactionManagement:RoadTollPaymentViewModel}">
+        <transactionManagement:RoadTollPaymentView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type transactionManagement:PriceListOverviewViewModel}">
+        <transactionManagement:PriceListOverviewView/>
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type userManagementDialog:HandleEmployeeViewModel}">
         <userManagementDialog:HandleEmployeeView/>
     </DataTemplate>
+
+    
 
 </ResourceDictionary>

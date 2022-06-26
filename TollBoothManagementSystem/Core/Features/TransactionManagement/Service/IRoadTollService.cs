@@ -8,7 +8,7 @@ namespace TollBoothManagementSystem.Core.Features.TransactionManagement.Service
 {
     public interface IRoadTollService : ICrudRepository<RoadToll>
     {
-        RoadToll GetRoadToll(VehicleType vehicleType, Currency currency, TollStation exitStation);
+        public RoadToll GetRoadToll(VehicleType vehicleType, Currency currency, TollStation exitStation);
         public List<RoadToll> RoadTollsForSection(Section section);
 
         public List<RoadToll> RoadTollsForTollStation(TollStation tollStation);

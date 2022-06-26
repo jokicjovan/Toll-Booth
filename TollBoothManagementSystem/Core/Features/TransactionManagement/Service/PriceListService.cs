@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TollBoothManagementSystem.Core.Features.TransactionManagement.Model;
 using TollBoothManagementSystem.Core.Features.TransactionManagement.Repository;
+using System.Linq;
 
 namespace TollBoothManagementSystem.Core.Features.TransactionManagement.Service
 {
@@ -13,6 +14,11 @@ namespace TollBoothManagementSystem.Core.Features.TransactionManagement.Service
         public PriceListService(IPriceListRepository priceListRepository)
         {
             _priceListRepository = priceListRepository;
+        }
+
+        public PriceList CurrentPriceListForSection(Section sec)
+        {
+            return _priceListRepository.ReadAll().Where(pl => pl.Section == sec && pl.ActivationDate <= DateTime.Now && DateTime.Now <= pl.ExpirationDate ).ToList()[0];
         }
 
         #region CRUD methods

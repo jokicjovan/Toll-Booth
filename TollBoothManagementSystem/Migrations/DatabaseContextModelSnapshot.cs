@@ -106,6 +106,10 @@ namespace TollBoothManagementSystem.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("TEXT");
 
@@ -124,7 +128,7 @@ namespace TollBoothManagementSystem.Migrations
                     b.Property<bool>("IsTrafficLightFunctional")
                         .HasColumnType("INTEGER");
 
-                    b.Property<Guid>("TollStationId")
+                    b.Property<Guid?>("TollStationId")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -552,9 +556,7 @@ namespace TollBoothManagementSystem.Migrations
                 {
                     b.HasOne("TollBoothManagementSystem.Core.Features.Infrastructure.Model.TollStation", "TollStation")
                         .WithMany("TollBooths")
-                        .HasForeignKey("TollStationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TollStationId");
 
                     b.Navigation("TollStation");
                 });

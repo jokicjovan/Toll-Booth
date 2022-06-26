@@ -6,6 +6,7 @@ namespace TollBoothManagementSystem.Core.Features.TransactionManagement.Service
 {
     public interface ISectionService : ICrudRepository<Section>
     {
-        Section GetSection(TollStation tollStation);
+        public Section GetSection(TollStation tollStation);
+        //public Section SectionOfTollStation(TollStation tollStation);
     }
 }
