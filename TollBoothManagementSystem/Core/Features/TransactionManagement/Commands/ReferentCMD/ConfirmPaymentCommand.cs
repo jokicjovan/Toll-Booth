@@ -62,6 +62,7 @@ namespace TollBoothManagementSystem.Core.Features.TransactionManagement.Commands
                 Currency = currency
             };
             _viewModel.RoadTollPaymentService.Create(payment);
+            _viewModel.ResetForm();
             MessageBox.Show("Payment has been processed.");
         }
     }
