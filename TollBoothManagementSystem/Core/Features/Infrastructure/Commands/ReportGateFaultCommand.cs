@@ -1,21 +1,32 @@
 ﻿using System.ComponentModel;
+using TollBoothManagementSystem.Core.Features.Infrastructure.Model;
+using TollBoothManagementSystem.Core.Features.Infrastructure.Service;
+using TollBoothManagementSystem.Core.Features.UserManagement.Service;
+using TollBoothManagementSystem.Core.Ninject;
 using TollBoothManagementSystem.Core.Utility.Commands;
 using TollBoothManagementSystem.GUI.Features.Infrastructure;
+using TollBoothManagementSystem.GUI.Features.Infrastructure.Dialog;
+using TollBoothManagementSystem.GUI.Features.Navigation;
+using TollBoothManagementSystem.GUI.Utility.Dialog;
 
 namespace TollBoothManagementSystem.Core.Features.Infrastructure.Commands
 {
     public class ReportGateFaultCommand : CommandBase
     {
-        private FaultReportViewModel _viewModel;
-        public ReportGateFaultCommand(FaultReportViewModel viewModel)
+        private readonly IDialogService _dialogService;
+
+        private readonly ReferentHomeViewModel _referentHomeViewModel;
+
+        public ReportGateFaultCommand(IDialogService dialogService, ReferentHomeViewModel referentHomeViewModel)
         {
-            _viewModel = viewModel;
-            _viewModel.PropertyChanged += OnViewModelPropertyChanged;
+            _dialogService = dialogService;
+            _referentHomeViewModel = referentHomeViewModel;
+            _referentHomeViewModel.PropertyChanged += OnViewModelPropertyChanged;
         }
 
         private void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(_viewModel.SelectedTollBooth))
+            if (e.PropertyName == nameof(_referentHomeViewModel.CurrentTollBooth))
             {
                 OnCanExecuteChange();
             }
@@ -23,16 +34,22 @@ namespace TollBoothManagementSystem.Core.Features.Infrastructure.Commands
 
         public override bool CanExecute(object? parameter)
         {
-            return !(_viewModel.SelectedTollBooth == null) && !(_viewModel.SelectedTollBooth.IsTrafficLightFunctional == false) && base.CanExecute(parameter);
+            return !(_referentHomeViewModel.CurrentTollBooth == null) && !(_referentHomeViewModel.CurrentTollBooth.IsTollGateFunctional == false) && base.CanExecute(parameter);
         }
 
         public override void Execute(object? parameter)
         {
-            _viewModel.SelectedTollBooth.IsTollGateFunctional = false;
-            _viewModel.TollBoothService.Update(_viewModel.SelectedTollBooth);
-            _viewModel.SelectedTollBooth = null;
-            _viewModel.Search();
-            //MessageBox.Show("TollBooth traffic light fixed successfully");
+            var userService = ServiceLocator.Get<IUserService>();
+            var tollBoothService = ServiceLocator.Get<ITollBoothService>();
+            var faultReportService = ServiceLocator.Get<IFaultReportService>();
+
+            var handleFaultReportVM = new HandleFaultReportViewModel(userService, tollBoothService, faultReportService, _referentHomeViewModel, FaultType.Gate);
+            _dialogService.ShowDialog(handleFaultReportVM, isForceClosed =>
+            {
+                var dialogForceClosed = isForceClosed;
+            });
+
+            //MessageBox.Show("Toll booth gate fixed successfully");
         }
     }
 }

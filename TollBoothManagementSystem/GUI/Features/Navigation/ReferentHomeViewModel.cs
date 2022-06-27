@@ -14,6 +14,7 @@ using TollBoothManagementSystem.Core.Features.UserManagement.Model;
 using TollBoothManagementSystem.Core.Ninject;
 using TollBoothManagementSystem.Core.Utility.HelperClasses;
 using TollBoothManagementSystem.GUI.Features.TransactionManagement;
+using TollBoothManagementSystem.GUI.Utility.Dialog;
 using TollBoothManagementSystem.GUI.Utility.ViewModel;
 
 namespace TollBoothManagementSystem.GUI.Features.Navigation
@@ -24,6 +25,8 @@ namespace TollBoothManagementSystem.GUI.Features.Navigation
         public ICommand LogOutCommand { get; set; }
         public ICommand NavigatePaymentCommand { get; set; }
         public ICommand SwitchTollBoothStatusCommand { get; set; }
+        public ICommand ReportTrafficLightFaultCommand { get; set; }
+        public ICommand ReportGateFaultCommand { get; set; }
         #endregion
 
         #region Atributes
@@ -63,16 +66,27 @@ namespace TollBoothManagementSystem.GUI.Features.Navigation
         {
             get => GlobalStore.ReadObject<TollStation>("CurrentTollStation");
         }
+        public TollBooth CurrentTollBooth
+        {
+            get => _currentTollBooth;
+            set
+            {
+                _currentTollBooth = value;
+                OnPropertyChanged(nameof(CurrentTollBooth));
+            }
+        }
 
         #endregion
 
         public ReferentHomeViewModel(ITollBoothService tollBoothService)
         {
-            LogOutCommand = new LogOutCommand();
-            NavigatePaymentCommand = new NavigatePaymentCommand();
             _currentTollBooth = tollBoothService.Read(GlobalStore.ReadObject<Guid>("CurrentTollBooth"));
             _tollBoothService = tollBoothService;
+            LogOutCommand = new LogOutCommand();
+            NavigatePaymentCommand = new NavigatePaymentCommand();
             SwitchTollBoothStatusCommand = new SwitchTollBoothStatusCommand(this);
+            ReportTrafficLightFaultCommand = new ReportTrafficLightFaultCommand(ServiceLocator.Get<IDialogService>(), this);
+            ReportGateFaultCommand = new ReportGateFaultCommand(ServiceLocator.Get<IDialogService>(), this);
             IsOpen = _currentTollBooth.IsOpen;
             RegisterHandler();
             EventBus.FireEvent("ShowPaymentWindow");

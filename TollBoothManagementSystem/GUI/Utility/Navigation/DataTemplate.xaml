@@ -4,6 +4,7 @@
                     xmlns:transactionManagment="clr-namespace:TollBoothManagementSystem.GUI.Features.TransactionManagement"
                     xmlns:usermanagement="clr-namespace:TollBoothManagementSystem.GUI.Features.UserManagement"
                     xmlns:infrastructure="clr-namespace:TollBoothManagementSystem.GUI.Features.Infrastructure"
+                    xmlns:infrastructureDialog="clr-namespace:TollBoothManagementSystem.GUI.Features.Infrastructure.Dialog"
                     xmlns:userManagementDialog="clr-namespace:TollBoothManagementSystem.GUI.Features.UserManagement.Dialog">
 
     <DataTemplate DataType="{x:Type navigation:LoginViewModel}">
@@ -36,6 +37,10 @@
 
     <DataTemplate DataType="{x:Type infrastructure:FixTollBoothViewModel}">
         <infrastructure:FixTollBoothView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type infrastructureDialog:HandleFaultReportViewModel}">
+        <infrastructureDialog:HandleFaultReportView/>
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type transactionManagment:RoadTollPaymentViewModel}">
