@@ -16,11 +16,6 @@ namespace TollBoothManagementSystem.Core.Features.TransactionManagement.Service
             _priceListRepository = priceListRepository;
         }
 
-        public PriceList CurrentPriceListForSection(Section sec)
-        {
-            return _priceListRepository.ReadAll().Where(pl => pl.Section == sec && pl.ActivationDate <= DateTime.Now && DateTime.Now <= pl.ExpirationDate ).ToList()[0];
-        }
-
         #region CRUD methods
 
         public IEnumerable<PriceList> ReadAll()

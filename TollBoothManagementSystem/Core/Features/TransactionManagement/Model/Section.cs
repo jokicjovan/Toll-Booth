@@ -31,5 +31,10 @@ namespace TollBoothManagementSystem.Core.Features.TransactionManagement.Model
 
         #endregion
 
+        public override string ToString()
+        {
+            return _origin + " - " + _destination;
+        }
+
     }
 }

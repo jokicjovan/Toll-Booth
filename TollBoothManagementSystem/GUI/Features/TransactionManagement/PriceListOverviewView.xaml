@@ -12,86 +12,101 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Text="Price list overview" FontSize="20" FontWeight="Bold" Margin="0 0 0 0"/>
-        <TextBlock Grid.Row="1" Text="RSD" FontSize="16" FontWeight="Bold" Margin="0 20 0 0"/>
-        <ListView Grid.Row="2" Margin="0 10 0 0" MaxHeight="300" Height="300" ItemsSource="{Binding DataTables}">
+        <!--<TextBlock Grid.Row="0" Text="Price list overview" FontSize="20" FontWeight="Bold" Margin="0 0 0 0"/>-->
+        <StackPanel Grid.Row="0" HorizontalAlignment="Left" Orientation="Horizontal">
+            <StackPanel  Orientation="Horizontal" Margin="20, 0, 0, 0">
+                <TextBlock Text="Section:" FontSize="24" Margin="0 0 20 0" VerticalAlignment="Bottom"/>
+                <ComboBox Margin="0,0,0,0" SelectedItem="{Binding SelectedSection}" FontSize="20" ItemsSource="{Binding Sections}" HorizontalAlignment="Left" Width="250"/>
+            </StackPanel>
+            <!--<StackPanel  Orientation="Vertical" Margin="20, 0, 0, 0">
+                <TextBlock Text="Station" FontSize="18" Margin="0 0 0 0"/>
+                <ComboBox Margin="0,0,0,0" SelectedItem="{Binding SelectedStation}" ItemsSource="{Binding TollStations}" HorizontalAlignment="Left" Width="200"/>
+            </StackPanel>-->
+        </StackPanel>
+        <Separator Grid.Row="1" Margin="15 20 15 10"/>
+        <TextBlock Grid.Row="2" Text="{Binding SelectedSection}" FontSize="30" Typography.Capitals="AllSmallCaps" HorizontalAlignment="Center"/>
+        <TextBlock Grid.Row="3" Text="RSD" FontSize="16" FontWeight="Bold" Margin="50 10 0 0"/>
+        <TextBlock Grid.Row="3" HorizontalAlignment="Right" Text="EUR" FontSize="16" FontWeight="Bold" Margin="0 10 50 0"/>
+        <ListView Grid.Row="4" Margin="0 10 0 0" MaxHeight="450" Height="450" ItemsSource="{Binding DataTables}" HorizontalAlignment="Center">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="1A" Width="80" DisplayMemberBinding="{Binding Category1A}">
+                    <GridViewColumn Header="1A" Width="80" DisplayMemberBinding="{Binding Category1ARSD}">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock HorizontalAlignment="Left" Padding="0 0 5 0"/>
+                                <TextBlock HorizontalAlignment="Center" Padding="0 0 5 0"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="1" Width="80" DisplayMemberBinding="{Binding Category1}">
+                    <GridViewColumn Header="1" Width="auto" DisplayMemberBinding="{Binding Category1RSD}">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock HorizontalAlignment="Left" Padding="0 0 5 0"/>
+                                <TextBlock HorizontalAlignment="Center" Padding="0 0 5 0"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="2" Width="80" DisplayMemberBinding="{Binding Category2}">
+                    <GridViewColumn Header="2" Width="auto" DisplayMemberBinding="{Binding Category2RSD}">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock HorizontalAlignment="Left" Padding="0 0 5 0"/>
+                                <TextBlock HorizontalAlignment="Center" Padding="0 0 5 0"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="3" Width="80" DisplayMemberBinding="{Binding Category3}">
+                    <GridViewColumn Header="3" Width="auto" DisplayMemberBinding="{Binding Category3RSD}">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock HorizontalAlignment="Left" Padding="0 0 5 0"/>
+                                <TextBlock HorizontalAlignment="Center" Padding="0 0 5 0"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="4" Width="80" DisplayMemberBinding="{Binding Category4}">
+                    <GridViewColumn Header="4" Width="auto" DisplayMemberBinding="{Binding Category4RSD}">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock HorizontalAlignment="Left" Padding="0 0 5 0"/>
+                                <TextBlock HorizontalAlignment="Center" Padding="0 0 5 0"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                     <GridViewColumn Header="Station" Width="auto" DisplayMemberBinding="{Binding StationName}">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock HorizontalAlignment="Left" Padding="0 0 5 0"/>
+                                <TextBlock HorizontalAlignment="Center" Padding="0 0 5 0"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="1A" Width="80" DisplayMemberBinding="{Binding Category1A}">
+                    <GridViewColumn Header="1A" Width="auto" DisplayMemberBinding="{Binding Category1AEUR}">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock HorizontalAlignment="Left" Padding="0 0 5 0"/>
+                                <TextBlock HorizontalAlignment="Center" Padding="0 0 5 0"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="1" Width="80" DisplayMemberBinding="{Binding Category1}">
+                    <GridViewColumn Header="1" Width="auto" DisplayMemberBinding="{Binding Category1EUR}">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock HorizontalAlignment="Left" Padding="0 0 5 0"/>
+                                <TextBlock HorizontalAlignment="Center" Padding="0 0 5 0"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="2" Width="80" DisplayMemberBinding="{Binding Category2}">
+                    <GridViewColumn Header="2" Width="auto" DisplayMemberBinding="{Binding Category2EUR}">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock HorizontalAlignment="Left" Padding="0 0 5 0"/>
+                                <TextBlock HorizontalAlignment="Center" Padding="0 0 5 0"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="3" Width="80" DisplayMemberBinding="{Binding Category3}">
+                    <GridViewColumn Header="3" Width="auto" DisplayMemberBinding="{Binding Category3EUR}">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock HorizontalAlignment="Left" Padding="0 0 5 0"/>
+                                <TextBlock HorizontalAlignment="Center" Padding="0 0 5 0"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="4" Width="80" DisplayMemberBinding="{Binding Category4}">
+                    <GridViewColumn Header="4" Width="auto" DisplayMemberBinding="{Binding Category4EUR}">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock HorizontalAlignment="Left" Padding="0 0 5 0"/>
+                                <TextBlock HorizontalAlignment="Center" Padding="0 0 5 0"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
