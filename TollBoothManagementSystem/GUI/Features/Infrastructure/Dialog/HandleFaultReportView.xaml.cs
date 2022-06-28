@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TollBoothManagementSystem.GUI.Features.Infrastructure
+namespace TollBoothManagementSystem.GUI.Features.Infrastructure.Dialog
 {
     /// <summary>
-    /// Interaction logic for FaultReportView.xaml
+    /// Interaction logic for HandleFaultReportView.xaml
     /// </summary>
-    public partial class FaultReportView : UserControl
+    public partial class HandleFaultReportView : UserControl
     {
-        public FaultReportView()
+        public HandleFaultReportView()
         {
             InitializeComponent();
         }

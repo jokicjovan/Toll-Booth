@@ -14,25 +14,30 @@ using TollBoothManagementSystem.Core.Features.UserManagement.Model;
 using TollBoothManagementSystem.Core.Ninject;
 using TollBoothManagementSystem.Core.Utility.HelperClasses;
 using TollBoothManagementSystem.GUI.Features.TransactionManagement;
+using TollBoothManagementSystem.GUI.Utility.Dialog;
 using TollBoothManagementSystem.GUI.Utility.ViewModel;
 
 namespace TollBoothManagementSystem.GUI.Features.Navigation
 {
     public class ReferentHomeViewModel : NavigableViewModel
     {
-        #region commands
+        #region Commands
         public ICommand LogOutCommand { get; set; }
         public ICommand NavigatePaymentCommand { get; set; }
         public ICommand SwitchTollBoothStatusCommand { get; set; }
+        public ICommand ReportTrafficLightFaultCommand { get; set; }
+        public ICommand ReportGateFaultCommand { get; set; }
         #endregion
 
         #region Atributes
         private bool _isOpen;
         private ITollBoothService _tollBoothService;
         private TollBooth _currentTollBooth;
+        private bool _trafficLightStatus;
+        private bool _gateStatus;
         #endregion
 
-        #region properties
+        #region Properties
         public string ButtonContent
         {
             get
@@ -42,6 +47,47 @@ namespace TollBoothManagementSystem.GUI.Features.Navigation
                 return "Toll booth closed";
             }
         }
+        public string TollGateFaultContent
+        {
+            get
+            {
+                if(CurrentTollBooth.IsTollGateFunctional == false)
+                    return "Toll gate not functional";
+                else
+                    return "Report toll gate fault";
+            }
+        }
+        public string TrafficLightFaultContent
+        {
+            get
+            {
+                if (CurrentTollBooth.IsTrafficLightFunctional == false)
+                    return "Traffic light not functional";
+                else
+                    return "Report traffic light fault";
+            }
+        }
+
+        public bool TrafficLightStatus
+        {
+            get => _trafficLightStatus;
+            set
+            {
+                _trafficLightStatus = value;
+                OnPropertyChanged(nameof(TrafficLightStatus));
+            }
+        }
+
+        public bool GateStatus
+        {
+            get => _gateStatus;
+            set
+            {
+                _gateStatus = value;
+                OnPropertyChanged(nameof(GateStatus));
+            }
+        }
+
         public bool IsOpen
         {
             get => _isOpen;
@@ -63,17 +109,30 @@ namespace TollBoothManagementSystem.GUI.Features.Navigation
         {
             get => GlobalStore.ReadObject<TollStation>("CurrentTollStation");
         }
+        public TollBooth CurrentTollBooth
+        {
+            get => _currentTollBooth;
+            set
+            {
+                _currentTollBooth = value;
+                OnPropertyChanged(nameof(CurrentTollBooth));
+            }
+        }
 
         #endregion
 
         public ReferentHomeViewModel(ITollBoothService tollBoothService)
         {
-            LogOutCommand = new LogOutCommand();
-            NavigatePaymentCommand = new NavigatePaymentCommand();
             _currentTollBooth = tollBoothService.Read(GlobalStore.ReadObject<Guid>("CurrentTollBooth"));
             _tollBoothService = tollBoothService;
+            LogOutCommand = new LogOutCommand();
+            NavigatePaymentCommand = new NavigatePaymentCommand();
             SwitchTollBoothStatusCommand = new SwitchTollBoothStatusCommand(this);
+            ReportTrafficLightFaultCommand = new ReportTrafficLightFaultCommand(ServiceLocator.Get<IDialogService>(), this);
+            ReportGateFaultCommand = new ReportGateFaultCommand(ServiceLocator.Get<IDialogService>(), this);
             IsOpen = _currentTollBooth.IsOpen;
+            TrafficLightStatus = CurrentTollBooth.IsTrafficLightFunctional;
+            GateStatus = CurrentTollBooth.IsTollGateFunctional;
             RegisterHandler();
             EventBus.FireEvent("ShowPaymentWindow");
         }

@@ -74,7 +74,6 @@ namespace TollBoothManagementSystem.Core.Features.ApplicationAccess.Commands
                         break;
 
                     case Role.Referent:
-
                         currentTollBooth = _viewModel.TollBoothService.Read(guid);
                         if(currentTollBooth == null)
                         {

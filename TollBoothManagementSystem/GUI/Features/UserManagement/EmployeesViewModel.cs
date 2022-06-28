@@ -2,18 +2,20 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
+using TollBoothManagementSystem.Core.Features.Infrastructure.Commands;
 using TollBoothManagementSystem.Core.Features.Infrastructure.Model;
 using TollBoothManagementSystem.Core.Features.Infrastructure.Service;
 using TollBoothManagementSystem.Core.Features.UserManagement.Commands;
 using TollBoothManagementSystem.Core.Features.UserManagement.Model;
 using TollBoothManagementSystem.Core.Features.UserManagement.Service;
 using TollBoothManagementSystem.Core.Utility.HelperClasses;
+using TollBoothManagementSystem.GUI.Features.Infrastructure;
 using TollBoothManagementSystem.GUI.Utility.Dialog;
 using TollBoothManagementSystem.GUI.Utility.ViewModel;
 
 namespace TollBoothManagementSystem.GUI.Features.UserManagement
 {
-    public class EmployeesViewModel : ViewModelBase
+    public class EmployeesViewModel : ViewModelBase, ISearchViewModel
     {
         #region services
 
@@ -94,7 +96,7 @@ namespace TollBoothManagementSystem.GUI.Features.UserManagement
         #endregion
 
         #region methods
-        public void SearchEmployee()
+        public void Search()
         {
             if (!string.IsNullOrEmpty(SearchText))
             {
@@ -121,7 +123,7 @@ namespace TollBoothManagementSystem.GUI.Features.UserManagement
             Employees = new ObservableCollection<Employee>(TollStation.Employees);
             AddEmployeeCommand = new AddEmployeeCommand(_dialogService, this);
             UpdateEmployeeCommand = new UpdateEmployeeCommand(_dialogService, this);
-            SearchEmployeeCommand = new SearchEmployeeCommand(this);
+            SearchEmployeeCommand = new SearchCommand(this);
             DeleteEmployeeCommand = new DeleteEmployeeCommand(this);
         }
 

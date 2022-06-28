@@ -1,21 +1,32 @@
 ﻿using System.ComponentModel;
+using System.Windows;
+using TollBoothManagementSystem.Core.Features.Infrastructure.Model;
+using TollBoothManagementSystem.Core.Features.Infrastructure.Service;
+using TollBoothManagementSystem.Core.Features.UserManagement.Service;
+using TollBoothManagementSystem.Core.Ninject;
 using TollBoothManagementSystem.Core.Utility.Commands;
-using TollBoothManagementSystem.GUI.Features.Infrastructure;
+using TollBoothManagementSystem.GUI.Features.Infrastructure.Dialog;
+using TollBoothManagementSystem.GUI.Features.Navigation;
+using TollBoothManagementSystem.GUI.Utility.Dialog;
 
 namespace TollBoothManagementSystem.Core.Features.Infrastructure.Commands
 {
     public class ReportTrafficLightFaultCommand : CommandBase
     {
-        private FaultReportViewModel _viewModel;
-        public ReportTrafficLightFaultCommand(FaultReportViewModel viewModel)
+        private readonly IDialogService _dialogService;
+
+        private readonly ReferentHomeViewModel _referentHomeViewModel;
+
+        public ReportTrafficLightFaultCommand(IDialogService dialogService, ReferentHomeViewModel referentHomeViewModel)
         {
-            _viewModel = viewModel;
-            _viewModel.PropertyChanged += OnViewModelPropertyChanged;
+            _dialogService = dialogService;
+            _referentHomeViewModel = referentHomeViewModel;
+            _referentHomeViewModel.PropertyChanged += OnViewModelPropertyChanged;
         }
 
         private void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(_viewModel.SelectedTollBooth))
+            if (e.PropertyName == nameof(_referentHomeViewModel.TrafficLightStatus))
             {
                 OnCanExecuteChange();
             }
@@ -23,16 +34,27 @@ namespace TollBoothManagementSystem.Core.Features.Infrastructure.Commands
 
         public override bool CanExecute(object? parameter)
         {
-            return !(_viewModel.SelectedTollBooth == null) && !(_viewModel.SelectedTollBooth.IsTrafficLightFunctional == false) && base.CanExecute(parameter);
+            return !(_referentHomeViewModel.TrafficLightStatus == false) && base.CanExecute(parameter);
         }
 
         public override void Execute(object? parameter)
         {
-            _viewModel.SelectedTollBooth.IsTrafficLightFunctional = false;
-            _viewModel.TollBoothService.Update(_viewModel.SelectedTollBooth);
-            _viewModel.SelectedTollBooth = null;
-            _viewModel.Search();
-            //MessageBox.Show("TollBooth traffic light fixed successfully");
+            var userService = ServiceLocator.Get<IUserService>();
+            var tollBoothService = ServiceLocator.Get<ITollBoothService>();
+            var faultReportService = ServiceLocator.Get<IFaultReportService>();
+
+            var handleFaultReportVM = new HandleFaultReportViewModel(userService, tollBoothService, faultReportService, _referentHomeViewModel, FaultType.TrafficLight);
+            _dialogService.ShowDialog(handleFaultReportVM, isForceClosed =>
+            {
+                var dialogClosedNormally = (bool)isForceClosed;
+
+                if (dialogClosedNormally)
+                {
+                    _referentHomeViewModel.TrafficLightStatus = false;
+                    _referentHomeViewModel.OnPropertyChanged(nameof(_referentHomeViewModel.TrafficLightFaultContent));
+                    MessageBox.Show("Toll booth traffic light fault reported successfully");
+                }
+            });
         }
     }
 }

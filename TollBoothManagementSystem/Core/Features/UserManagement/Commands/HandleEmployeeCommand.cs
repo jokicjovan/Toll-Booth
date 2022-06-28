@@ -64,7 +64,7 @@ namespace TollBoothManagementSystem.Core.Features.UserManagement.Commands
         public void HandleAction(object parameter, Action action)
         {
             action();
-            _employeesVM.SearchEmployee();
+            _employeesVM.Search();
             _handleEmployeeVM.ResetFields();
             var dialog = (DialogWindow)parameter;
             dialog.Close();
