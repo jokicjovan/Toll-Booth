@@ -98,11 +98,11 @@ namespace TollBoothManagementSystem.GUI.Features.Infrastructure
             {
                 var searchText = SearchText.ToLower();
 
-                TollBooths = new ObservableCollection<TollBooth>(TollStation.TollBooths.Where(tollBooth => tollBooth.Code.ToLower().Contains(searchText)));
+                TollBooths = new ObservableCollection<TollBooth>(TollStation.TollBooths.Where(tollBooth => tollBooth.Code.ToLower().Contains(searchText)).OrderBy(x => x.Code));
             }
             else
             {
-                TollBooths = new ObservableCollection<TollBooth>(TollStation.TollBooths);
+                TollBooths = new ObservableCollection<TollBooth>(TollStation.TollBooths.OrderBy(x => x.Code));
             }
         }
 
@@ -115,7 +115,7 @@ namespace TollBoothManagementSystem.GUI.Features.Infrastructure
             _dialogService = dialogService;
 
             _tollStation = _tollStationService.Read(tollStationId);
-            TollBooths = new ObservableCollection<TollBooth>(_tollStation.TollBooths);
+            Search();
 
             //AddEmployeeCommand = new AddEmployeeCommand(_dialogService, this);
             //UpdateEmployeeCommand = new UpdateEmployeeCommand(_dialogService, this);

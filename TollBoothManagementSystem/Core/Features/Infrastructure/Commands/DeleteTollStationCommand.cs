@@ -24,7 +24,8 @@ namespace TollBoothManagementSystem.Core.Features.Infrastructure.Commands
 
         public override bool CanExecute(object? parameter)
         {
-            return !(_viewModel.SelectedTollStation == null) && base.CanExecute(parameter);
+            return !(_viewModel.SelectedTollStation == null) && !(_viewModel.SelectedSection.Origin.Id == _viewModel.SelectedTollStation.Id ) 
+                && !(_viewModel.SelectedSection.Destination.Id == _viewModel.SelectedTollStation.Id) && base.CanExecute(parameter);
         }
 
         public override void Execute(object? parameter)

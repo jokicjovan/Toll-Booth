@@ -42,7 +42,7 @@ namespace TollBoothManagementSystem.Core.Features.TransactionManagement.Commands
 
             double price = _viewModel.Price;
 
-            double avarageSpeed = distance / (DateTime.Now - enterDateTime).TotalHours;
+            double averageSpeed = distance / (DateTime.Now - enterDateTime).TotalHours;
 
             TollBooth tollBooth = _viewModel.TollBoothService.Read(GlobalStore.ReadObject<Guid>("CurrentTollBooth"));
 
@@ -57,7 +57,7 @@ namespace TollBoothManagementSystem.Core.Features.TransactionManagement.Commands
                 VehicleCategory = vehicleType,
                 LicencePlateNumber = licencePlateNumber,
                 Price = price,
-                AvarageSpeed = avarageSpeed,
+                AverageSpeed = averageSpeed,
                 TollBooth = tollBooth,
                 Currency = currency
             };

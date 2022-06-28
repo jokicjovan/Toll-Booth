@@ -4,6 +4,7 @@ using System.Windows.Input;
 using TollBoothManagementSystem.Core.Features.Infrastructure.Commands;
 using TollBoothManagementSystem.Core.Features.Infrastructure.Model;
 using TollBoothManagementSystem.Core.Features.Infrastructure.Service;
+using TollBoothManagementSystem.Core.Features.TransactionManagement.Model;
 using TollBoothManagementSystem.Core.Features.TransactionManagement.Service;
 using TollBoothManagementSystem.Core.Features.UserManagement.Commands;
 using TollBoothManagementSystem.Core.Features.UserManagement.Service;
@@ -35,6 +36,10 @@ namespace TollBoothManagementSystem.GUI.Features.Infrastructure
 
         private string _searchText;
 
+        private ObservableCollection<Section> _sections;
+
+        private Section _selectedSection;
+
         #endregion
 
         #region properties
@@ -56,6 +61,28 @@ namespace TollBoothManagementSystem.GUI.Features.Infrastructure
             {
                 _selectedTollStation = value;
                 OnPropertyChanged(nameof(SelectedTollStation));
+            }
+        }
+
+        public ObservableCollection<Section> Sections
+        {
+            get => _sections;
+            set
+            {
+                _sections = value;
+                OnPropertyChanged(nameof(Sections));
+            }
+        }
+
+        public Section SelectedSection
+        {
+            get => _selectedSection;
+            set
+            {
+                _selectedSection = value;
+                SelectedTollStation = null;
+                TollStations = new ObservableCollection<TollStation>(_selectedSection.TollStations.OrderBy(x => x.OrderNumber).ThenBy(x => x.Name));
+                OnPropertyChanged(nameof(SelectedSection));
             }
         }
 
@@ -111,10 +138,11 @@ namespace TollBoothManagementSystem.GUI.Features.Infrastructure
             _tollStationService = tollStationService;
             _sectionService = sectionService;
 
-            _tollStations = new ObservableCollection<TollStation>(TollStationService.ReadAll());
+            _sections = new ObservableCollection<Section>(SectionService.ReadAll());
+            SelectedSection = _sections.FirstOrDefault();
+
             AddTollStationCommand = new AddTollStationCommand(_dialogService, this);
             //UpdateTollStationCommand = new UpdateTollStationCommand(_dialogService, this);
-            _tollStations = new ObservableCollection<TollStation>(TollStationService.ReadAll().OrderBy(x => x.Name));
             ShowEmployeesCommand = new OpenAllEmployeesManagementCommand(this);
             ShowTollBoothsCommand = new ShowTollBoothsCommand(this);
             DeleteTollStationCommand = new DeleteTollStationCommand(this);

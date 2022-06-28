@@ -30,8 +30,8 @@ namespace TollBoothManagementSystem.Core.Features.TransactionManagement.Model
         private double _distance;
         public double Distance { get => _distance; set => OnPropertyChanged(ref _distance, value); }
 
-        private double _avarageSpeed;
-        public double AvarageSpeed { get => _avarageSpeed; set => OnPropertyChanged(ref _avarageSpeed, value); }
+        private double _averageSpeed;
+        public double AverageSpeed { get => _averageSpeed; set => OnPropertyChanged(ref _averageSpeed, value); }
 
         private Currency _currency;
         public virtual Currency Currency { get => _currency; set => OnPropertyChanged(ref _currency, value); }
@@ -48,7 +48,7 @@ namespace TollBoothManagementSystem.Core.Features.TransactionManagement.Model
             EnterTollStation = other.EnterTollStation;
             Price = other.Price;
             Distance = other.Distance;
-            AvarageSpeed = other.AvarageSpeed;
+            AverageSpeed = other.AverageSpeed;
             VehicleCategory = other.VehicleCategory;
             ExitTime = other.ExitTime;
             EnterTime = other.EnterTime;

@@ -13,6 +13,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="75" />
+            <RowDefinition Height="50" />
             <RowDefinition />
         </Grid.RowDefinitions>
 
@@ -97,9 +98,34 @@
             </Grid>
         </Grid>
 
+        <StackPanel Grid.Row="1" HorizontalAlignment="Stretch" Background="#10416b">
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" >
+                <TextBlock
+                        Text="Section:"
+                        FontSize="18"
+                        Margin="5, 5"
+                        Padding="5"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Foreground="White"/>
+
+                <ComboBox SelectedItem="{Binding SelectedSection}"
+                        FontSize="18"
+                        ItemsSource="{Binding Sections}"
+                        Margin="10, 5"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Width="250"
+                        Foreground="White">
+                    <ComboBox.Resources>
+                        <SolidColorBrush x:Key="MaterialDesignPaper" Color="#10416b"/>
+                    </ComboBox.Resources>
+                </ComboBox>
+            </StackPanel>
+        </StackPanel>
 
         <DataGrid x:Name="TollStations"
-                  Grid.Row="1"
+                  Grid.Row="2"
                   IsReadOnly="True"
                   AutoGenerateColumns="False"
                   ItemsSource="{Binding TollStations}"
@@ -108,6 +134,11 @@
                   Background="White">
             
             <DataGrid.Columns>
+                <DataGridTextColumn Header="Order number"
+                                    MinWidth="120"
+                                    Width="*"
+                                    Binding="{Binding OrderNumber}"/>
+                
                 <DataGridTextColumn Header="Name"
                                     MinWidth="120"
                                     Width="*"

@@ -207,7 +207,7 @@ namespace TollBoothManagementSystem.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<double>("AvarageSpeed")
+                    b.Property<double>("AverageSpeed")
                         .HasColumnType("REAL");
 
                     b.Property<DateTime>("CreatedAt")

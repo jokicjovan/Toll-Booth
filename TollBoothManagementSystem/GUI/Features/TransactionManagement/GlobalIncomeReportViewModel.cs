@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using TollBoothManagementSystem.Core.Features.General.Model;
 using TollBoothManagementSystem.Core.Features.General.Service;
 using TollBoothManagementSystem.Core.Features.Infrastructure.Model;
@@ -67,7 +68,7 @@ namespace TollBoothManagementSystem.GUI.Features.TransactionManagement
             _tollStationService = tollStationService;
             _startDate = DateTime.Now;
             _endDate = DateTime.Now;
-            _tollStations = _tollStationService.ReadAll();
+            _tollStations = _tollStationService.ReadAll().OrderBy(x => x.Name);
             LoadData();
         }
 

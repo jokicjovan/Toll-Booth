@@ -100,14 +100,13 @@ namespace TollBoothManagementSystem.GUI.Features.UserManagement
             if (!string.IsNullOrEmpty(SearchText))
             {
                 var searchText = SearchText.ToLower();
-                var roles = Enum.GetValues(typeof(Role)).Cast<Role>().Where(text => Enum.GetName(typeof(Role), text).ToLower().Contains(searchText));
 
                 Employees = new ObservableCollection<Employee>(TollStation.Employees.Where(employee => employee.FirstName.ToLower().Contains(searchText)
-               || employee.LastName.ToLower().Contains(searchText) || roles.Contains(employee.Role)));
+               || employee.LastName.ToLower().Contains(searchText)).OrderBy(x => x.Role).ThenBy(x => x.FirstName).ThenBy(x => x.LastName));
             }
             else
             {
-                Employees = new ObservableCollection<Employee>(TollStation.Employees);
+                Employees = new ObservableCollection<Employee>(TollStation.Employees.OrderBy(x => x.Role).ThenBy(x => x.FirstName).ThenBy(x => x.LastName));
             }
         }
 
@@ -119,7 +118,7 @@ namespace TollBoothManagementSystem.GUI.Features.UserManagement
             _tollStationService = tollStationService;
 
             _tollStation = tollStationService.Read(tollStationId);
-            Employees = new ObservableCollection<Employee>(TollStation.Employees);
+            Search();
             AddEmployeeCommand = new AddEmployeeCommand(_dialogService, _tollStationService, this);
             UpdateEmployeeCommand = new UpdateEmployeeCommand(_dialogService, _tollStationService, this);
             SearchEmployeeCommand = new SearchCommand(this);

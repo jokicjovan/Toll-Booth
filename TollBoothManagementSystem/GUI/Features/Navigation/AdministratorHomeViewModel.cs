@@ -37,7 +37,7 @@ namespace TollBoothManagementSystem.GUI.Features.Navigation
             OpenGlobalIncomeReportCommand = new OpenGlobalIncomeReportCommand();
             PriceListOverviewCommand = new PriceListOverviewCommand();
             RegisterHandler();
-            EventBus.FireEvent("TollStationsManagement");
+            EventBus.FireEvent("PriceListOverview");
         }
 
         #region Handlers

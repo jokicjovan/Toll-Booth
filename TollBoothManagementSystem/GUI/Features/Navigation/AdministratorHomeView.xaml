@@ -19,7 +19,7 @@
 
                 <Grid Grid.Column="0">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="90" />
+                        <RowDefinition Height="85" />
                         <RowDefinition Height="*" />
                         <RowDefinition />
                     </Grid.RowDefinitions>
@@ -34,26 +34,26 @@
 
                         <Separator BorderBrush="White" BorderThickness="2" Margin="20,5,20,5"></Separator>
                     </StackPanel>
-                        
+
                     <StackPanel Grid.Row="1" VerticalAlignment="Top">
+                        <RadioButton Content="💲 Price list overview"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding PriceListOverviewCommand}" IsChecked="True"/>
                         <RadioButton Content="🛣️ Toll stations overview"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
-                             Command="{Binding OpenTollStationsManagementCommand}" IsChecked="True"/>
+                             Command="{Binding OpenTollStationsManagementCommand}" IsChecked="False"/>
                         <RadioButton Content="📝 Income report"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding OpenGlobalIncomeReportCommand}" IsChecked="False"/>
-                        <RadioButton Content="💲 Price list overview"
-                             Height="50"
-                             Foreground="White"
-                             FontSize="14"
-                             Style="{StaticResource MenuButtonTheme}"
-                             Command="{Binding PriceListOverviewCommand}" IsChecked="False"/>
 
                     </StackPanel>
                     
