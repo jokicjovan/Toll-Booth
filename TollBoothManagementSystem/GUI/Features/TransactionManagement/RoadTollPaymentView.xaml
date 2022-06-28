@@ -55,7 +55,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <RadioButton Content="Category 1a" TabIndex="0" IsChecked="{Binding SelectedVehicleCategory, Converter={StaticResource ResourceKey=ParameterToCategory}, ConverterParameter=Category1A}" Grid.Column="0" Style="{StaticResource VehicleCategoryButtonTheme}"/>
+                <RadioButton Content="Category 1A" TabIndex="0" IsChecked="{Binding SelectedVehicleCategory, Converter={StaticResource ResourceKey=ParameterToCategory}, ConverterParameter=Category1A}" Grid.Column="0" Style="{StaticResource VehicleCategoryButtonTheme}"/>
                 <RadioButton Content="Category 1" TabIndex="1" IsChecked="{Binding SelectedVehicleCategory, Converter={StaticResource ResourceKey=ParameterToCategory}, ConverterParameter=Category1}" Grid.Column="1" Style="{StaticResource VehicleCategoryButtonTheme}"/>
                 <RadioButton Content="Category 2" TabIndex="2" IsChecked="{Binding SelectedVehicleCategory, Converter={StaticResource ResourceKey=ParameterToCategory}, ConverterParameter=Category2}" Grid.Column="2" Style="{StaticResource VehicleCategoryButtonTheme}"/>
                 <RadioButton Content="Category 3" TabIndex="3" IsChecked="{Binding SelectedVehicleCategory, Converter={StaticResource ResourceKey=ParameterToCategory}, ConverterParameter=Category3}" Grid.Column="3" Style="{StaticResource VehicleCategoryButtonTheme}"/>

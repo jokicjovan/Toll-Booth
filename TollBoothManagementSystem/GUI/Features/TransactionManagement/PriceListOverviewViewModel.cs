@@ -132,8 +132,6 @@ namespace TollBoothManagementSystem.GUI.Features.TransactionManagement
 
         #endregion
 
-
-
         private void LoadSections()
         {
             _sections = new List<Section>(_sectionRepository.ReadAll());
@@ -162,6 +160,7 @@ namespace TollBoothManagementSystem.GUI.Features.TransactionManagement
             {
                 LoadDataTableRow(station);
             }
+            _dataTables.RemoveAt(0);
         }
 
         private void LoadDataTableRow(TollStation station)
@@ -190,7 +189,7 @@ namespace TollBoothManagementSystem.GUI.Features.TransactionManagement
             _roadTollPriceService = roadTollPriceService;
             _currencyService = currencyService;
 
-            _currencies = new ObservableCollection<Currency>(currencyService.ReadAll());
+            _currencies = new ObservableCollection<Currency>(_currencyService.ReadAll());
 
             LoadSections();
         }

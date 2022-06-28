@@ -8,7 +8,6 @@ using TollBoothManagementSystem.Core.Features.Infrastructure.Service;
 using TollBoothManagementSystem.Core.Features.UserManagement.Commands;
 using TollBoothManagementSystem.Core.Features.UserManagement.Model;
 using TollBoothManagementSystem.Core.Features.UserManagement.Service;
-using TollBoothManagementSystem.Core.Utility.HelperClasses;
 using TollBoothManagementSystem.GUI.Features.Infrastructure;
 using TollBoothManagementSystem.GUI.Utility.Dialog;
 using TollBoothManagementSystem.GUI.Utility.ViewModel;
@@ -114,15 +113,15 @@ namespace TollBoothManagementSystem.GUI.Features.UserManagement
 
         #endregion
 
-        public EmployeesViewModel(IEmployeeService employeeService, ITollStationService tollStationService, IDialogService dialogService) {
+        public EmployeesViewModel(IEmployeeService employeeService, ITollStationService tollStationService, IDialogService dialogService, Guid tollStationId) {
             _employeeService = employeeService;
             _dialogService = dialogService;
             _tollStationService = tollStationService;
 
-            _tollStation = GlobalStore.ReadObject<Manager>("LoggedUser").TollStation;
+            _tollStation = tollStationService.Read(tollStationId);
             Employees = new ObservableCollection<Employee>(TollStation.Employees);
-            AddEmployeeCommand = new AddEmployeeCommand(_dialogService, this);
-            UpdateEmployeeCommand = new UpdateEmployeeCommand(_dialogService, this);
+            AddEmployeeCommand = new AddEmployeeCommand(_dialogService, _tollStationService, this);
+            UpdateEmployeeCommand = new UpdateEmployeeCommand(_dialogService, _tollStationService, this);
             SearchEmployeeCommand = new SearchCommand(this);
             DeleteEmployeeCommand = new DeleteEmployeeCommand(this);
         }

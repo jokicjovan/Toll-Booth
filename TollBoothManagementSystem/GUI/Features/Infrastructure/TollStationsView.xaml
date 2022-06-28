@@ -50,13 +50,19 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <Button Width="90"
+                <Button Width="120"
                         Margin="10"
-                        Grid.Column="2"
-                        Content="Manage"
+                        Grid.Column="0"
+                        Content="Employees"
+                        HorizontalAlignment="Center"
+                        Command="{Binding ShowEmployeesCommand}"/>
+
+                <Button Width="120"
+                        Margin="10"
+                        Grid.Column="1"
+                        Content="Toll booths"
                         HorizontalAlignment="Center"
                         Command="{Binding ShowTollBoothsCommand}"/>
             </Grid>
