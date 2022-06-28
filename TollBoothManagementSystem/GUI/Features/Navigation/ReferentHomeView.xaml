@@ -140,6 +140,14 @@
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding NavigatePaymentCommand}" IsChecked="True"/>
+                        <RadioButton Content="📝 Income report"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding OpenStationIncomeReportCommand}"
+                             IsChecked="False"
+                             Visibility="{Binding IsBoss}"/>
                     </StackPanel>
 
                     <Button Content="Log out"
