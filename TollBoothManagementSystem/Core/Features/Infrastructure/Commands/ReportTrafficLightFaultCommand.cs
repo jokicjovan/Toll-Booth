@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Windows;
 using TollBoothManagementSystem.Core.Features.Infrastructure.Model;
 using TollBoothManagementSystem.Core.Features.Infrastructure.Service;
 using TollBoothManagementSystem.Core.Features.UserManagement.Service;
@@ -45,9 +46,13 @@ namespace TollBoothManagementSystem.Core.Features.Infrastructure.Commands
             var handleFaultReportVM = new HandleFaultReportViewModel(userService, tollBoothService, faultReportService, _referentHomeViewModel, FaultType.TrafficLight);
             _dialogService.ShowDialog(handleFaultReportVM, isForceClosed =>
             {
-                var dialogForceClosed = isForceClosed;
+                var dialogForceClosed = (bool)isForceClosed;
+
+                if (!dialogForceClosed)
+                {
+                    MessageBox.Show("Toll booth traffic light fault reported successfully");
+                }
             });
-            //MessageBox.Show("Toll booth traffic light fixed successfully");
         }
     }
 }
