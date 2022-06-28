@@ -19,6 +19,7 @@ namespace TollBoothManagementSystem.GUI.Features.Navigation
         public ICommand LogOutCommand { get; set; }
         public ICommand OpenTollStationsManagementCommand { get; set; }
         public ICommand OpenGlobalIncomeReportCommand { get; set; }
+        public ICommand PriceListOverviewCommand { get; set; }
         #endregion
 
         #region Properties
@@ -32,6 +33,7 @@ namespace TollBoothManagementSystem.GUI.Features.Navigation
             LogOutCommand = new LogOutCommand();
             OpenTollStationsManagementCommand = new OpenTollStationsManagementCommand();
             OpenGlobalIncomeReportCommand = new OpenGlobalIncomeReportCommand();
+            PriceListOverviewCommand = new PriceListOverviewCommand();
             RegisterHandler();
             EventBus.FireEvent("TollStationsManagement");
         }
@@ -58,6 +60,11 @@ namespace TollBoothManagementSystem.GUI.Features.Navigation
                 GlobalIncomeReportViewModel viewModel = ServiceLocator.Get<GlobalIncomeReportViewModel>();
                 SwitchCurrentViewModel(viewModel);
 
+
+            EventBus.RegisterHandler("PriceListOverview", () =>
+            {
+                PriceListOverviewViewModel Plvm = ServiceLocator.Get<PriceListOverviewViewModel>();
+                SwitchCurrentViewModel(Plvm);
             });
         }
         #endregion

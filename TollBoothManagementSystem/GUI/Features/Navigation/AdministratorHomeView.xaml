@@ -42,12 +42,13 @@
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding OpenTollStationsManagementCommand}" IsChecked="True"/>
-                        <RadioButton Content="📝 Income report"
+                        <RadioButton Content="💲 Price list overview"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding OpenGlobalIncomeReportCommand}" IsChecked="False"/>
+                             Command="{Binding PriceListOverviewCommand}" IsChecked="False"/>
                     </StackPanel>
                     
 

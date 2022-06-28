@@ -4,6 +4,7 @@ using System.Linq;
 using TollBoothManagementSystem.Core.Features.Infrastructure.Model;
 using TollBoothManagementSystem.Core.Features.TransactionManagement.Model;
 using TollBoothManagementSystem.Core.Features.TransactionManagement.Repository;
+using System.Linq;
 
 namespace TollBoothManagementSystem.Core.Features.TransactionManagement.Service
 {
@@ -15,6 +16,22 @@ namespace TollBoothManagementSystem.Core.Features.TransactionManagement.Service
         {
             _sectionRepository = sectionRepository;
         }
+
+        //public Section SectionOfTollStation(TollStation tollStation)
+        //{
+        //    List<Section> allSec = _sectionRepository.ReadAll().ToList();
+        //    foreach (Section sec in allSec)
+        //    {
+        //        foreach (TollStation ts in sec.TollStations)
+        //        {
+        //            if (ts == tollStation)
+        //            {
+        //                return sec;
+        //            }
+        //        }
+        //    }
+        //    return null;
+        //}
 
         public Section Create(Section entity)
         {

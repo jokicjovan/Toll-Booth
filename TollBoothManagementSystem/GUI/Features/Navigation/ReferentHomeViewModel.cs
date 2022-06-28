@@ -33,6 +33,8 @@ namespace TollBoothManagementSystem.GUI.Features.Navigation
         private bool _isOpen;
         private ITollBoothService _tollBoothService;
         private TollBooth _currentTollBooth;
+        private bool _trafficLightStatus;
+        private bool _gateStatus;
         #endregion
 
         #region Properties
@@ -65,6 +67,27 @@ namespace TollBoothManagementSystem.GUI.Features.Navigation
                     return "Report traffic light fault";
             }
         }
+
+        public bool TrafficLightStatus
+        {
+            get => _trafficLightStatus;
+            set
+            {
+                _trafficLightStatus = value;
+                OnPropertyChanged(nameof(TrafficLightStatus));
+            }
+        }
+
+        public bool GateStatus
+        {
+            get => _gateStatus;
+            set
+            {
+                _gateStatus = value;
+                OnPropertyChanged(nameof(GateStatus));
+            }
+        }
+
         public bool IsOpen
         {
             get => _isOpen;
@@ -108,6 +131,8 @@ namespace TollBoothManagementSystem.GUI.Features.Navigation
             ReportTrafficLightFaultCommand = new ReportTrafficLightFaultCommand(ServiceLocator.Get<IDialogService>(), this);
             ReportGateFaultCommand = new ReportGateFaultCommand(ServiceLocator.Get<IDialogService>(), this);
             IsOpen = _currentTollBooth.IsOpen;
+            TrafficLightStatus = CurrentTollBooth.IsTrafficLightFunctional;
+            GateStatus = CurrentTollBooth.IsTollGateFunctional;
             RegisterHandler();
             EventBus.FireEvent("ShowPaymentWindow");
         }

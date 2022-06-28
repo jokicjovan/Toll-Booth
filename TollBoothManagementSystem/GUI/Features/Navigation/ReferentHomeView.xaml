@@ -73,10 +73,61 @@
                         VerticalAlignment="Bottom"
                         Command="{Binding ReportGateFaultCommand}"
                         Margin="0,5,0,5"/>
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0 5 0 5">
+                                <TextBlock Text="Traffic light working:"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Left"
+                                   Foreground="White"
+                                   FontSize="14"
+                                   Margin="5,0,0,0" />
+                                <TextBlock FontSize="14" Text="{Binding TrafficLightStatus}" Margin="10 0 0 0">
+                                    <TextBlock.Style>
+                                        <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding TrafficLightStatus}" Value="True">
+                                                    <Setter Property="Foreground" Value="#54ac7c"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding TrafficLightStatus}" Value="False">
+                                                    <Setter Property="Foreground" Value="#db4a2e"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </StackPanel>
+                            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0 5 0 5">
+                                <TextBlock Text="Gate working:"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Left"
+                                   Foreground="White"
+                                   FontSize="14"
+                                   Margin="5,0,0,0" />
+                                <TextBlock FontSize="14" Text="{Binding GateStatus}" Margin="10 0 0 0">
+                                    <TextBlock.Style>
+                                        <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding GateStatus}" Value="True">
+                                                    <Setter Property="Foreground" Value="#54ac7c"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding GateStatus}" Value="False">
+                                                    <Setter Property="Foreground" Value="#db4a2e"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </StackPanel>
+                        </Grid>
                     </StackPanel>
 
                     <StackPanel Grid.Row="4" VerticalAlignment="Center">
-                        <RadioButton Content="Payment"
+                        <RadioButton Content="💸 Payment"
                              Height="50"
                              Foreground="White"
                              FontSize="14"

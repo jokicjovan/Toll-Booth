@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using TollBoothManagementSystem.Core.Features.General.Model;
 using TollBoothManagementSystem.Core.Features.Infrastructure.Model;
 using TollBoothManagementSystem.Core.Features.TransactionManagement.Model;
@@ -529,10 +530,6 @@ namespace TollBoothManagementSystem.Core.Persistence
             context.TollStations.Add(ts24);
             context.TollStations.Add(ts25);
 
-            context.SaveChanges();
-
-            #endregion
-
             mn1.TollStation = ts01;
             rf1.TollStation = ts01;
             rf2.TollStation = ts01;
@@ -544,6 +541,10 @@ namespace TollBoothManagementSystem.Core.Persistence
             context.Users.Update(rf2);
             context.Users.Update(rf3);
             context.Users.Update(rf4);
+
+            context.SaveChanges();
+
+            #endregion
 
             #region Section
 
