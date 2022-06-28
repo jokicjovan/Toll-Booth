@@ -40,5 +40,10 @@ namespace TollBoothManagementSystem.Core.Features.Infrastructure.Model
         }
 
         #endregion
+
+        public override string ToString()
+        {
+            return _name;
+        }
     }
 }
