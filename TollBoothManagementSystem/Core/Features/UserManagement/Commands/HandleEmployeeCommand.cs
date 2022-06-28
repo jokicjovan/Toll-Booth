@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Windows;
+using TollBoothManagementSystem.Core.Features.Infrastructure.Model;
+using TollBoothManagementSystem.Core.Features.Infrastructure.Service;
 using TollBoothManagementSystem.Core.Features.UserManagement.Model;
 using TollBoothManagementSystem.Core.Features.UserManagement.Service;
 using TollBoothManagementSystem.Core.Utility.Commands;
@@ -12,18 +14,22 @@ namespace TollBoothManagementSystem.Core.Features.UserManagement.Commands
     public class HandleEmployeeCommand : CommandBase
     {
         private readonly IUserService _userService;
+        private readonly ITollStationService _tollStationService;
         private readonly EmployeesViewModel _employeesVM;
         private readonly HandleEmployeeViewModel _handleEmployeeVM;
+        private TollStation _tollStation;
 
         private Guid _employeeId;
 
-        public HandleEmployeeCommand(IUserService userService, EmployeesViewModel employeesVM,
-            HandleEmployeeViewModel handleEmployeeVM, Guid employeeId)
+        public HandleEmployeeCommand(IUserService userService, ITollStationService tollStationService, EmployeesViewModel employeesVM,
+            HandleEmployeeViewModel handleEmployeeVM, Guid employeeId, TollStation tollStation)
         {
+            _tollStationService = tollStationService;
             _userService = userService;
             _employeesVM = employeesVM;
             _handleEmployeeVM = handleEmployeeVM;
             _employeeId = employeeId;
+            _tollStation = tollStation;
             _handleEmployeeVM.PropertyChanged += _handleEmployeeVM_PropertyChanged;
         }
 
@@ -91,6 +97,8 @@ namespace TollBoothManagementSystem.Core.Features.UserManagement.Commands
                     Role = Role.Referent
                 };
                 _userService.Create(newEmployee);
+                _tollStation.Employees.Add(newEmployee);
+                _tollStationService.Update(_tollStation);
             } 
             else
             {
@@ -101,9 +109,11 @@ namespace TollBoothManagementSystem.Core.Features.UserManagement.Commands
                     FirstName = firstName,
                     LastName = lastName,
                     DateOfBirth = dateOfBirth,
-                    Role = Role.Referent
+                    Role = Role.Manager
                 };
                 _userService.Create(newEmployee);
+                _tollStation.Employees.Add(newEmployee);
+                _tollStationService.Update(_tollStation);
             }
         }
 

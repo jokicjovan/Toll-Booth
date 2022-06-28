@@ -1,12 +1,15 @@
 ﻿using System.Windows.Input;
 using TollBoothManagementSystem.Core.Features.ApplicationAccess.Commands;
 using TollBoothManagementSystem.Core.Features.Infrastructure.Commands;
+using TollBoothManagementSystem.Core.Features.Infrastructure.Service;
 using TollBoothManagementSystem.Core.Features.UserManagement.Commands;
 using TollBoothManagementSystem.Core.Features.UserManagement.Model;
+using TollBoothManagementSystem.Core.Features.UserManagement.Service;
 using TollBoothManagementSystem.Core.Ninject;
 using TollBoothManagementSystem.Core.Utility.HelperClasses;
 using TollBoothManagementSystem.GUI.Features.Infrastructure;
 using TollBoothManagementSystem.GUI.Features.UserManagement;
+using TollBoothManagementSystem.GUI.Utility.Dialog;
 using TollBoothManagementSystem.GUI.Utility.ViewModel;
 
 namespace TollBoothManagementSystem.GUI.Features.Navigation
@@ -36,10 +39,10 @@ namespace TollBoothManagementSystem.GUI.Features.Navigation
         {
             _manager = GlobalStore.ReadObject<Manager>("LoggedUser");
             RegisterHandler();
-            SwitchCurrentViewModel(ServiceLocator.Get<EmployeesViewModel>());
             LogOutCommand = new LogOutCommand();
             OpenEmployeesManagementCommand = new OpenEmployeesManagementCommand();
             OpenFixTollBoothCommand = new OpenFixTollBoothCommand();
+            EventBus.FireEvent("EmployeesManagement");
         }
 
         #region handlers
@@ -47,7 +50,10 @@ namespace TollBoothManagementSystem.GUI.Features.Navigation
         {
             EventBus.RegisterHandler("EmployeesManagement", () =>
             {
-                EmployeesViewModel Evm = ServiceLocator.Get<EmployeesViewModel>();
+                var employeeService = ServiceLocator.Get<IEmployeeService>();
+                var tollStationService = ServiceLocator.Get<ITollStationService>();
+                var dialogService = ServiceLocator.Get<IDialogService>();
+                EmployeesViewModel Evm = new EmployeesViewModel(employeeService, tollStationService, dialogService, Manager.TollStation.Id);
                 SwitchCurrentViewModel(Evm);
             });
 

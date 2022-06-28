@@ -7,6 +7,8 @@ using TollBoothManagementSystem.Core.Features.UserManagement.Service;
 using TollBoothManagementSystem.Core.Features.UserManagement.Model;
 using System.Collections.ObjectModel;
 using TollBoothManagementSystem.Core.Features.UserManagement.Commands;
+using TollBoothManagementSystem.Core.Features.Infrastructure.Service;
+using TollBoothManagementSystem.Core.Features.Infrastructure.Model;
 
 namespace TollBoothManagementSystem.GUI.Features.UserManagement.Dialog
 {
@@ -114,13 +116,15 @@ namespace TollBoothManagementSystem.GUI.Features.UserManagement.Dialog
         #region Services
 
         private readonly IUserService _userService;
+        private readonly ITollStationService _tollStationService;
 
         #endregion
-        public HandleEmployeeViewModel(IUserService userService, EmployeesViewModel employeesVM,
-            Guid employeeId) : base("Add employee", 700, 550)
+        public HandleEmployeeViewModel(IUserService userService, ITollStationService tollStationService, EmployeesViewModel employeesVM,
+            Guid employeeId, TollStation tollStation) : base("Add employee", 700, 550)
         {
             _userService = userService;
-            _employeeId = employeeId; 
+            _employeeId = employeeId;
+            _tollStationService = tollStationService;
 
             AvailableRoles = new ObservableCollection<Role> { Role.Referent, Role.Manager };
 
@@ -138,7 +142,7 @@ namespace TollBoothManagementSystem.GUI.Features.UserManagement.Dialog
                 ReadOnlyEmailAddress = false;
             }
 
-            HandleEmployeeCommand = new HandleEmployeeCommand(_userService, employeesVM, this, employeeId);
+            HandleEmployeeCommand = new HandleEmployeeCommand(_userService, _tollStationService, employeesVM, this, employeeId, tollStation);
         }
 
         public void ResetFields()
