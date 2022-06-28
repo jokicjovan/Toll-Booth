@@ -19,7 +19,7 @@
 
                 <Grid Grid.Column="0">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="90"/>
+                        <RowDefinition Height="140"/>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
@@ -27,29 +27,36 @@
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="0" Text="{Binding FirstName, StringFormat='Hello {0}'}"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Left"
-                       Foreground="White"
-                       FontSize="22"
-                       Margin="20,0,0,0" />
+                    <StackPanel Grid.Row="0" Orientation="Vertical">
+                        <TextBlock Text="{Binding FirstName, StringFormat='Hello {0}'}"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left"
+                           Foreground="White"
+                           FontSize="22"
+                           Margin="10,15,0,10" />
 
-                    <TextBlock Grid.Row="1" Text="Current station:"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Left"
-                       Foreground="White"
-                       FontSize="16"
-                       Margin="5,0,0,0" />
+                        <Separator BorderBrush="White" BorderThickness="2" Margin="10,5,10,5"></Separator>
 
-                    <TextBlock Grid.Row="2" Text="{Binding CurrentStation.Name}"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Left"
-                       Foreground="White"
-                       FontSize="16"
-                       Margin="5,0,0,0" />
+                        <TextBlock Text="Toll station:"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left"
+                           Foreground="White"
+                           FontSize="18"
+                           Margin="10,10,10,0" />
 
-                    <StackPanel Grid.Row="3" >
-                        <Button Content="{Binding ButtonContent, Mode=OneWay}" Command="{Binding SwitchTollBoothStatusCommand}" BorderThickness="0" Margin="0 15 0 0 ">
+                        <TextBlock Text="{Binding CurrentStation.Name}"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left"
+                           Foreground="White"
+                           FontSize="16"
+                           Margin="10,0,0,10" />
+
+                        <Separator BorderBrush="White" BorderThickness="2" Margin="10,5,10,0"/>
+
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1" >
+                        <Button Content="{Binding ButtonContent, Mode=OneWay}" Command="{Binding SwitchTollBoothStatusCommand}" BorderThickness="0" Margin="10 10 10 0 ">
                             <Button.Style>
                                 <Style BasedOn="{StaticResource {x:Type Button}}" TargetType="Button">
                                     <Setter Property="Background" Value="#db4a2e"/>
@@ -66,20 +73,20 @@
                         Grid.Row="5"
                         VerticalAlignment="Bottom"
                         Command="{Binding ReportTrafficLightFaultCommand}"
-                        Margin="0,10,0,5"/>
+                        Margin="10,10,10,5"/>
 
                         <Button Content="{Binding TollGateFaultContent}"
                         Grid.Row="5"
                         VerticalAlignment="Bottom"
                         Command="{Binding ReportGateFaultCommand}"
-                        Margin="0,5,0,5"/>
+                        Margin="10,5,10,15"/>
 
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="auto"/>
                             </Grid.RowDefinitions>
-                            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0 5 0 5">
+                            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10 5 10 5">
                                 <TextBlock Text="Traffic light working:"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Left"
@@ -101,7 +108,7 @@
                                     </TextBlock.Style>
                                 </TextBlock>
                             </StackPanel>
-                            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0 5 0 5">
+                            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10 5 10 5">
                                 <TextBlock Text="Gate working:"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Left"
@@ -126,8 +133,8 @@
                         </Grid>
                     </StackPanel>
 
-                    <StackPanel Grid.Row="4" VerticalAlignment="Center">
-                        <RadioButton Content="💸 Payment"
+                    <StackPanel Grid.Row="2" VerticalAlignment="Top" Margin="0, 10, 0, 0">
+                        <RadioButton Content="🧾 Payment"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
@@ -142,7 +149,7 @@
                     Margin="10,0,10,20"/>
                 </Grid>
 
-                <ContentControl Grid.Row="1"
+                <ContentControl Grid.Row="3"
                             Grid.Column="1"
                             Margin="0,10,10,10"
                             Content="{Binding CurrentViewModel}"/>
