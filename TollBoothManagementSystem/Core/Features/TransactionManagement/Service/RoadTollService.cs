@@ -31,7 +31,7 @@ namespace TollBoothManagementSystem.Core.Features.TransactionManagement.Service
 
         public List<RoadToll> RoadTollsForTollStation(TollStation tollStation)
         {
-            return _roadTollRepository.ReadAll().Where(r => r.TollStation == tollStation).ToList();
+            return _roadTollRepository.ReadAll().Where(r => r.TollStation == tollStation).OrderBy(r => r.CreatedAt).ToList();
         }
 
         public RoadToll GetRoadToll(VehicleType vehicleType, Currency currency, TollStation exitStation)
