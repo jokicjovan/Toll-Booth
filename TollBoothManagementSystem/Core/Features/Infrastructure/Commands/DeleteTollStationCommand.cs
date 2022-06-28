@@ -31,8 +31,13 @@ namespace TollBoothManagementSystem.Core.Features.Infrastructure.Commands
         {
             if (MessageBox.Show("Are you sure you want to delete this station?\nAll employess will be fired!", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
+                var section = _viewModel.SectionService.GetSection(_viewModel.SelectedTollStation);
+                section.TollStations.Remove(_viewModel.SelectedTollStation);
+                _viewModel.SectionService.Update(section);
+
                 _viewModel.TollStationService.FireAllEmployees(_viewModel.SelectedTollStation);
                 _viewModel.TollStationService.Delete(_viewModel.SelectedTollStation.Id);
+
                 _viewModel.Search();
                 MessageBox.Show("TollStation deleted successfully");
             }
