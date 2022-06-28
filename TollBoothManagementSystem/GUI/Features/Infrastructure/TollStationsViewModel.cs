@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
 using TollBoothManagementSystem.Core.Features.Infrastructure.Commands;
 using TollBoothManagementSystem.Core.Features.Infrastructure.Model;
 using TollBoothManagementSystem.Core.Features.Infrastructure.Service;
+using TollBoothManagementSystem.Core.Features.TransactionManagement.Service;
 using TollBoothManagementSystem.Core.Features.UserManagement.Commands;
 using TollBoothManagementSystem.Core.Features.UserManagement.Service;
 using TollBoothManagementSystem.GUI.Utility.Dialog;
@@ -17,10 +17,12 @@ namespace TollBoothManagementSystem.GUI.Features.Infrastructure
         #region services
         private readonly IEmployeeService _employeeService;
         private readonly ITollStationService _tollStationService;
+        private readonly ISectionService _sectionService;
         private readonly IDialogService _dialogService;
 
         public IEmployeeService EmployeeService => _employeeService;
         public IDialogService DialogService => _dialogService;
+        public ISectionService SectionService => _sectionService;
         public ITollStationService TollStationService => _tollStationService;
 
         #endregion
@@ -102,11 +104,12 @@ namespace TollBoothManagementSystem.GUI.Features.Infrastructure
 
         #endregion
 
-        public TollStationsViewModel(IEmployeeService employeeService, ITollStationService tollStationService, IDialogService dialogService)
+        public TollStationsViewModel(IEmployeeService employeeService, ITollStationService tollStationService, ISectionService sectionService, IDialogService dialogService)
         {
             _employeeService = employeeService;
             _dialogService = dialogService;
             _tollStationService = tollStationService;
+            _sectionService = sectionService;
 
             _tollStations = new ObservableCollection<TollStation>(TollStationService.ReadAll());
             AddTollStationCommand = new AddTollStationCommand(_dialogService, this);
