@@ -160,6 +160,9 @@ namespace TollBoothManagementSystem.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("OrderNumber")
+                        .HasColumnType("INTEGER");
+
                     b.Property<Guid?>("SectionId")
                         .HasColumnType("TEXT");
 

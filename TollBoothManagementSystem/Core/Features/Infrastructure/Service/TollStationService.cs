@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TollBoothManagementSystem.Core.Features.Infrastructure.Model;
 using TollBoothManagementSystem.Core.Features.Infrastructure.Repository;
 using TollBoothManagementSystem.Core.Features.UserManagement.Model;
@@ -20,6 +17,7 @@ namespace TollBoothManagementSystem.Core.Features.Infrastructure.Service
             _tollStationRepository = tollStationRepository;
         }
 
+        #region CRUD methods
         public TollStation Create(TollStation entity)
         {
             return _tollStationRepository.Create(entity);
@@ -44,6 +42,9 @@ namespace TollBoothManagementSystem.Core.Features.Infrastructure.Service
         {
             return _tollStationRepository.Update(entity);
         }
+
+        #endregion
+
         public void FireEmployee(TollStation tollStation, Employee employee)
         {
             if (tollStation.Boss != null && tollStation.Boss.Id == employee.Id) {

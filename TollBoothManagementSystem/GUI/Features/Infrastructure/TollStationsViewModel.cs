@@ -105,7 +105,7 @@ namespace TollBoothManagementSystem.GUI.Features.Infrastructure
             _tollStationService = tollStationService;
 
             _tollStations = new ObservableCollection<TollStation>(TollStationService.ReadAll());
-            //AddTollStationCommand = new AddTollStationCommand(_dialogService, this);
+            AddTollStationCommand = new AddTollStationCommand(_dialogService, this);
             //UpdateTollStationCommand = new UpdateTollStationCommand(_dialogService, this);
             ShowTollBoothsCommand = new ShowTollBoothsCommand(this);
             DeleteTollStationCommand = new DeleteTollStationCommand(this);
