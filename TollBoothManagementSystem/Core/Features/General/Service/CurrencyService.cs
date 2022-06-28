@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using TollBoothManagementSystem.Core.Features.General.Model;
 using TollBoothManagementSystem.Core.Features.General.Repository;
 
@@ -42,5 +43,10 @@ namespace TollBoothManagementSystem.Core.Features.General.Service
         }
 
         #endregion
+
+        public Currency? GetCurrencyByCode(string code)
+        {
+            return _currencyRepository.ReadAll().FirstOrDefault(e => e.Code.ToLower() == code.ToLower());
+        }
     }
 }

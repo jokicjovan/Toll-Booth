@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using TollBoothManagementSystem.Core.Features.Infrastructure.Model;
 using TollBoothManagementSystem.Core.Features.TransactionManagement.Model;
 using TollBoothManagementSystem.Core.Features.TransactionManagement.Repository;
 
@@ -42,5 +44,10 @@ namespace TollBoothManagementSystem.Core.Features.TransactionManagement.Service
         }
 
         #endregion
+
+        public IEnumerable<RoadTollPayment> GetPaymentsForStation(TollStation tollStation)
+        {
+            return _roadTollPaymentRepository.ReadAll().Where(e => e.TollBooth.TollStation.Id == tollStation.Id);
+        }
     }
 }

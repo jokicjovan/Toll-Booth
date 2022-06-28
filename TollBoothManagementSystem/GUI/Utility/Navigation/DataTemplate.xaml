@@ -51,4 +51,7 @@
         <userManagementDialog:HandleEmployeeView/>
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type transactionManagment:GlobalIncomeReportViewModel}">
+        <transactionManagment:GlobalIncomeReportView/>
+    </DataTemplate>
 </ResourceDictionary>

@@ -42,7 +42,14 @@
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding OpenTollStationsManagementCommand}" IsChecked="True"/>
+                        <RadioButton Content="📝 Income report"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding OpenGlobalIncomeReportCommand}" IsChecked="False"/>
                     </StackPanel>
+                    
 
                     <Button Content="Log out"
                     Grid.Row="2"
