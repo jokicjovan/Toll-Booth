@@ -47,8 +47,8 @@
         <infrastructureDialog:HandleFaultReportView/>
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type transactionManagment:RoadTollPaymentViewModel}">
-        <transactionManagment:RoadTollPaymentView/>
+    <DataTemplate DataType="{x:Type transactionManagement:RoadTollPaymentViewModel}">
+        <transactionManagement:RoadTollPaymentView/>
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type userManagementDialog:HandleEmployeeViewModel}">
