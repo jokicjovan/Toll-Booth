@@ -358,6 +358,5 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
-TollBoothManagementSystem/Migrations/DatabaseContextModelSnapshot.cs
-TollBoothManagementSystem/Core/Persistence/tollbooth.db
+TollBoothManagementSystem/Migrations/
 TollBoothManagementSystem/Core/Persistence/tollbooth.db
