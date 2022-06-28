@@ -55,6 +55,7 @@ namespace TollBoothManagementSystem.Core.Features.Infrastructure.Commands
             action();
             _handleFaultReportVM.ResetFields();
             var dialog = (DialogWindow)parameter;
+            dialog.DialogResult = true;
             dialog.Close();
         }
 
@@ -66,14 +67,13 @@ namespace TollBoothManagementSystem.Core.Features.Infrastructure.Commands
             {
                 Description = description,
                 TollBooth = _referentHomeVM.CurrentTollBooth,
-                Reporter = (UserManagement.Model.Referent)_userService.Read(GlobalStore.ReadObject<Referent>("LoggedUser").Id),
+                Reporter = (Referent)_userService.Read(GlobalStore.ReadObject<Referent>("LoggedUser").Id),
                 DateOfReport = DateTime.Now
             };
 
-            _referentHomeVM.CurrentTollBooth.IsTrafficLightFunctional = false;
-            _tollBoothService.Update(_referentHomeVM.CurrentTollBooth);
             _faultReportService.Create(newFaultReport);
 
+            _referentHomeVM.CurrentTollBooth.IsOpen = false;
             if (_faultType == FaultType.TrafficLight)
             {
                 _referentHomeVM.CurrentTollBooth.IsTrafficLightFunctional = false;

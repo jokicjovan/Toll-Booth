@@ -26,7 +26,7 @@ namespace TollBoothManagementSystem.Core.Features.Infrastructure.Commands
 
         private void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(_referentHomeViewModel.CurrentTollBooth))
+            if (e.PropertyName == nameof(_referentHomeViewModel.GateStatus))
             {
                 OnCanExecuteChange();
             }
@@ -34,7 +34,7 @@ namespace TollBoothManagementSystem.Core.Features.Infrastructure.Commands
 
         public override bool CanExecute(object? parameter)
         {
-            return !(_referentHomeViewModel.CurrentTollBooth == null) && !(_referentHomeViewModel.CurrentTollBooth.IsTollGateFunctional == false) && base.CanExecute(parameter);
+            return !(_referentHomeViewModel.GateStatus == false) && base.CanExecute(parameter);
         }
 
         public override void Execute(object? parameter)
@@ -46,10 +46,12 @@ namespace TollBoothManagementSystem.Core.Features.Infrastructure.Commands
             var handleFaultReportVM = new HandleFaultReportViewModel(userService, tollBoothService, faultReportService, _referentHomeViewModel, FaultType.Gate);
             _dialogService.ShowDialog(handleFaultReportVM, isForceClosed =>
             {
-                var dialogForceClosed = (bool)isForceClosed;
+                var dialogClosedNormally = (bool)isForceClosed;
 
-                if (!dialogForceClosed) 
+                if (dialogClosedNormally)
                 {
+                    _referentHomeViewModel.GateStatus = false;
+                    _referentHomeViewModel.OnPropertyChanged(nameof(_referentHomeViewModel.TollGateFaultContent));
                     MessageBox.Show("Toll booth gate fault reported successfully");
                 }
             });
