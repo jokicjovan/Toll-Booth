@@ -127,7 +127,7 @@
                     </StackPanel>
 
                     <StackPanel Grid.Row="4" VerticalAlignment="Center">
-                        <RadioButton Content="Payment"
+                        <RadioButton Content="💸 Payment"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
