@@ -78,15 +78,19 @@ namespace TollBoothManagementSystem.GUI.Features.TransactionManagement
         private void LoadData()
         {
             _tollStationsDTO = new ObservableCollection<DataTableDTO>();
-
+            double totalRSD = 0;
+            double totalEUR = 0;
             foreach(var tollStation in _tollStations)
             {
                 double incomeRSD = _tollStationService.GetIncome(tollStation, StartDate, EndDate, _rsdCode);
+                totalRSD += incomeRSD;
                 double incomeEUR = _tollStationService.GetIncome(tollStation, StartDate, EndDate, _eurCode);
+                totalEUR += incomeEUR;
                 DataTableDTO obj = new DataTableDTO(tollStation.Name, incomeRSD, incomeEUR);
                 _tollStationsDTO.Add(obj);
-                OnPropertyChanged(nameof(TollStations));
             }
+            _tollStationsDTO.Add(new DataTableDTO("TOTAL", totalRSD, totalEUR));
+            OnPropertyChanged(nameof(TollStations));
         }
     }
 }
