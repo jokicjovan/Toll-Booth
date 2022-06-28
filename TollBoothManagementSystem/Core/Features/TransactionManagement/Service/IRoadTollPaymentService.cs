@@ -8,5 +8,6 @@ namespace TollBoothManagementSystem.Core.Features.TransactionManagement.Service
     public interface IRoadTollPaymentService : ICrudRepository<RoadTollPayment>
     {
         IEnumerable<RoadTollPayment> GetPaymentsForStation(TollStation tollStation);
+        IEnumerable<RoadTollPayment> GetPaymentsForBooth(TollBooth tollBooth);
     }
 }

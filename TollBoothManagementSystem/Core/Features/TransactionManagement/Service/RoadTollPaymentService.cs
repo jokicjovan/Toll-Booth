@@ -49,5 +49,10 @@ namespace TollBoothManagementSystem.Core.Features.TransactionManagement.Service
         {
             return _roadTollPaymentRepository.ReadAll().Where(e => e.TollBooth.TollStation.Id == tollStation.Id);
         }
+
+        public IEnumerable<RoadTollPayment> GetPaymentsForBooth(TollBooth tollBooth)
+        {
+            return _roadTollPaymentRepository.ReadAll().Where(e => e.TollBooth.Id == tollBooth.Id);
+        }
     }
 }

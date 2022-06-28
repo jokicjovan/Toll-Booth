@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TollBoothManagementSystem.Core.Features.General.Model;
 using TollBoothManagementSystem.Core.Features.General.Service;
 using TollBoothManagementSystem.Core.Features.Infrastructure.Model;
@@ -30,12 +27,11 @@ namespace TollBoothManagementSystem.GUI.Features.TransactionManagement
                 _incomeEUR = incomeEUR;
             }
         }
-        #region Atributes
+        #region Attributes
         private ObservableCollection<DataTableDTO> _tollStationsDTO;
         private DateTime _startDate;
         private DateTime _endDate;
         private readonly ITollStationService _tollStationService;
-        private readonly IRoadTollPaymentService _paymentService;
         private readonly IEnumerable<TollStation> _tollStations;
         private Currency _eurCode;
         private Currency _rsdCode;

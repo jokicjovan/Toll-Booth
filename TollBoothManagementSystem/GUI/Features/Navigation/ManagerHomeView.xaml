@@ -58,6 +58,12 @@
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding OpenEmployeesManagementCommand}"
                              IsChecked="True"/>
+                        <RadioButton Content="📝 Income report"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding OpenStationIncomeReportCommand}" IsChecked="False"/>
                         <RadioButton Content="🛣️ Toll Booths overview"
                              Height="50"
                              Foreground="White"
