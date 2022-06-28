@@ -8,6 +8,8 @@
              FontFamily="{DynamicResource MaterialDesignFont}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="75" />
@@ -104,7 +106,7 @@
                   SelectedItem="{Binding Path=SelectedTollStation, Mode=TwoWay}"
                   SelectionMode="Single"
                   Background="White">
-
+            
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name"
                                     MinWidth="120"

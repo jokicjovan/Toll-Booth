@@ -25,6 +25,7 @@ namespace TollBoothManagementSystem.Core.Features.Infrastructure.Service
             _roadTollPaymentService = roadTollPaymentService;
         }
 
+        #region CRUD methods
         public TollStation Create(TollStation entity)
         {
             return _tollStationRepository.Create(entity);
@@ -49,6 +50,9 @@ namespace TollBoothManagementSystem.Core.Features.Infrastructure.Service
         {
             return _tollStationRepository.Update(entity);
         }
+
+        #endregion
+
         public void FireEmployee(TollStation tollStation, Employee employee)
         {
             if (tollStation.Boss != null && tollStation.Boss.Id == employee.Id) {

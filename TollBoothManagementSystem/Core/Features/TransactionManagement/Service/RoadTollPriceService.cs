@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using TollBoothManagementSystem.Core.Features.General.Model;
+using TollBoothManagementSystem.Core.Features.General.Service;
 using TollBoothManagementSystem.Core.Features.Infrastructure.Model;
 using TollBoothManagementSystem.Core.Features.TransactionManagement.Model;
 using TollBoothManagementSystem.Core.Features.TransactionManagement.Repository;
@@ -12,11 +13,15 @@ namespace TollBoothManagementSystem.Core.Features.TransactionManagement.Service
     {
         private readonly IRoadTollPriceRepository _roadTollPriceRepository;
         private readonly IRoadTollService _roadTollService;
+        private readonly IPriceListService _priceListService;
+        private readonly ICurrencyService _currencyService;
 
-        public RoadTollPriceService(IRoadTollPriceRepository roadTollPriceRepository, IRoadTollService roadTollService)
+        public RoadTollPriceService(IRoadTollPriceRepository roadTollPriceRepository, IRoadTollService roadTollService,
+             ICurrencyService currencyService)
         {
             _roadTollPriceRepository = roadTollPriceRepository;
             _roadTollService = roadTollService;
+            _currencyService = currencyService;
         }
 
         #region CRUD methods
@@ -64,6 +69,40 @@ namespace TollBoothManagementSystem.Core.Features.TransactionManagement.Service
             double priceEnter = _roadTollPriceRepository.ReadAll().First(e => e.PriceList.Id == pricelist.Id && e.RoadToll.Id == tollEnter.Id).Price;
             double priceExit = _roadTollPriceRepository.ReadAll().First(e => e.PriceList.Id == pricelist.Id && e.RoadToll.Id == tollExit.Id).Price;
             return Math.Abs(priceExit - priceEnter);
+        }
+
+        public void GeneratePrices(PriceList priceList, TollStation tollStation, int basePrice)
+        {
+            foreach (var currency in _currencyService.ReadAll())
+            {
+                double qoef = 1;
+                var convertedBasePrice = basePrice;
+
+                if (currency.Code == "EUR")
+                    convertedBasePrice = basePrice / 117;
+
+                foreach (VehicleType vehicleType in Enum.GetValues(typeof(VehicleType)))
+                {
+                    RoadToll newRoadToll = new RoadToll()
+                    {
+                        TollStation = tollStation,
+                        VehicleType = vehicleType,
+                        Currency = currency
+                    };
+                    _roadTollService.Create(newRoadToll);
+
+                    var price = qoef * convertedBasePrice;
+                    RoadTollPrice newRoadTollPrice = new RoadTollPrice()
+                    {
+                        PriceList = priceList,
+                        RoadToll = newRoadToll,
+                        Price = (int) price
+                    };
+                    Create(newRoadTollPrice);
+
+                    qoef += 1;
+                }
+            }
         }
     }
 }

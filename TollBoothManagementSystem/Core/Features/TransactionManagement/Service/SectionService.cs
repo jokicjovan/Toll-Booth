@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using TollBoothManagementSystem.Core.Features.Infrastructure.Model;
+using TollBoothManagementSystem.Core.Features.Infrastructure.Service;
 using TollBoothManagementSystem.Core.Features.TransactionManagement.Model;
 using TollBoothManagementSystem.Core.Features.TransactionManagement.Repository;
 using System.Linq;
@@ -12,26 +13,15 @@ namespace TollBoothManagementSystem.Core.Features.TransactionManagement.Service
     {
         private readonly ISectionRepository _sectionRepository;
 
-        public SectionService(ISectionRepository sectionRepository)
+        private readonly ITollStationService _tollStationService;
+
+        public SectionService(ISectionRepository sectionRepository, ITollStationService tollStationService)
         {
             _sectionRepository = sectionRepository;
+            _tollStationService = tollStationService;
         }
 
-        //public Section SectionOfTollStation(TollStation tollStation)
-        //{
-        //    List<Section> allSec = _sectionRepository.ReadAll().ToList();
-        //    foreach (Section sec in allSec)
-        //    {
-        //        foreach (TollStation ts in sec.TollStations)
-        //        {
-        //            if (ts == tollStation)
-        //            {
-        //                return sec;
-        //            }
-        //        }
-        //    }
-        //    return null;
-        //}
+        #region CRUD methods
 
         public Section Create(Section entity)
         {
@@ -61,6 +51,31 @@ namespace TollBoothManagementSystem.Core.Features.TransactionManagement.Service
         public Section GetSection(TollStation tollStation)
         {
             return _sectionRepository.ReadAll().First(e => e.TollStations.Contains(tollStation));
+        }
+
+        #endregion
+
+        public bool IsOrderNumberValid(int orderNumber, Guid sectionId)
+        {
+            if (orderNumber <= 1)
+                return false;
+
+            var section = Read(sectionId);
+
+            return section.TollStations.Count >= orderNumber;
+        }
+
+        public void ShiftTollStationOrderNumbers(int orderNumber, Guid sectionId)
+        {
+            var section = Read(sectionId);
+
+            foreach (var tollStation in section.TollStations)
+            {
+                if (tollStation.OrderNumber >= orderNumber)
+                    tollStation.OrderNumber ++;
+
+                _tollStationService.Update(tollStation);
+            }
         }
     }
 }

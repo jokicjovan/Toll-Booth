@@ -14,6 +14,8 @@ namespace TollBoothManagementSystem.Core.Features.TransactionManagement.Model
         private TollStation _destination;
         public virtual TollStation Destination { get => _destination; set => OnPropertyChanged(ref _destination, value); }
 
+        public string Path => _origin.Location.Name + " - " + _destination.Location.Name;
+
         private IList<TollStation> _tollStations;
         public virtual IList<TollStation> TollStations { get => _tollStations; set => OnPropertyChanged(ref _tollStations, value); }
 

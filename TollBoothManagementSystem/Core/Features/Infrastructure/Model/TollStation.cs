@@ -12,6 +12,9 @@ namespace TollBoothManagementSystem.Core.Features.Infrastructure.Model
         private string _name;
         public string Name { get => _name; set => OnPropertyChanged(ref _name, value); }
 
+        private int _orderNumber;
+        public int OrderNumber { get => _orderNumber; set => OnPropertyChanged(ref _orderNumber, value); }
+
         private Location _location;
         public virtual Location Location { get => _location; set => OnPropertyChanged(ref _location, value); }
 
@@ -33,6 +36,7 @@ namespace TollBoothManagementSystem.Core.Features.Infrastructure.Model
         public TollStation(TollStation other) : base(other)
         {
             Name = other.Name;
+            OrderNumber = other.OrderNumber;
             Location = other.Location;
             Boss = other.Boss;
             TollBooths = other.TollBooths;
