@@ -64,7 +64,6 @@ namespace TollBoothManagementSystem.GUI.Features.TransactionManagement
         private IRoadTollPriceService _roadTollPriceService;
         private readonly ICurrencyService _currencyService;
         private Section _selectedSection;
-        private TollStation _selectedStation;
         private PriceList _selectedPriceList;
         private ObservableCollection<DataTable> _dataTables;
 
@@ -81,19 +80,7 @@ namespace TollBoothManagementSystem.GUI.Features.TransactionManagement
                 OnPropertyChanged(nameof(SelectedSection));
                 _selectedPriceList = _priceListService.GetActivePricelist(_selectedSection);
                 LoadStations(value);
-                OnPropertyChanged(nameof(SelectedStation));
                 OnPropertyChanged(nameof(TollStations));
-                OnPropertyChanged(nameof(DataTables));
-            }
-        }
-
-        public TollStation SelectedStation
-        {
-            get => _selectedStation;
-            set
-            {
-                _selectedStation = value;
-                OnPropertyChanged(nameof(SelectedStation));
                 OnPropertyChanged(nameof(DataTables));
             }
         }
@@ -166,7 +153,6 @@ namespace TollBoothManagementSystem.GUI.Features.TransactionManagement
                 
             }
             _tollStations = _tollStations.OrderBy(x => x.CreatedAt).ToList();
-            _selectedStation = _tollStations[0];
             LoadDataTable(_tollStations);
         }
 
@@ -207,12 +193,6 @@ namespace TollBoothManagementSystem.GUI.Features.TransactionManagement
             _currencies = new ObservableCollection<Currency>(currencyService.ReadAll());
 
             LoadSections();
-
-            //_currentTollStation = GlobalStore.ReadObject<Administrator>("LoggedUser").TollStation;
-            //_currentSection = _sectionService.GetSection(_currentTollStation);
-            //_currentPriceList = _priceListService.CurrentPriceListForSection(_currentSection);
-
-            //setRoadTolls();
         }
 
     }

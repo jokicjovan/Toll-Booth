@@ -2,117 +2,158 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:TollBoothManagementSystem.GUI.Features.TransactionManagement"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             FontFamily="{DynamicResource MaterialDesignFont}"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="600"
-             Background="White">
-    <Grid Margin="15">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-        </Grid.RowDefinitions>
-        <!--<TextBlock Grid.Row="0" Text="Price list overview" FontSize="20" FontWeight="Bold" Margin="0 0 0 0"/>-->
-        <StackPanel Grid.Row="0" HorizontalAlignment="Left" Orientation="Horizontal">
-            <StackPanel  Orientation="Horizontal" Margin="20, 0, 0, 0">
-                <TextBlock Text="Section:" FontSize="24" Margin="0 0 20 0" VerticalAlignment="Bottom"/>
-                <ComboBox Margin="0,0,0,0" SelectedItem="{Binding SelectedSection}" FontSize="20" ItemsSource="{Binding Sections}" HorizontalAlignment="Left" Width="250"/>
-            </StackPanel>
-            <!--<StackPanel  Orientation="Vertical" Margin="20, 0, 0, 0">
-                <TextBlock Text="Station" FontSize="18" Margin="0 0 0 0"/>
-                <ComboBox Margin="0,0,0,0" SelectedItem="{Binding SelectedStation}" ItemsSource="{Binding TollStations}" HorizontalAlignment="Left" Width="200"/>
-            </StackPanel>-->
-        </StackPanel>
-        <Separator Grid.Row="1" Margin="15 20 15 10"/>
-        <TextBlock Grid.Row="2" Text="{Binding SelectedSection}" FontSize="30" Typography.Capitals="AllSmallCaps" HorizontalAlignment="Center"/>
-        <TextBlock Grid.Row="3" Text="RSD" FontSize="16" FontWeight="Bold" Margin="50 10 0 0"/>
-        <TextBlock Grid.Row="3" HorizontalAlignment="Right" Text="EUR" FontSize="16" FontWeight="Bold" Margin="0 10 50 0"/>
-        <ListView Grid.Row="4" Margin="0 10 0 0" MaxHeight="450" Height="450" ItemsSource="{Binding DataTables}" HorizontalAlignment="Center">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="1A" Width="80" DisplayMemberBinding="{Binding Category1ARSD}">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock HorizontalAlignment="Center" Padding="0 0 5 0"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Header="1" Width="auto" DisplayMemberBinding="{Binding Category1RSD}">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock HorizontalAlignment="Center" Padding="0 0 5 0"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Header="2" Width="auto" DisplayMemberBinding="{Binding Category2RSD}">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock HorizontalAlignment="Center" Padding="0 0 5 0"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Header="3" Width="auto" DisplayMemberBinding="{Binding Category3RSD}">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock HorizontalAlignment="Center" Padding="0 0 5 0"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Header="4" Width="auto" DisplayMemberBinding="{Binding Category4RSD}">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock HorizontalAlignment="Center" Padding="0 0 5 0"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Header="Station" Width="auto" DisplayMemberBinding="{Binding StationName}">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock HorizontalAlignment="Center" Padding="0 0 5 0"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Header="1A" Width="auto" DisplayMemberBinding="{Binding Category1AEUR}">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock HorizontalAlignment="Center" Padding="0 0 5 0"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Header="1" Width="auto" DisplayMemberBinding="{Binding Category1EUR}">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock HorizontalAlignment="Center" Padding="0 0 5 0"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Header="2" Width="auto" DisplayMemberBinding="{Binding Category2EUR}">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock HorizontalAlignment="Center" Padding="0 0 5 0"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Header="3" Width="auto" DisplayMemberBinding="{Binding Category3EUR}">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock HorizontalAlignment="Center" Padding="0 0 5 0"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Header="4" Width="auto" DisplayMemberBinding="{Binding Category4EUR}">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock HorizontalAlignment="Center" Padding="0 0 5 0"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                </GridView>
-            </ListView.View>
-        </ListView>
+             d:DesignHeight="450" d:DesignWidth="600">
 
+    <UserControl.Resources>
+        <Style TargetType="DataGridCell" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
+    </UserControl.Resources>
+
+    
+
+    <Grid Margin="15 0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70" />
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="10*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0"
+                           Text="Section:"
+                           FontSize="18"
+                           Margin="0, 10"
+                           Padding="0, 5, 0, 0"
+                           VerticalAlignment="Top"
+                           Foreground="White"/>
+
+                <ComboBox Grid.Column="1"
+                          SelectedItem="{Binding SelectedSection}"
+                          FontSize="18"
+                          ItemsSource="{Binding Sections}"
+                          Margin="0, 10"
+                          HorizontalAlignment="Left"
+                          VerticalAlignment="Top"
+                          Width="250"
+                          Foreground="White">
+                          <ComboBox.Resources>
+                            <SolidColorBrush x:Key="MaterialDesignPaper" Color="#10416b"/>
+                          </ComboBox.Resources>
+                </ComboBox>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <TextBlock Grid.Row="2"
+                           Text="{Binding SelectedSection}"
+                           FontSize="30"
+                           FontWeight="Bold"
+                           Typography.Capitals="AllPetiteCaps"
+                           HorizontalAlignment="Center"
+                           Foreground="White"/>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="2" Margin="181, 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <TextBlock Text="RSD"
+                           FontSize="16"
+                           FontWeight="Bold"
+                           Foreground="White"/>
+            </Grid>
+            <Grid Grid.Column="1">
+                <TextBlock Text="EUR"
+                           FontSize="16"
+                           FontWeight="Bold"
+                           HorizontalAlignment="Right"
+                           Foreground="White"/>
+            </Grid>
+        </Grid>
+
+        <DataGrid x:Name="DataTables"
+                  Grid.Row="3"
+                  IsReadOnly="True"
+                  AutoGenerateColumns="False"
+                  ItemsSource="{Binding DataTables}"
+                  SelectionMode="Single"
+                  Background="White">
+        
+            <DataGrid.Columns>
+
+                <DataGridTextColumn Header="1A"                                  
+                                    Width="*"
+                                    Binding="{Binding Category1ARSD}"/>
+
+                <DataGridTextColumn Header="1"                                 
+                                    Width="*"
+                                    Binding="{Binding Category1RSD}"/>
+
+                <DataGridTextColumn Header="2"                                   
+                                    Width="*"
+                                    Binding="{Binding Category2RSD}"/>
+
+                <DataGridTextColumn Header="3"                            
+                                    Width="*"
+                                    Binding="{Binding Category3RSD}"/>
+
+                <DataGridTextColumn Header="4"                                 
+                                    Width="*"
+                                    Binding="{Binding Category4RSD}"/>
+
+                <DataGridTextColumn Header="Stations"                           
+                                    Width="2*"
+                                    Binding="{Binding StationName}"/>
+
+                <DataGridTextColumn Header="1A"                                  
+                                    Width="*"
+                                    Binding="{Binding Category1AEUR}"/>
+
+                <DataGridTextColumn Header="1"                                 
+                                    Width="*"
+                                    Binding="{Binding Category1EUR}"/>
+
+                <DataGridTextColumn Header="2"                                   
+                                    Width="*"
+                                    Binding="{Binding Category2EUR}"/>
+
+                <DataGridTextColumn Header="3"                            
+                                    Width="*"
+                                    Binding="{Binding Category3EUR}"/>
+
+                <DataGridTextColumn Header="4"                                 
+                                    Width="*"
+                                    Binding="{Binding Category4EUR}"/>
+
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
+     
+    
 </UserControl>
