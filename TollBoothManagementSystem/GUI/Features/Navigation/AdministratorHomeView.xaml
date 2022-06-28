@@ -35,7 +35,7 @@
                         <Separator BorderBrush="White" BorderThickness="2" Margin="20,5,20,5"></Separator>
                     </StackPanel>
                         
-                    <StackPanel Grid.Row="1" VerticalAlignment="Center">
+                    <StackPanel Grid.Row="1" VerticalAlignment="Top">
                         <RadioButton Content="🛣️ Toll stations"
                              Height="50"
                              Foreground="White"

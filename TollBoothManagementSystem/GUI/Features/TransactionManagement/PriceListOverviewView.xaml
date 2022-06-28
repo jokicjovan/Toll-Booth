@@ -17,19 +17,17 @@
         </Style>
     </UserControl.Resources>
 
-    
-
-    <Grid Margin="15 0">
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="70" />
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="60" />
+            <RowDefinition Height="60"/>
             <RowDefinition Height="35"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
             <Grid Grid.Column="0">
@@ -41,7 +39,7 @@
                 <TextBlock Grid.Column="0"
                            Text="Section:"
                            FontSize="18"
-                           Margin="0, 10"
+                           Margin="10, 10"
                            Padding="0, 5, 0, 0"
                            VerticalAlignment="Top"
                            Foreground="White"/>
@@ -62,7 +60,7 @@
             </Grid>
         </Grid>
 
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Background="#10416b">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
@@ -71,24 +69,25 @@
                            Text="{Binding SelectedSection}"
                            FontSize="30"
                            FontWeight="Bold"
+                           Padding="0, 10"
                            Typography.Capitals="AllPetiteCaps"
                            HorizontalAlignment="Center"
                            Foreground="White"/>
             </Grid>
         </Grid>
 
-        <Grid Grid.Row="2" Margin="181, 0">
+        <Grid Grid.Row="2" Background="#10416b">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0">
+            <Grid Grid.Column="0" HorizontalAlignment="Center">
                 <TextBlock Text="RSD"
                            FontSize="16"
                            FontWeight="Bold"
                            Foreground="White"/>
             </Grid>
-            <Grid Grid.Column="1">
+            <Grid Grid.Column="1" HorizontalAlignment="Center">
                 <TextBlock Text="EUR"
                            FontSize="16"
                            FontWeight="Bold"
@@ -107,23 +106,23 @@
         
             <DataGrid.Columns>
 
-                <DataGridTextColumn Header="1A"                                  
+                <DataGridTextColumn Header="🏍️"                                  
                                     Width="*"
                                     Binding="{Binding Category1ARSD}"/>
 
-                <DataGridTextColumn Header="1"                                 
+                <DataGridTextColumn Header="🚗"                                 
                                     Width="*"
                                     Binding="{Binding Category1RSD}"/>
 
-                <DataGridTextColumn Header="2"                                   
+                <DataGridTextColumn Header="🚐"                                   
                                     Width="*"
                                     Binding="{Binding Category2RSD}"/>
 
-                <DataGridTextColumn Header="3"                            
+                <DataGridTextColumn Header="🚌"                            
                                     Width="*"
                                     Binding="{Binding Category3RSD}"/>
 
-                <DataGridTextColumn Header="4"                                 
+                <DataGridTextColumn Header="🚐🚌"                                 
                                     Width="*"
                                     Binding="{Binding Category4RSD}"/>
 
@@ -131,23 +130,23 @@
                                     Width="2*"
                                     Binding="{Binding StationName}"/>
 
-                <DataGridTextColumn Header="1A"                                  
+                <DataGridTextColumn Header="🏍️"                                  
                                     Width="*"
                                     Binding="{Binding Category1AEUR}"/>
 
-                <DataGridTextColumn Header="1"                                 
+                <DataGridTextColumn Header="🚗"                                 
                                     Width="*"
                                     Binding="{Binding Category1EUR}"/>
 
-                <DataGridTextColumn Header="2"                                   
+                <DataGridTextColumn Header="🚐"                                   
                                     Width="*"
                                     Binding="{Binding Category2EUR}"/>
 
-                <DataGridTextColumn Header="3"                            
+                <DataGridTextColumn Header="🚌"                            
                                     Width="*"
                                     Binding="{Binding Category3EUR}"/>
 
-                <DataGridTextColumn Header="4"                                 
+                <DataGridTextColumn Header="🚐🚌"                                 
                                     Width="*"
                                     Binding="{Binding Category4EUR}"/>
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
 using TollBoothManagementSystem.Core.Features.Infrastructure.Commands;
@@ -104,7 +105,7 @@ namespace TollBoothManagementSystem.GUI.Features.Infrastructure
             _dialogService = dialogService;
             _tollStationService = tollStationService;
 
-            _tollStations = new ObservableCollection<TollStation>(TollStationService.ReadAll());
+            _tollStations = new ObservableCollection<TollStation>(TollStationService.ReadAll().OrderBy(x => x.Name));
             //AddTollStationCommand = new AddTollStationCommand(_dialogService, this);
             //UpdateTollStationCommand = new UpdateTollStationCommand(_dialogService, this);
             ShowTollBoothsCommand = new ShowTollBoothsCommand(this);
