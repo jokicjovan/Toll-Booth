@@ -60,7 +60,7 @@ namespace TollBoothManagementSystem.GUI.Features.Navigation
                 GlobalIncomeReportViewModel viewModel = ServiceLocator.Get<GlobalIncomeReportViewModel>();
                 SwitchCurrentViewModel(viewModel);
 
-
+            });
             EventBus.RegisterHandler("PriceListOverview", () =>
             {
                 PriceListOverviewViewModel Plvm = ServiceLocator.Get<PriceListOverviewViewModel>();
