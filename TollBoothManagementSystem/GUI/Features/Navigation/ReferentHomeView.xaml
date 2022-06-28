@@ -62,13 +62,13 @@
                             </Button.Style>
                         </Button>
 
-                        <Button Content="Report traffic light fault"
+                        <Button Content="{Binding TrafficLightFaultContent}"
                         Grid.Row="5"
                         VerticalAlignment="Bottom"
                         Command="{Binding ReportTrafficLightFaultCommand}"
                         Margin="0,10,0,5"/>
 
-                        <Button Content="Report gate fault"
+                        <Button Content="{Binding TollGateFaultContent}"
                         Grid.Row="5"
                         VerticalAlignment="Bottom"
                         Command="{Binding ReportGateFaultCommand}"

@@ -21,7 +21,7 @@ namespace TollBoothManagementSystem.GUI.Features.Navigation
 {
     public class ReferentHomeViewModel : NavigableViewModel
     {
-        #region commands
+        #region Commands
         public ICommand LogOutCommand { get; set; }
         public ICommand NavigatePaymentCommand { get; set; }
         public ICommand SwitchTollBoothStatusCommand { get; set; }
@@ -35,7 +35,7 @@ namespace TollBoothManagementSystem.GUI.Features.Navigation
         private TollBooth _currentTollBooth;
         #endregion
 
-        #region properties
+        #region Properties
         public string ButtonContent
         {
             get
@@ -43,6 +43,26 @@ namespace TollBoothManagementSystem.GUI.Features.Navigation
                 if (IsOpen)
                     return "Toll booth opened";
                 return "Toll booth closed";
+            }
+        }
+        public string TollGateFaultContent
+        {
+            get
+            {
+                if(CurrentTollBooth.IsTollGateFunctional == false)
+                    return "Toll gate not functional";
+                else
+                    return "Report toll gate fault";
+            }
+        }
+        public string TrafficLightFaultContent
+        {
+            get
+            {
+                if (CurrentTollBooth.IsTrafficLightFunctional == false)
+                    return "Traffic light not functional";
+                else
+                    return "Report traffic light fault";
             }
         }
         public bool IsOpen
