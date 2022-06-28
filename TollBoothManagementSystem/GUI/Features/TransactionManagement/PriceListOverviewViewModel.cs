@@ -160,6 +160,7 @@ namespace TollBoothManagementSystem.GUI.Features.TransactionManagement
             {
                 LoadDataTableRow(station);
             }
+            _dataTables.RemoveAt(0);
         }
 
         private void LoadDataTableRow(TollStation station)

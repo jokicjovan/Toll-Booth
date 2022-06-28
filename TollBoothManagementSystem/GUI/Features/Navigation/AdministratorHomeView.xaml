@@ -36,7 +36,7 @@
                     </StackPanel>
                         
                     <StackPanel Grid.Row="1" VerticalAlignment="Top">
-                        <RadioButton Content="🛣️ Toll stations"
+                        <RadioButton Content="🛣️ Toll stations overview"
                              Height="50"
                              Foreground="White"
                              FontSize="14"

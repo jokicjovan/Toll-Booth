@@ -5,6 +5,7 @@ using System.Windows.Input;
 using TollBoothManagementSystem.Core.Features.Infrastructure.Commands;
 using TollBoothManagementSystem.Core.Features.Infrastructure.Model;
 using TollBoothManagementSystem.Core.Features.Infrastructure.Service;
+using TollBoothManagementSystem.Core.Features.UserManagement.Commands;
 using TollBoothManagementSystem.Core.Features.UserManagement.Service;
 using TollBoothManagementSystem.GUI.Utility.Dialog;
 using TollBoothManagementSystem.GUI.Utility.ViewModel;
@@ -80,6 +81,8 @@ namespace TollBoothManagementSystem.GUI.Features.Infrastructure
 
         public ICommand ShowTollBoothsCommand { get; set; }
 
+        public ICommand ShowEmployeesCommand { get; set; }
+
         #endregion
 
         #region methods
@@ -106,8 +109,7 @@ namespace TollBoothManagementSystem.GUI.Features.Infrastructure
             _tollStationService = tollStationService;
 
             _tollStations = new ObservableCollection<TollStation>(TollStationService.ReadAll().OrderBy(x => x.Name));
-            //AddTollStationCommand = new AddTollStationCommand(_dialogService, this);
-            //UpdateTollStationCommand = new UpdateTollStationCommand(_dialogService, this);
+            ShowEmployeesCommand = new OpenAllEmployeesManagementCommand(this);
             ShowTollBoothsCommand = new ShowTollBoothsCommand(this);
             DeleteTollStationCommand = new DeleteTollStationCommand(this);
             SearchTollStationCommand = new SearchCommand(this);
