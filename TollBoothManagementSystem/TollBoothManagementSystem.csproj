@@ -9,10 +9,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="GUI\Fonts\password.ttf" />
     <None Remove="GUI\Utility\Resources\logoImage.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="GUI\Fonts\password.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="GUI\Utility\Resources\icon.ico" />
   </ItemGroup>
 

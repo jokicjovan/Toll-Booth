@@ -13,7 +13,6 @@ namespace TollBoothManagementSystem.Core.Features.TransactionManagement.Service
     {
         private readonly IRoadTollPriceRepository _roadTollPriceRepository;
         private readonly IRoadTollService _roadTollService;
-        private readonly IPriceListService _priceListService;
         private readonly ICurrencyService _currencyService;
 
         public RoadTollPriceService(IRoadTollPriceRepository roadTollPriceRepository, IRoadTollService roadTollService,

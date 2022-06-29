@@ -84,7 +84,8 @@
                     materialDesign:HintAssist.Hint="Choose section" 
                     ItemsSource="{Binding AllSections}"
                     DisplayMemberPath="Path"
-                    SelectedItem="{Binding SelectedSection}" >
+                    SelectedItem="{Binding SelectedSection}" 
+                    IsEnabled="{Binding ReadOnlySection}" >
                     <ComboBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <VirtualizingStackPanel />

@@ -105,6 +105,8 @@ namespace TollBoothManagementSystem.GUI.Features.Infrastructure.Dialog
 
         public TollStation? stationToUpdate;
 
+        public bool ReadOnlySection { get; private set; }
+
         #endregion
 
         #region Error message view models
@@ -169,10 +171,12 @@ namespace TollBoothManagementSystem.GUI.Features.Infrastructure.Dialog
             {
                 FetchProperties();
                 Title = "Update station";
+                ReadOnlySection = false;
             }
             else
             {
                 Title = "Add station";
+                ReadOnlySection = true;
             }
 
             HandleStationCommand = new HandleTollStationCommand(_tollStationService, _sectionService, _sectionInfoService, 
