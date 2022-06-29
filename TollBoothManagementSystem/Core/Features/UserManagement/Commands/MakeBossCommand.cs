@@ -2,16 +2,16 @@
 using System.Windows;
 using TollBoothManagementSystem.Core.Features.UserManagement.Model;
 using TollBoothManagementSystem.Core.Utility.Commands;
-using TollBoothManagementSystem.Core.Utility.HelperClasses;
 using TollBoothManagementSystem.GUI.Features.UserManagement;
 
 namespace TollBoothManagementSystem.Core.Features.UserManagement.Commands
 {
-    public class DeleteEmployeeCommand : CommandBase
+    public class MakeBossCommand : CommandBase
     {
         private EmployeesViewModel _viewModel;
-        public DeleteEmployeeCommand(EmployeesViewModel viewModel) {
-            _viewModel = viewModel; 
+        public MakeBossCommand(EmployeesViewModel viewModel)
+        {
+            _viewModel = viewModel;
             _viewModel.PropertyChanged += OnViewModelPropertyChanged;
         }
 
@@ -25,16 +25,18 @@ namespace TollBoothManagementSystem.Core.Features.UserManagement.Commands
 
         public override bool CanExecute(object? parameter)
         {
-            var currentUser = GlobalStore.ReadObject<User>("LoggedUser");
-            return !(_viewModel.SelectedEmployee == null || _viewModel.SelectedEmployee.Id == currentUser.Id) && base.CanExecute(parameter);
+            return !(_viewModel.SelectedEmployee == null || _viewModel.SelectedEmployee.Role == Role.Manager) && 
+                !(_viewModel.TollStation.Boss == null || _viewModel.TollStation.Boss.Id == _viewModel.SelectedEmployee.Id) 
+                && base.CanExecute(parameter);
         }
 
         public override void Execute(object? parameter)
         {
-            _viewModel.TollStationService.FireEmployee(_viewModel.TollStation, _viewModel.SelectedEmployee);
+            _viewModel.TollStation.Boss = (Referent)_viewModel.SelectedEmployee;
+            _viewModel.TollStationService.Update(_viewModel.TollStation);
             _viewModel.SelectedEmployee = null;
             _viewModel.Search();
-            MessageBox.Show("Employee deleted successfully");
+            MessageBox.Show("Employee promoted successfully");
         }
     }
 }

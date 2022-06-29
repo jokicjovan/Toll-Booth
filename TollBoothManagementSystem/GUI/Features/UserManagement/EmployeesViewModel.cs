@@ -8,6 +8,7 @@ using TollBoothManagementSystem.Core.Features.Infrastructure.Service;
 using TollBoothManagementSystem.Core.Features.UserManagement.Commands;
 using TollBoothManagementSystem.Core.Features.UserManagement.Model;
 using TollBoothManagementSystem.Core.Features.UserManagement.Service;
+using TollBoothManagementSystem.Core.Utility.HelperClasses;
 using TollBoothManagementSystem.GUI.Features.Infrastructure;
 using TollBoothManagementSystem.GUI.Utility.Dialog;
 using TollBoothManagementSystem.GUI.Utility.ViewModel;
@@ -78,6 +79,11 @@ namespace TollBoothManagementSystem.GUI.Features.UserManagement
                 _tollStation = value;
                 OnPropertyChanged(nameof(TollStation));
             }
+        }        
+
+        public bool IsAdministrator
+        {
+            get; private set;
         }
 
         #endregion
@@ -91,6 +97,8 @@ namespace TollBoothManagementSystem.GUI.Features.UserManagement
         public ICommand DeleteEmployeeCommand { get; set; }
 
         public ICommand SearchEmployeeCommand { get; set; }
+
+        public ICommand MakeBossCommand { get; set; }
 
         #endregion
 
@@ -116,6 +124,16 @@ namespace TollBoothManagementSystem.GUI.Features.UserManagement
             _employeeService = employeeService;
             _dialogService = dialogService;
             _tollStationService = tollStationService;
+
+            if (GlobalStore.ReadObject<User>("LoggedUser").Role == Role.Administrator)
+            {
+                IsAdministrator = true;
+                MakeBossCommand = new MakeBossCommand(this);
+            }
+            else 
+            {
+                IsAdministrator = false;
+            }
 
             _tollStation = tollStationService.Read(tollStationId);
             Search();

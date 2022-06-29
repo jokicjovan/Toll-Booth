@@ -8,6 +8,10 @@
              FontFamily="{DynamicResource MaterialDesignFont}"
              mc:Ignorable="d" 
              d:DesignHeight="400" d:DesignWidth="700">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="b2vc"></BooleanToVisibilityConverter>
+    </UserControl.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="75" />
@@ -26,7 +30,7 @@
                     <ColumnDefinition Width="2*" />
                     <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
-                
+
                 <TextBox Width="220"
                      Grid.Column="0"
                      Height="40"
@@ -43,7 +47,17 @@
                     Margin="0,5,10,0"
                     Command="{Binding SearchEmployeeCommand}"/>
             </Grid>
-            
+
+            <Grid Grid.Column="1">
+                <Button Width="100"
+                        Margin="10"
+                        Grid.Column="0"
+                        Content="Make boss"
+                        HorizontalAlignment="Center"
+                        Command="{Binding MakeBossCommand}"
+                        Visibility="{Binding IsAdministrator, Converter={StaticResource b2vc}}"/>
+            </Grid>
+
             <Grid Grid.Column="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
