@@ -1,6 +1,6 @@
 # Toll-Booth - Projektni zadatak iz predmeta specifikacija i modeliranje softvera
 
-Marko Janošević
-Vlada Dević
-Jovan Šerbedžija
-Jovan Jokić
+Marko Janošević<br/>
+Vlada Dević<br/>
+Jovan Šerbedžija<br/>
+Jovan Jokić<br/>
