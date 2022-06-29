@@ -55,7 +55,7 @@
                            FontSize="10" />
 
                 <!--EmailAddress-->
-                <TextBox MaxLength="30" 
+                <TextBox MaxLength="50" 
                          Style="{DynamicResource MaterialDesignFloatingHintTextBox}" 
                          materialDesign:HintAssist.Hint="Enter email address" 
                          Margin="10 15 10 0" 
