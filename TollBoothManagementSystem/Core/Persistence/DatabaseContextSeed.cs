@@ -80,6 +80,19 @@ namespace TollBoothManagementSystem.Core.Persistence
             var loc24 = new Location { PostalCode = 32304, Name = "Takovo" };
             var loc25 = new Location { PostalCode = 32212, Name = "Preljina" };
 
+            var loc26 = new Location { PostalCode = 16000, Name = "Leskovac" };
+            var loc27 = new Location { PostalCode = 12000, Name = "Pozarevac" };
+            var loc28 = new Location { PostalCode = 35000, Name = "Jagodina" };
+            var loc29 = new Location { PostalCode = 18300, Name = "Pirot" };
+            var loc30 = new Location { PostalCode = 15300, Name = "Loznica" };
+            var loc31 = new Location { PostalCode = 25000, Name = "Sombor" };
+            var loc32 = new Location { PostalCode = 14000, Name = "Valjevo" };
+            var loc33 = new Location { PostalCode = 31000, Name = "Uzice" };
+            var loc34 = new Location { PostalCode = 15000, Name = "Sabac" };
+            var loc35 = new Location { PostalCode = 36300, Name = "Novi Pazar" };
+            var loc36 = new Location { PostalCode = 19000, Name = "Zajecar" };
+            var loc37 = new Location { PostalCode = 36000, Name = "Kraljevo" };
+
             context.Locations.Add(loc01);
             context.Locations.Add(loc02);
             context.Locations.Add(loc03);
@@ -105,7 +118,18 @@ namespace TollBoothManagementSystem.Core.Persistence
             context.Locations.Add(loc23);
             context.Locations.Add(loc24);
             context.Locations.Add(loc25);
-
+            context.Locations.Add(loc26);
+            context.Locations.Add(loc27);
+            context.Locations.Add(loc28);
+            context.Locations.Add(loc29);
+            context.Locations.Add(loc30);
+            context.Locations.Add(loc31);
+            context.Locations.Add(loc32);
+            context.Locations.Add(loc33);
+            context.Locations.Add(loc34);
+            context.Locations.Add(loc35);
+            context.Locations.Add(loc36);
+            context.Locations.Add(loc37);
             context.SaveChanges();
 
             #endregion
