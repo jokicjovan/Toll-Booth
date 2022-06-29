@@ -58,21 +58,6 @@ namespace TollBoothManagementSystem.GUI.Features.Infrastructure.Dialog
             set { _selectedSection = value; OnPropertyChanged(nameof(SelectedSection)); OnPropertyChanged(nameof(CanExecute)); }
         }
 
-        private ObservableCollection<Employee> _allReferents;
-        public ObservableCollection<Employee> AllReferents
-        {
-            get { return _allReferents; }
-            set { _allReferents = value; OnPropertyChanged(nameof(AllReferents)); OnPropertyChanged(nameof(CanExecute)); }
-        }
-
-        private Employee? _selectedReferent;
-        [ValidationField]
-        public Employee? SelectedReferent
-        {
-            get { return _selectedReferent; }
-            set { _selectedReferent = value; OnPropertyChanged(nameof(SelectedReferent)); OnPropertyChanged(nameof(CanExecute)); }
-        }
-
         private string _distance;
         [ValidationField]
         public string Distance
@@ -117,7 +102,6 @@ namespace TollBoothManagementSystem.GUI.Features.Infrastructure.Dialog
         public ErrorMessageViewModel DistanceError { get; private set; } = new ErrorMessageViewModel();
         public ErrorMessageViewModel PriceError { get; private set; } = new ErrorMessageViewModel();
         public ErrorMessageViewModel OrderNumberError { get; private set; } = new ErrorMessageViewModel();
-        public ErrorMessageViewModel ReferentError { get; private set; } = new ErrorMessageViewModel();
 
 
         public bool CanExecute => IsValid();
@@ -163,7 +147,6 @@ namespace TollBoothManagementSystem.GUI.Features.Infrastructure.Dialog
 
             AllLocations = new ObservableCollection<Location>(_locationService.ReadAll());
             AllSections = new ObservableCollection<Section>(_sectionService.ReadAll());
-            AllReferents = new ObservableCollection<Employee>(_employeeService.ReadAll().Where(e => e.Role == Role.Referent));
 
             _stationId = stationId;
 
@@ -195,7 +178,6 @@ namespace TollBoothManagementSystem.GUI.Features.Infrastructure.Dialog
         {
             stationToUpdate = _tollStationService.Read(_stationId);
             SelectedLocation = stationToUpdate.Location;
-            SelectedReferent = stationToUpdate.Boss;
             SelectedSection = _sectionService.getSectionForTollStation(stationToUpdate.Id);
             var sectionInfo = _sectionInfoService.getSectionInfoForTollStation(stationToUpdate.Id);
             var priceList = _priceListService.GetActivePricelist(SelectedSection);
@@ -244,17 +226,6 @@ namespace TollBoothManagementSystem.GUI.Features.Infrastructure.Dialog
             else
             {
                 SectionError.ErrorMessage = null;
-            }
-
-            // Boss
-            if (SelectedReferent == null && IsDirty(nameof(SelectedReferent)))
-            {
-                ReferentError.ErrorMessage = "You must select a referent.";
-                valid = false;
-            }
-            else
-            {
-                ReferentError.ErrorMessage = null;
             }
 
             // Distance

@@ -94,7 +94,7 @@ namespace TollBoothManagementSystem.Core.Features.Infrastructure.Commands.Dialog
             {
                 Name = _handleTollStationVM.StationName,
                 Location = _handleTollStationVM.SelectedLocation,
-                Boss = (Referent) _handleTollStationVM.SelectedReferent,
+                Boss = null,
                 TollBooths = new List<TollBooth>(),
                 Employees = new List<Employee>(),
                 OrderNumber = orderNumber
@@ -170,7 +170,7 @@ namespace TollBoothManagementSystem.Core.Features.Infrastructure.Commands.Dialog
             _handleTollStationVM.stationToUpdate.Name = _handleTollStationVM.StationName;
             _handleTollStationVM.stationToUpdate.OrderNumber = orderNumber;
             _handleTollStationVM.stationToUpdate.Location = _handleTollStationVM.SelectedLocation;
-            _handleTollStationVM.stationToUpdate.Boss = (Referent) _handleTollStationVM.SelectedReferent;
+            _handleTollStationVM.stationToUpdate.Boss = _handleTollStationVM.stationToUpdate.Boss;
             _tollStationService.Update(_handleTollStationVM.stationToUpdate);
         }
     }

@@ -6,6 +6,7 @@ using TollBoothManagementSystem.Core.Utility.Commands;
 using TollBoothManagementSystem.GUI.Features.Infrastructure.Dialog;
 using TollBoothManagementSystem.GUI.Features.Infrastructure;
 using TollBoothManagementSystem.GUI.Utility.Dialog;
+using System.Linq;
 
 namespace TollBoothManagementSystem.Core.Features.Infrastructure.Commands.Dialog
 {
@@ -46,6 +47,13 @@ namespace TollBoothManagementSystem.Core.Features.Infrastructure.Commands.Dialog
 
         public override void Execute(object? parameter)
         {
+            if (_tollStation.TollBooths.Any(tb => tb.Code.ToLower() == _handleTollBoothVM.BoothCode.ToLower()))
+            {
+                _handleTollBoothVM.BoothCodeError.ErrorMessage = "Booth code must be unique";
+                return;
+            }
+
+
             if (_tollBoothId == Guid.Empty)
             {
                 HandleAction(parameter, AddBooth);

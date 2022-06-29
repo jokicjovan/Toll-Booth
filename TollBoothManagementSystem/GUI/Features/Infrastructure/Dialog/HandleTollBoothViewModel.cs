@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Windows.Input;
 using TollBoothManagementSystem.Core.Features.Infrastructure.Commands.Dialog;
 using TollBoothManagementSystem.Core.Features.Infrastructure.Model;

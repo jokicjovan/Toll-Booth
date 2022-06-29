@@ -71,7 +71,7 @@
                         Grid.Column="0"
                         Grid.Row="1"
                         Foreground="Red" 
-                        DataContext="{Binding ETCError}" 
+                        DataContext="{Binding IsETCError}" 
                         Text="{Binding ErrorMessage}" 
                         Visibility="{Binding HasError, Converter={StaticResource b2vc}}"
                         Margin="10 0 10 0" 

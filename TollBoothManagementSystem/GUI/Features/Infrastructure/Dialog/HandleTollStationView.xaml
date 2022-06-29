@@ -92,39 +92,11 @@
                         </ItemsPanelTemplate>
                     </ComboBox.ItemsPanel>
                 </ComboBox>
-                
+
                 <TextBlock 
                     Style="{DynamicResource MaterialDesignHelperTextBlock}" 
                     Foreground="Red" 
                     DataContext="{Binding SectionError}" 
-                    Text="{Binding ErrorMessage}" 
-                    Visibility="{Binding HasError, Converter={StaticResource b2vc}}"
-                    Margin="10 0 10 0" 
-                    FontSize="10" />
-
-                <!--Boss-->
-                <ComboBox 
-                    Style="{DynamicResource MaterialDesignFloatingHintComboBox}" 
-                    IsEditable="True"
-                    Grid.Column="1"
-                    Margin="10 15 10 0"
-                    IsTextSearchEnabled="True"
-                    TextSearch.TextPath="FullName"
-                    materialDesign:HintAssist.Hint="Choose boss" 
-                    ItemsSource="{Binding AllReferents}"
-                    DisplayMemberPath="FullName"
-                    SelectedItem="{Binding SelectedReferent}" >
-                    <ComboBox.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <VirtualizingStackPanel />
-                        </ItemsPanelTemplate>
-                    </ComboBox.ItemsPanel>
-                </ComboBox>
-
-                <TextBlock 
-                    Style="{DynamicResource MaterialDesignHelperTextBlock}" 
-                    Foreground="Red" 
-                    DataContext="{Binding ReferentError}" 
                     Text="{Binding ErrorMessage}" 
                     Visibility="{Binding HasError, Converter={StaticResource b2vc}}"
                     Margin="10 0 10 0" 
