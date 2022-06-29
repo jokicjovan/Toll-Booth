@@ -213,7 +213,7 @@ namespace TollBoothManagementSystem.GUI.Features.TransactionManagement
             _selectedCurrency = _currencies.First(e => e.Code == "RSD");
             _currentSection = GlobalStore.ReadObject<Section>("CurrentSection");
             _activePricelist = GlobalStore.ReadObject<PriceList>("ActivePricelist");
-            _tollStations = new ObservableCollection<TollStation>(_currentSection.TollStations.Where(e => e.Id != _currentStation.Id));
+            _tollStations = new ObservableCollection<TollStation>(_currentSection.TollStations.Where(e => e.Id != _currentStation.Id).OrderBy(x => x.OrderNumber));
             _selectedStation = _tollStations[0];
             ConfirmPaymentCommand = new ConfirmPaymentCommand(this);
         }

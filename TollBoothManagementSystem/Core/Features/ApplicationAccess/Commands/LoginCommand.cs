@@ -70,7 +70,7 @@ namespace TollBoothManagementSystem.Core.Features.ApplicationAccess.Commands
                         Administrator admin = (Administrator)user;
                         GlobalStore.AddObject("LoggedUser", admin);
                         EventBus.FireEvent("AdministratorLogin");
-                        TitleManager.Title = "Referent";
+                        TitleManager.Title = "Administrator";
                         break;
 
                     case Role.Referent:

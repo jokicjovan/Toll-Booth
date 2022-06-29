@@ -120,12 +120,12 @@ namespace TollBoothManagementSystem.GUI.Features.Infrastructure
             if (!string.IsNullOrEmpty(SearchText))
             {
                 var searchText = SearchText.ToLower();
-                TollStations = new ObservableCollection<TollStation>(TollStationService.ReadAll().Where(tollStation => tollStation.Name.ToLower().Contains(searchText)
-               || tollStation.Location.Name.ToLower().Contains(searchText)));
+                TollStations = new ObservableCollection<TollStation>(_selectedSection.TollStations.Where(tollStation => tollStation.Name.ToLower().Contains(searchText)
+               || tollStation.Location.Name.ToLower().Contains(searchText)).OrderBy(x => x.OrderNumber).ThenBy(x => x.Name));
             }
             else
             {
-                TollStations = new ObservableCollection<TollStation>(TollStationService.ReadAll());
+                TollStations = new ObservableCollection<TollStation>(_selectedSection.TollStations.OrderBy(x => x.OrderNumber).ThenBy(x => x.Name));
             }
         }
 

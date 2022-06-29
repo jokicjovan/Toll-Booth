@@ -19,17 +19,32 @@ namespace TollBoothManagementSystem.Core.Persistence
 
             // Manager
             var mn1 = new Manager { FirstName = "Igor", LastName = "Mirkovic", EmailAddress = "igormirkovic@example.com", Password = "test123", DateOfBirth = DateTime.Now.AddYears(-34), Role = Role.Manager };
+            var mn2 = new Manager { FirstName = "Gordana", LastName = "Milicic", EmailAddress = "gordanamilicic@example.com", Password = "test123", DateOfBirth = DateTime.Now.AddYears(-34), Role = Role.Manager };
+            var mn3 = new Manager { FirstName = "Veljko", LastName = "Veljkovic", EmailAddress = "veljkoveljkovic@example.com", Password = "test123", DateOfBirth = DateTime.Now.AddYears(-34), Role = Role.Manager };
             context.Users.Add(mn1);
             
             // Referent
             var rf1 = new Referent { FirstName = "Nikola", LastName = "Petrovic", EmailAddress = "nikolapetrovic@example.com", Password = "test123", DateOfBirth = DateTime.Now.AddYears(-25), Role = Role.Referent };
-            var rf2 = new Referent { FirstName = "Dzoni", LastName = "Petrovic", EmailAddress = "dzonipetrovic@example.com", Password = "test123", DateOfBirth = DateTime.Now.AddYears(-25), Role = Role.Referent };
-            var rf3 = new Referent { FirstName = "Dzonson", LastName = "Petrovic", EmailAddress = "dzonsonpetrovic@example.com", Password = "test123", DateOfBirth = DateTime.Now.AddYears(-25), Role = Role.Referent };
-            var rf4 = new Referent { FirstName = "Nidzo", LastName = "Petrovic", EmailAddress = "nidzopetrovic@example.com", Password = "test123", DateOfBirth = DateTime.Now.AddYears(-25), Role = Role.Referent };
+            var rf2 = new Referent { FirstName = "Marko", LastName = "Markovic", EmailAddress = "markomarkovic@example.com", Password = "test123", DateOfBirth = DateTime.Now.AddYears(-25), Role = Role.Referent };
+            var rf3 = new Referent { FirstName = "Petar", LastName = "Petrovic", EmailAddress = "petarpetrovic@example.com", Password = "test123", DateOfBirth = DateTime.Now.AddYears(-25), Role = Role.Referent };
+
+            var rf4 = new Referent { FirstName = "Zlatibor", LastName = "Jankovic", EmailAddress = "zlatiborjankovic@example.com", Password = "test123", DateOfBirth = DateTime.Now.AddYears(-25), Role = Role.Referent };
+            var rf5 = new Referent { FirstName = "Darko", LastName = "Djuricic", EmailAddress = "darkodjuricic@example.com", Password = "test123", DateOfBirth = DateTime.Now.AddYears(-25), Role = Role.Referent };
+            var rf6 = new Referent { FirstName = "Nebojsa", LastName = "Stojanovic", EmailAddress = "nebojsastojanovic@example.com", Password = "test123", DateOfBirth = DateTime.Now.AddYears(-25), Role = Role.Referent };
+
+            var rf7 = new Referent { FirstName = "Zlatko", LastName = "Babic", EmailAddress = "zlatkobabic@example.com", Password = "test123", DateOfBirth = DateTime.Now.AddYears(-25), Role = Role.Referent };
+            var rf8 = new Referent { FirstName = "Marko", LastName = "Lazic", EmailAddress = "markolazic@example.com", Password = "test123", DateOfBirth = DateTime.Now.AddYears(-25), Role = Role.Referent };
+            var rf9 = new Referent { FirstName = "Rastko", LastName = "Glogovac", EmailAddress = "rastkoglogovac@example.com", Password = "test123", DateOfBirth = DateTime.Now.AddYears(-25), Role = Role.Referent };
+
             context.Users.Add(rf1);
             context.Users.Add(rf2);
             context.Users.Add(rf3);
             context.Users.Add(rf4);
+            context.Users.Add(rf5);
+            context.Users.Add(rf6);
+            context.Users.Add(rf7);
+            context.Users.Add(rf8);
+            context.Users.Add(rf9);
 
             context.SaveChanges();
             #endregion
@@ -227,151 +242,151 @@ namespace TollBoothManagementSystem.Core.Persistence
 
             #region TollStation
 
-            var ts01 = new TollStation { Location = loc01, Name = loc01.Name, Boss = rf1, TollBooths = new List<TollBooth> { tb001, tb002, tb003, tb004 }, Employees = new List<Employee> { rf1, rf2, rf3, rf4, mn1 } };
+            var ts01 = new TollStation { OrderNumber = 1, Location = loc01, Name = loc01.Name, Boss = rf1, TollBooths = new List<TollBooth> { tb001, tb002, tb003, tb004 }, Employees = new List<Employee> { rf1, rf2, rf3, mn1 } };
             tb001.TollStation = ts01;
             tb002.TollStation = ts01;
             tb003.TollStation = ts01;
             tb004.TollStation = ts01;
 
-            var ts02 = new TollStation { Location = loc02, Name = loc02.Name, Boss = rf1, TollBooths = new List<TollBooth> { tb011, tb012, tb013, tb014 } };
+            var ts02 = new TollStation { OrderNumber = 2, Location = loc02, Name = loc02.Name, Boss = null, TollBooths = new List<TollBooth> { tb011, tb012, tb013, tb014 }};
             tb011.TollStation = ts02;
             tb012.TollStation = ts02;
             tb013.TollStation = ts02;
             tb014.TollStation = ts02;
 
-            var ts03 = new TollStation { Location = loc03, Name = loc03.Name, Boss = rf1, TollBooths = new List<TollBooth> { tb021, tb022, tb023, tb024 } };
+            var ts03 = new TollStation { OrderNumber = 3, Location = loc03, Name = loc03.Name, Boss = null, TollBooths = new List<TollBooth> { tb021, tb022, tb023, tb024 }};
             tb021.TollStation = ts03;
             tb022.TollStation = ts03;
             tb023.TollStation = ts03;
             tb024.TollStation = ts03;
 
-            var ts04 = new TollStation { Location = loc04, Name = loc04.Name, Boss = rf1, TollBooths = new List<TollBooth> { tb031, tb032, tb033, tb034 } };
+            var ts04 = new TollStation { OrderNumber = 4, Location = loc04, Name = loc04.Name, Boss = rf4, TollBooths = new List<TollBooth> { tb031, tb032, tb033, tb034 }, Employees = new List<Employee> { rf4, rf5, rf6, mn2 } };
             tb031.TollStation = ts04;
             tb032.TollStation = ts04;
             tb033.TollStation = ts04;
             tb034.TollStation = ts04;
 
-            var ts05 = new TollStation { Location = loc05, Name = loc05.Name, Boss = rf1, TollBooths = new List<TollBooth> { tb041, tb042, tb043, tb044 } };
+            var ts05 = new TollStation { OrderNumber = 5, Location = loc05, Name = loc05.Name, Boss = null, TollBooths = new List<TollBooth> { tb041, tb042, tb043, tb044 } };
             tb041.TollStation = ts05;
             tb042.TollStation = ts05;
             tb043.TollStation = ts05;
             tb044.TollStation = ts05;
 
-            var ts06 = new TollStation { Location = loc06, Name = loc06.Name, Boss = rf1, TollBooths = new List<TollBooth> { tb051, tb052, tb053, tb054 } };
+            var ts06 = new TollStation { OrderNumber = 6, Location = loc06, Name = loc06.Name, Boss = null, TollBooths = new List<TollBooth> { tb051, tb052, tb053, tb054 } };
             tb051.TollStation = ts06;
             tb052.TollStation = ts06;
             tb053.TollStation = ts06;
             tb054.TollStation = ts06;
 
-            var ts07 = new TollStation { Location = loc07, Name = loc07.Name, Boss = rf1, TollBooths = new List<TollBooth> { tb061, tb062, tb063, tb064 } };
+            var ts07 = new TollStation { OrderNumber = 7, Location = loc07, Name = loc07.Name, Boss = rf7, TollBooths = new List<TollBooth> { tb061, tb062, tb063, tb064 }, Employees = new List<Employee> { rf7, rf8, rf9, mn3 }};
             tb061.TollStation = ts07;
             tb062.TollStation = ts07;
             tb063.TollStation = ts07;
             tb064.TollStation = ts07;
 
-            var ts08 = new TollStation { Location = loc08, Name = loc08.Name, Boss = rf1, TollBooths = new List<TollBooth> { tb071, tb072, tb073, tb074 } };
+            var ts08 = new TollStation { OrderNumber = 1, Location = loc08, Name = loc08.Name, Boss = null, TollBooths = new List<TollBooth> { tb071, tb072, tb073, tb074 } };
             tb071.TollStation = ts08;
             tb072.TollStation = ts08;
             tb073.TollStation = ts08;
             tb074.TollStation = ts08;
 
-            var ts09 = new TollStation { Location = loc09, Name = loc09.Name, Boss = rf1, TollBooths = new List<TollBooth> { tb081, tb082, tb083, tb084 } };
+            var ts09 = new TollStation { OrderNumber = 2, Location = loc09, Name = loc09.Name, Boss = null, TollBooths = new List<TollBooth> { tb081, tb082, tb083, tb084 } };
             tb081.TollStation = ts09;
             tb082.TollStation = ts09;
             tb083.TollStation = ts09;
             tb084.TollStation = ts09;
 
-            var ts10 = new TollStation { Location = loc10, Name = loc10.Name, Boss = rf1, TollBooths = new List<TollBooth> { tb091, tb092, tb093, tb094 } };
+            var ts10 = new TollStation { OrderNumber = 3, Location = loc10, Name = loc10.Name, Boss = null, TollBooths = new List<TollBooth> { tb091, tb092, tb093, tb094 } };
             tb091.TollStation = ts10;
             tb092.TollStation = ts10;
             tb093.TollStation = ts10;
             tb094.TollStation = ts10;
 
-            var ts11 = new TollStation { Location = loc11, Name = loc11.Name, Boss = rf1, TollBooths = new List<TollBooth> { tb101, tb102, tb103, tb104 } };
+            var ts11 = new TollStation { OrderNumber = 4, Location = loc11, Name = loc11.Name, Boss = null, TollBooths = new List<TollBooth> { tb101, tb102, tb103, tb104 } };
             tb101.TollStation = ts11;
             tb102.TollStation = ts11;
             tb103.TollStation = ts11;
             tb104.TollStation = ts11;
 
-            var ts12 = new TollStation { Location = loc12, Name = loc12.Name, Boss = rf1, TollBooths = new List<TollBooth> { tb111, tb112, tb113, tb114 } };
+            var ts12 = new TollStation { OrderNumber = 5, Location = loc12, Name = loc12.Name, Boss = null, TollBooths = new List<TollBooth> { tb111, tb112, tb113, tb114 } };
             tb111.TollStation = ts12;
             tb112.TollStation = ts12;
             tb113.TollStation = ts12;
             tb114.TollStation = ts12;
 
-            var ts13 = new TollStation { Location = loc13, Name = loc13.Name, Boss = rf1, TollBooths = new List<TollBooth> { tb121, tb122, tb123, tb124 } };
+            var ts13 = new TollStation { OrderNumber = 6, Location = loc13, Name = loc13.Name, Boss = null, TollBooths = new List<TollBooth> { tb121, tb122, tb123, tb124 } };
             tb121.TollStation = ts13;
             tb122.TollStation = ts13;
             tb123.TollStation = ts13;
             tb124.TollStation = ts13;
 
-            var ts14 = new TollStation { Location = loc14, Name = loc14.Name, Boss = rf1, TollBooths = new List<TollBooth> { tb131, tb132, tb133, tb134 } };
+            var ts14 = new TollStation { OrderNumber = 7, Location = loc14, Name = loc14.Name, Boss = null, TollBooths = new List<TollBooth> { tb131, tb132, tb133, tb134 } };
             tb131.TollStation = ts14;
             tb132.TollStation = ts14;
             tb133.TollStation = ts14;
             tb134.TollStation = ts14;
 
-            var ts15 = new TollStation { Location = loc15, Name = loc15.Name, Boss = rf1, TollBooths = new List<TollBooth> { tb141, tb142, tb143, tb144 } };
+            var ts15 = new TollStation { OrderNumber = 8, Location = loc15, Name = loc15.Name, Boss = null, TollBooths = new List<TollBooth> { tb141, tb142, tb143, tb144 } };
             tb141.TollStation = ts15;
             tb142.TollStation = ts15;
             tb143.TollStation = ts15;
             tb144.TollStation = ts15;
 
-            var ts16 = new TollStation { Location = loc16, Name = loc16.Name, Boss = rf1, TollBooths = new List<TollBooth> { tb151, tb152, tb153, tb154 } };
+            var ts16 = new TollStation { OrderNumber = 9, Location = loc16, Name = loc16.Name, Boss = null, TollBooths = new List<TollBooth> { tb151, tb152, tb153, tb154 } };
             tb151.TollStation = ts16;
             tb152.TollStation = ts16;
             tb153.TollStation = ts16;
             tb154.TollStation = ts16;
 
-            var ts17 = new TollStation { Location = loc17, Name = loc17.Name, Boss = rf1, TollBooths = new List<TollBooth> { tb161, tb162, tb163, tb164 } };
+            var ts17 = new TollStation { OrderNumber = 10, Location = loc17, Name = loc17.Name, Boss = null, TollBooths = new List<TollBooth> { tb161, tb162, tb163, tb164 } };
             tb161.TollStation = ts17;
             tb162.TollStation = ts17;
             tb163.TollStation = ts17;
             tb164.TollStation = ts17;
 
-            var ts18 = new TollStation { Location = loc18, Name = loc18.Name, Boss = rf1, TollBooths = new List<TollBooth> { tb171, tb172, tb173, tb174 } };
+            var ts18 = new TollStation { OrderNumber = 11, Location = loc18, Name = loc18.Name, Boss = null, TollBooths = new List<TollBooth> { tb171, tb172, tb173, tb174 } };
             tb171.TollStation = ts18;
             tb172.TollStation = ts18;
             tb173.TollStation = ts18;
             tb174.TollStation = ts18;
 
-            var ts19 = new TollStation { Location = loc19, Name = loc19.Name, Boss = rf1, TollBooths = new List<TollBooth> { tb181, tb182, tb183, tb184 } };
+            var ts19 = new TollStation { OrderNumber = 12, Location = loc19, Name = loc19.Name, Boss = null, TollBooths = new List<TollBooth> { tb181, tb182, tb183, tb184 } };
             tb181.TollStation = ts19;
             tb182.TollStation = ts19;
             tb183.TollStation = ts19;
             tb184.TollStation = ts19;
 
-            var ts20 = new TollStation { Location = loc20, Name = loc20.Name, Boss = rf1, TollBooths = new List<TollBooth> { tb191, tb192, tb193, tb194 } };
+            var ts20 = new TollStation { OrderNumber = 1, Location = loc20, Name = loc20.Name, Boss = null, TollBooths = new List<TollBooth> { tb191, tb192, tb193, tb194 } };
             tb191.TollStation = ts20;
             tb192.TollStation = ts20;
             tb193.TollStation = ts20;
             tb194.TollStation = ts20;
 
-            var ts21 = new TollStation { Location = loc21, Name = loc21.Name, Boss = rf1, TollBooths = new List<TollBooth> { tb201, tb202, tb203, tb204 } };
+            var ts21 = new TollStation { OrderNumber = 2, Location = loc21, Name = loc21.Name, Boss = null, TollBooths = new List<TollBooth> { tb201, tb202, tb203, tb204 } };
             tb201.TollStation = ts21;
             tb202.TollStation = ts21;
             tb203.TollStation = ts21;
             tb204.TollStation = ts21;
 
-            var ts22 = new TollStation { Location = loc22, Name = loc22.Name, Boss = rf1, TollBooths = new List<TollBooth> { tb211, tb212, tb213, tb214 } };
+            var ts22 = new TollStation { OrderNumber = 3, Location = loc22, Name = loc22.Name, Boss = null, TollBooths = new List<TollBooth> { tb211, tb212, tb213, tb214 } };
             tb211.TollStation = ts22;
             tb212.TollStation = ts22;
             tb213.TollStation = ts22;
             tb214.TollStation = ts22;
 
-            var ts23 = new TollStation { Location = loc23, Name = loc23.Name, Boss = rf1, TollBooths = new List<TollBooth> { tb221, tb222, tb223, tb224 } };
+            var ts23 = new TollStation { OrderNumber = 4, Location = loc23, Name = loc23.Name, Boss = null, TollBooths = new List<TollBooth> { tb221, tb222, tb223, tb224 } };
             tb221.TollStation = ts23;
             tb222.TollStation = ts23;
             tb223.TollStation = ts23;
             tb224.TollStation = ts23;
 
-            var ts24 = new TollStation { Location = loc24, Name = loc24.Name, Boss = rf1, TollBooths = new List<TollBooth> { tb231, tb232, tb233, tb234 } };
+            var ts24 = new TollStation { OrderNumber = 5, Location = loc24, Name = loc24.Name, Boss = null, TollBooths = new List<TollBooth> { tb231, tb232, tb233, tb234 } };
             tb231.TollStation = ts24;
             tb232.TollStation = ts24;
             tb233.TollStation = ts24;
             tb234.TollStation = ts24;
 
-            var ts25 = new TollStation { Location = loc25, Name = loc25.Name, Boss = rf1, TollBooths = new List<TollBooth> { tb241, tb242, tb243, tb244 } };
+            var ts25 = new TollStation { OrderNumber = 6, Location = loc25, Name = loc25.Name, Boss = null, TollBooths = new List<TollBooth> { tb241, tb242, tb243, tb244 } };
             tb241.TollStation = ts25;
             tb242.TollStation = ts25;
             tb243.TollStation = ts25;
@@ -530,10 +545,18 @@ namespace TollBoothManagementSystem.Core.Persistence
             context.TollStations.Add(ts25);
 
             mn1.TollStation = ts01;
+            mn2.TollStation = ts04;
+            mn3.TollStation = ts07;
+
             rf1.TollStation = ts01;
             rf2.TollStation = ts01;
             rf3.TollStation = ts01;
-            rf4.TollStation = ts01;
+            rf4.TollStation = ts04;
+            rf5.TollStation = ts04;
+            rf6.TollStation = ts04;
+            rf7.TollStation = ts07;
+            rf8.TollStation = ts07;
+            rf9.TollStation = ts07;
 
             context.Users.Update(mn1);
             context.Users.Update(rf1);

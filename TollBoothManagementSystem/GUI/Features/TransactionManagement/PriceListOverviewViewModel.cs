@@ -150,7 +150,7 @@ namespace TollBoothManagementSystem.GUI.Features.TransactionManagement
                 _tollStations.Add(station);
                 
             }
-            _tollStations = _tollStations.OrderBy(x => x.CreatedAt).ToList();
+            _tollStations = _tollStations.OrderBy(x => x.OrderNumber).ToList();
             LoadDataTable(_tollStations);
         }
 
