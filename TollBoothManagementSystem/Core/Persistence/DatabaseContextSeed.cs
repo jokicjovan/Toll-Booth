@@ -47,6 +47,7 @@ namespace TollBoothManagementSystem.Core.Persistence
             context.Users.Add(rf9);
 
             context.SaveChanges();
+
             #endregion
 
             #region Locations

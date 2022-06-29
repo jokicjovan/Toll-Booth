@@ -47,5 +47,14 @@ namespace TollBoothManagementSystem.Core.Features.TransactionManagement.Service
             double distance2 = _sectionInfoRepository.ReadAll().First(e => e.TollStation.Id == exitStation.Id).Distance;
             return Math.Abs(distance2 - distance1);
         }
+
+        public SectionInfo getSectionInfoForTollStation(Guid tollStationId)
+        {
+            return _sectionInfoRepository.ReadAll()
+                                         .First(si =>
+                                         {
+                                             return si.TollStation.Id == tollStationId;
+                                         });
+        }
     }
 }

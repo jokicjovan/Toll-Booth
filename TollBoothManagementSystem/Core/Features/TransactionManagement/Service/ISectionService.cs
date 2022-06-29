@@ -12,5 +12,9 @@ namespace TollBoothManagementSystem.Core.Features.TransactionManagement.Service
         public bool IsOrderNumberValid(int orderNumber, Guid sectionId);
 
         public void ShiftTollStationOrderNumbers(int orderNumber, Guid sectionId);
+
+        public void ShiftTollStationOrderNumbersLeft(int orderNumber, Guid sectionId);
+
+        public Section getSectionForTollStation(Guid tollStationId);
     }
 }

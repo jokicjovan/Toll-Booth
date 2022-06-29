@@ -5,6 +5,7 @@ using System.Windows.Input;
 using TollBoothManagementSystem.Core.Features.General.Model;
 using TollBoothManagementSystem.Core.Features.General.Service;
 using TollBoothManagementSystem.Core.Features.Infrastructure.Commands.Dialog;
+using TollBoothManagementSystem.Core.Features.Infrastructure.Model;
 using TollBoothManagementSystem.Core.Features.Infrastructure.Service;
 using TollBoothManagementSystem.Core.Features.TransactionManagement.Model;
 using TollBoothManagementSystem.Core.Features.TransactionManagement.Service;
@@ -102,6 +103,8 @@ namespace TollBoothManagementSystem.GUI.Features.Infrastructure.Dialog
 
         private Guid _stationId;
 
+        public TollStation? stationToUpdate;
+
         #endregion
 
         #region Error message view models
@@ -164,7 +167,7 @@ namespace TollBoothManagementSystem.GUI.Features.Infrastructure.Dialog
 
             if (stationId != Guid.Empty)
             {
-                FetchStation();
+                FetchProperties();
                 Title = "Update station";
             }
             else
@@ -184,11 +187,19 @@ namespace TollBoothManagementSystem.GUI.Features.Infrastructure.Dialog
             IsValid();
         }
 
-        public void FetchStation()
+        public void FetchProperties()
         {
-            var station = _tollStationService.Read(_stationId);
+            stationToUpdate = _tollStationService.Read(_stationId);
+            SelectedLocation = stationToUpdate.Location;
+            SelectedReferent = stationToUpdate.Boss;
+            SelectedSection = _sectionService.getSectionForTollStation(stationToUpdate.Id);
+            var sectionInfo = _sectionInfoService.getSectionInfoForTollStation(stationToUpdate.Id);
+            var priceList = _priceListService.GetActivePricelist(SelectedSection);
+            Distance = sectionInfo.Distance.ToString();
+            Price = _roadTollPriceService.GetBasePriceForTollStation(priceList.Id, stationToUpdate.Id).ToString();
+            OrderNumber = stationToUpdate.OrderNumber.ToString();
 
-            StationName = station.Name;
+            StationName = stationToUpdate.Name;
         }
 
 
@@ -243,7 +254,7 @@ namespace TollBoothManagementSystem.GUI.Features.Infrastructure.Dialog
             }
 
             // Distance
-            var isNumeric = int.TryParse(Distance, out int distance);
+            var isNumeric = double.TryParse(Distance, out double distance);
             if (!isNumeric && IsDirty(nameof(Distance)))
             {
                 DistanceError.ErrorMessage = "You have to enter a number.";
@@ -260,7 +271,7 @@ namespace TollBoothManagementSystem.GUI.Features.Infrastructure.Dialog
             }
 
             // Price
-            isNumeric = int.TryParse(Price, out int price);
+            isNumeric = double.TryParse(Price, out double price);
             if (!isNumeric && IsDirty(nameof(Price)))
             {
                 PriceError.ErrorMessage = "You have to enter a number.";
@@ -283,7 +294,7 @@ namespace TollBoothManagementSystem.GUI.Features.Infrastructure.Dialog
                 OrderNumberError.ErrorMessage = "You have to enter a number.";
                 valid = false;
             }
-            else if (orderNumber < 1 && IsDirty(nameof(OrderNumber)))
+            else if (orderNumber <= 0 && IsDirty(nameof(OrderNumber)))
             {
                 OrderNumberError.ErrorMessage = "You have to enter a value larger than 0.";
                 valid = false;

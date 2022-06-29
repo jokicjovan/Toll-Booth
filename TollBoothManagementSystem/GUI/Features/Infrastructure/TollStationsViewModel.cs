@@ -142,7 +142,8 @@ namespace TollBoothManagementSystem.GUI.Features.Infrastructure
             SelectedSection = _sections.FirstOrDefault();
 
             AddTollStationCommand = new AddTollStationCommand(_dialogService, this);
-            //UpdateTollStationCommand = new UpdateTollStationCommand(_dialogService, this);
+            UpdateTollStationCommand = new UpdateTollStationCommand(_dialogService, this);
+            _tollStations = new ObservableCollection<TollStation>(TollStationService.ReadAll().OrderBy(x => x.Name));
             ShowEmployeesCommand = new OpenAllEmployeesManagementCommand(this);
             ShowTollBoothsCommand = new ShowTollBoothsCommand(this);
             DeleteTollStationCommand = new DeleteTollStationCommand(this);

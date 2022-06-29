@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using System.Windows;
 using TollBoothManagementSystem.Core.Utility.Commands;
 using TollBoothManagementSystem.GUI.Features.Infrastructure;

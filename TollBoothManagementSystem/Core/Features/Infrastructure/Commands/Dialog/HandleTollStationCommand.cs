@@ -58,21 +58,20 @@ namespace TollBoothManagementSystem.Core.Features.Infrastructure.Commands.Dialog
         public override void Execute(object? parameter)
         {
             int.TryParse(_handleTollStationVM.OrderNumber, out int orderNumber);
+            if (! _sectionService.IsOrderNumberValid(orderNumber, _handleTollStationVM.SelectedSection.Id))
+            {
+                _handleTollStationVM.OrderNumberError.ErrorMessage = "Order number is not valid";
+                return;
+            }
+
             if (_tollStationId == Guid.Empty)
             {
-                if (_sectionService.IsOrderNumberValid(orderNumber, _handleTollStationVM.SelectedSection.Id))
-                {
-                    HandleAction(parameter, AddStation);
-                    MessageBox.Show("Toll station added successfully");
-                }
-                else
-                {
-                    _handleTollStationVM.OrderNumberError.ErrorMessage = "Order number is not valid";
-                }
+                HandleAction(parameter, AddStation);
+                MessageBox.Show("Toll station added successfully");
             }
             else
             {
-                HandleAction(parameter, UpdateEmployee);
+                HandleAction(parameter, UpdateStation);
                 MessageBox.Show("Toll station updated successfully");
             }
         }
@@ -80,7 +79,7 @@ namespace TollBoothManagementSystem.Core.Features.Infrastructure.Commands.Dialog
         public void HandleAction(object parameter, Action action)
         {
             action();
-            //_employeesVM.SearchEmployee();
+            _tollStationsVM.Search();
             _handleTollStationVM.ResetFields();
             var dialog = (DialogWindow)parameter;
             dialog.DialogResult = true;
@@ -104,11 +103,12 @@ namespace TollBoothManagementSystem.Core.Features.Infrastructure.Commands.Dialog
 
             // Update order numbers in section
             var section = _sectionService.Read(_handleTollStationVM.SelectedSection.Id);
-            section.TollStations.Add(tollStation);
             _sectionService.ShiftTollStationOrderNumbers(orderNumber, section.Id);
+            section.TollStations.Add(tollStation);
+            _sectionService.Update(section);
 
             // Add section info
-            int.TryParse(_handleTollStationVM.Distance, out int distance);
+            double.TryParse(_handleTollStationVM.Distance, out double distance);
             var sectionInfo = new SectionInfo()
             {
                 Section = section,
@@ -118,23 +118,60 @@ namespace TollBoothManagementSystem.Core.Features.Infrastructure.Commands.Dialog
             _sectionInfoService.Create(sectionInfo);
 
             // Add prices
-            int.TryParse(_handleTollStationVM.Price, out int price);
+            double.TryParse(_handleTollStationVM.Price, out double price);
             var priceList = _priceListService.GetActivePricelist(section);
             _roadTollPriceService.GeneratePrices(priceList, tollStation, price);
         }
 
-        public void UpdateEmployee()
+        public void UpdateStation()
         {
-            //var employeeToUpdate = _userService.Read(_employeeId);
 
-            //employeeToUpdate.EmailAddress = _handleEmployeeVM.EmailAddress;
-            //employeeToUpdate.Password = _handleEmployeeVM.Password;
-            //employeeToUpdate.FirstName = _handleEmployeeVM.FirstName;
-            //employeeToUpdate.LastName = _handleEmployeeVM.LastName;
-            //employeeToUpdate.DateOfBirth = _handleEmployeeVM.DateOfBirth;
-            //employeeToUpdate.Role = (Role)_handleEmployeeVM.ChosenRole;
+            int.TryParse(_handleTollStationVM.OrderNumber, out int orderNumber);
+            double.TryParse(_handleTollStationVM.Price, out double price);
+            double.TryParse(_handleTollStationVM.Distance, out double distance);
+            var section = _sectionService.Read(_handleTollStationVM.SelectedSection.Id);
+            var priceList = _priceListService.GetActivePricelist(section);
 
-            //_userService.Update(employeeToUpdate);
+            if (section.Id == _sectionService.getSectionForTollStation(_handleTollStationVM.stationToUpdate.Id).Id)
+            {
+                if (price != _roadTollPriceService.GetBasePriceForTollStation(priceList.Id, _handleTollStationVM.stationToUpdate.Id))
+                    _roadTollPriceService.UpdatePrices(priceList, _handleTollStationVM.stationToUpdate, price);
+
+
+                // Update order numbers in section
+                if (orderNumber != _handleTollStationVM.stationToUpdate.OrderNumber)
+                {
+                    _sectionService.ShiftTollStationOrderNumbersLeft(_handleTollStationVM.stationToUpdate.OrderNumber, section.Id);
+                    _sectionService.ShiftTollStationOrderNumbers(orderNumber, section.Id);
+                }
+
+                // Update section info
+                var newSectionInfo = _sectionInfoService.getSectionInfoForTollStation(_handleTollStationVM.stationToUpdate.Id); ;
+                newSectionInfo.Distance = distance;
+                _sectionInfoService.Update(newSectionInfo);
+            }
+            else
+            {
+                section.TollStations.Add(_handleTollStationVM.stationToUpdate);
+                _roadTollPriceService.ClearPricesForTollStation(_handleTollStationVM.stationToUpdate.Id);
+                _roadTollPriceService.GeneratePrices(priceList, _handleTollStationVM.stationToUpdate, price);
+                _sectionService.ShiftTollStationOrderNumbers(orderNumber, section.Id);
+
+                var newSectionInfo = new SectionInfo()
+                {
+                    TollStation = _handleTollStationVM.stationToUpdate,
+                    Section = section,
+                    Distance = distance
+                };
+                _sectionInfoService.Create(newSectionInfo);
+            }
+
+            // Update station
+            _handleTollStationVM.stationToUpdate.Name = _handleTollStationVM.StationName;
+            _handleTollStationVM.stationToUpdate.OrderNumber = orderNumber;
+            _handleTollStationVM.stationToUpdate.Location = _handleTollStationVM.SelectedLocation;
+            _handleTollStationVM.stationToUpdate.Boss = (Referent) _handleTollStationVM.SelectedReferent;
+            _tollStationService.Update(_handleTollStationVM.stationToUpdate);
         }
     }
 }

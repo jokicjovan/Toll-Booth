@@ -5,7 +5,6 @@ using TollBoothManagementSystem.Core.Features.Infrastructure.Model;
 using TollBoothManagementSystem.Core.Features.Infrastructure.Service;
 using TollBoothManagementSystem.Core.Features.TransactionManagement.Model;
 using TollBoothManagementSystem.Core.Features.TransactionManagement.Repository;
-using System.Linq;
 
 namespace TollBoothManagementSystem.Core.Features.TransactionManagement.Service
 {
@@ -76,6 +75,27 @@ namespace TollBoothManagementSystem.Core.Features.TransactionManagement.Service
 
                 _tollStationService.Update(tollStation);
             }
+        }
+
+        public void ShiftTollStationOrderNumbersLeft(int orderNumber, Guid sectionId)
+        {
+            var section = Read(sectionId);
+
+            foreach (var tollStation in section.TollStations)
+            {
+                if (tollStation.OrderNumber > orderNumber)
+                    tollStation.OrderNumber--;
+
+                _tollStationService.Update(tollStation);
+            }
+        }
+        public Section getSectionForTollStation(Guid tollStationId)
+        {
+            return _sectionRepository.ReadAll()
+                                     .First(s =>
+                                     {
+                                         return s.Origin.Id == tollStationId || s.Destination.Id == tollStationId || s.TollStations.Any(ts => ts.Id == tollStationId);
+                                     });
         }
     }
 }

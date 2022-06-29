@@ -71,7 +71,7 @@ namespace TollBoothManagementSystem.Core.Features.TransactionManagement.Service
             return Math.Abs(priceExit - priceEnter);
         }
 
-        public void GeneratePrices(PriceList priceList, TollStation tollStation, int basePrice)
+        public void GeneratePrices(PriceList priceList, TollStation tollStation, double basePrice)
         {
             foreach (var currency in _currencyService.ReadAll())
             {
@@ -91,17 +91,57 @@ namespace TollBoothManagementSystem.Core.Features.TransactionManagement.Service
                     };
                     _roadTollService.Create(newRoadToll);
 
-                    var price = qoef * convertedBasePrice;
+                    var price = Math.Round(qoef * convertedBasePrice, 1);
                     RoadTollPrice newRoadTollPrice = new RoadTollPrice()
                     {
                         PriceList = priceList,
                         RoadToll = newRoadToll,
-                        Price = (int) price
+                        Price = price
                     };
                     Create(newRoadTollPrice);
 
                     qoef += 1;
                 }
+            }
+        }
+
+        public void UpdatePrices(PriceList priceList, TollStation tollStation, double newBasePrice)
+        {
+            var roadTollPrices = _roadTollPriceRepository.ReadAll()
+                                                         .Where(rtp => rtp.RoadToll.TollStation.Id == tollStation.Id)
+                                                         .Where(rtp => rtp.PriceList.Id == priceList.Id);
+
+            var oldBasePrice = GetBasePriceForTollStation(priceList.Id, tollStation.Id);
+
+            var qoef = newBasePrice / oldBasePrice;
+
+            foreach (var roadTollPrice in roadTollPrices)
+            {
+                roadTollPrice.Price = Math.Round(roadTollPrice.Price * qoef, 1);
+                Update(roadTollPrice);
+            }
+        }
+        public double GetBasePriceForTollStation(Guid priceListId, Guid tollStationId)
+        {
+            var roadTollPrice = _roadTollPriceRepository.ReadAll()
+                                                        .Where(rtp => rtp.RoadToll.TollStation.Id == tollStationId)
+                                                        .Where(rtp => rtp.PriceList.Id == priceListId)
+                                                        .Where(rtp => rtp.RoadToll.VehicleType == VehicleType.Category1A)
+                                                        .Where(rtp => rtp.RoadToll.Currency.Code == "RSD")
+                                                        .First();
+
+            return roadTollPrice.Price;
+        }
+
+        public void ClearPricesForTollStation(Guid tollStationId)
+        {
+            var roadTollPrices = _roadTollPriceRepository.ReadAll()
+                                                         .Where(rtp => rtp.RoadToll.TollStation.Id == tollStationId);
+
+            foreach (var roadTollPrice in roadTollPrices)
+            {
+                _roadTollPriceRepository.Delete(roadTollPrice.RoadToll.Id);
+                Delete(roadTollPrice.Id);
             }
         }
     }
