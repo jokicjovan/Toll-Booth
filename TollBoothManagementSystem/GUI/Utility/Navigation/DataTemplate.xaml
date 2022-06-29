@@ -55,6 +55,10 @@
         <infrastructureDialog:HandleTollStationView/>
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type infrastructureDialog:HandleTollBoothViewModel}">
+        <infrastructureDialog:HandleTollBoothView/>
+    </DataTemplate>
+
     <DataTemplate DataType="{x:Type userManagementDialog:HandleEmployeeViewModel}">
         <userManagementDialog:HandleEmployeeView/>
     </DataTemplate>

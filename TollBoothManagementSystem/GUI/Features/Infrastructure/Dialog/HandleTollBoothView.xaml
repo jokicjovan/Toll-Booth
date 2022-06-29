@@ -50,19 +50,26 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    
                     <!--Is ETC-->
                     <ComboBox 
                         Style="{DynamicResource MaterialDesignFloatingHintComboBox}" 
                         Grid.Column="0"
+                        Grid.Row="0"
                         Margin="10 15 10 0"
-                        materialDesign:HintAssist.Hint="Is ETC" >
-                        <ComboBoxItem Content="No" />
-                        <ComboBoxItem Content="Yes" IsSelected="{Binding IsETC, Mode=OneWayToSource}" />
+                        materialDesign:HintAssist.Hint="Is ETC" 
+                        ItemsSource="{Binding Booleans}"
+                        SelectedItem="{Binding IsETC}">
                     </ComboBox>
 
                     <TextBlock 
                         Style="{DynamicResource MaterialDesignHelperTextBlock}" 
                         Grid.Column="0"
+                        Grid.Row="1"
                         Foreground="Red" 
                         DataContext="{Binding ETCError}" 
                         Text="{Binding ErrorMessage}" 
@@ -74,15 +81,17 @@
                     <ComboBox 
                         Style="{DynamicResource MaterialDesignFloatingHintComboBox}" 
                         Grid.Column="1"
+                        Grid.Row="0"
                         Margin="10 15 10 0"
-                        materialDesign:HintAssist.Hint="Is open" >
-                        <ComboBoxItem Content="No" />
-                        <ComboBoxItem Content="Yes" IsSelected="{Binding IsOpen, Mode=OneWayToSource}" />
+                        materialDesign:HintAssist.Hint="Is open"                         
+                        ItemsSource="{Binding Booleans}"
+                        SelectedItem="{Binding IsOpen}">
                     </ComboBox>
 
                     <TextBlock 
                         Style="{DynamicResource MaterialDesignHelperTextBlock}" 
                         Grid.Column="1"
+                        Grid.Row="1"
                         Foreground="Red" 
                         DataContext="{Binding IsOpenError}" 
                         Text="{Binding ErrorMessage}" 
@@ -95,22 +104,28 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
-
                     </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
 
                     <!--Is traffic light functional-->
                     <ComboBox 
                         Style="{DynamicResource MaterialDesignFloatingHintComboBox}" 
                         Grid.Column="0"
+                        Grid.Row="0"
                         Margin="10 15 10 0"
-                        materialDesign:HintAssist.Hint="Is trafic light funtional" >
-                        <ComboBoxItem Content="No" />
-                        <ComboBoxItem Content="Yes" IsSelected="{Binding IsTrafficLightFunctional, Mode=OneWayToSource}" />
+                        materialDesign:HintAssist.Hint="Is trafic light funtional"                         
+                        ItemsSource="{Binding Booleans}"
+                        SelectedItem="{Binding IsTrafficLightFunctional}">
                     </ComboBox>
 
                     <TextBlock 
                         Style="{DynamicResource MaterialDesignHelperTextBlock}" 
                         Grid.Column="0"
+                        Grid.Row="1"
                         Foreground="Red" 
                         DataContext="{Binding ETCError}" 
                         Text="{Binding ErrorMessage}" 
@@ -118,19 +133,21 @@
                         Margin="10 0 10 0" 
                         FontSize="10" />
 
-                    <!--Is open-->
+                    <!--Is toll gate functional-->
                     <ComboBox 
                         Style="{DynamicResource MaterialDesignFloatingHintComboBox}" 
                         Grid.Column="1"
+                        Grid.Row="0"
                         Margin="10 15 10 0"
-                        materialDesign:HintAssist.Hint="Is toll gate functional" >
-                        <ComboBoxItem Content="No" />
-                        <ComboBoxItem Content="Yes" IsSelected="{Binding IsTollGateFunctional, Mode=OneWayToSource}" />
+                        materialDesign:HintAssist.Hint="Is toll gate functional"                         
+                        ItemsSource="{Binding Booleans}"
+                        SelectedItem="{Binding IsTollGateFunctional}">
                     </ComboBox>
 
                     <TextBlock 
                         Style="{DynamicResource MaterialDesignHelperTextBlock}" 
                         Grid.Column="1"
+                        Grid.Row="1"
                         Foreground="Red" 
                         DataContext="{Binding IsOpenError}" 
                         Text="{Binding ErrorMessage}" 
@@ -144,7 +161,7 @@
                         Margin="10 50 10 15" 
                         Width="200"
                         Foreground="White" 
-                        Command="{Binding HandleStationCommand}" 
+                        Command="{Binding HandleBoothCommand}" 
                         CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" 
                         FocusManager.FocusedElement="{Binding ElementName=FirstField}"/>
             </StackPanel>

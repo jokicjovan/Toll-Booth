@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
+using TollBoothManagementSystem.Core.Features.Infrastructure.Commands.Dialog;
 using TollBoothManagementSystem.Core.Features.Infrastructure.Model;
 using TollBoothManagementSystem.Core.Features.Infrastructure.Service;
 using TollBoothManagementSystem.GUI.Utility.Dialog;
@@ -9,7 +10,7 @@ using TollBoothManagementSystem.GUI.Utility.Validation;
 
 namespace TollBoothManagementSystem.GUI.Features.Infrastructure.Dialog
 {
-    public class HandleTollBoothViewModel : DialogViewModelBase<HandleTollStationViewModel>
+    public class HandleTollBoothViewModel : DialogViewModelBase<HandleTollBoothViewModel>
     {
         #region Properties
 
@@ -53,6 +54,13 @@ namespace TollBoothManagementSystem.GUI.Features.Infrastructure.Dialog
             set { _isTollGateFunctional = value; OnPropertyChanged(nameof(IsTollGateFunctional)); OnPropertyChanged(nameof(CanExecute)); }
         }
 
+        private ObservableCollection<bool> _booleans;
+        public ObservableCollection<bool> Booleans
+        {
+            get { return _booleans; }
+            set { _booleans = value; OnPropertyChanged(nameof(Booleans)); OnPropertyChanged(nameof(CanExecute)); }
+        }
+
         #endregion
 
         #region Additional properties
@@ -90,13 +98,15 @@ namespace TollBoothManagementSystem.GUI.Features.Infrastructure.Dialog
 
         #endregion
         public HandleTollBoothViewModel(ITollBoothService tollBoothService, ITollStationService tollStationService,
-            TollStationsViewModel tollStationsVM,
-            Guid boothId) : base("Add station", 700, 600)
+            TollBoothsViewModel tollBoothsVm,
+            Guid boothId, TollStation tollStation) : base("Add station", 700, 500)
         {
             _tollBoothService = tollBoothService;
             _tollStationService = tollStationService;
 
             _boothId = boothId;
+
+            Booleans = new ObservableCollection<bool>() { true, false };
 
             if (_boothId != Guid.Empty)
             {
@@ -108,31 +118,24 @@ namespace TollBoothManagementSystem.GUI.Features.Infrastructure.Dialog
                 Title = "Add booth";
             }
 
-            HandleStationCommand = new HandleTollStationCommand(_tollStationService, _sectionService, _sectionInfoService,
-                _roadTollPriceService,
-                _priceListService, tollStationsVM, this, _stationId);
+            HandleBoothCommand = new HandleTollBoothCommand(_tollBoothService, _tollStationService,  tollBoothsVm, this, boothId, tollStation);
         }
 
         public void ResetFields()
         {
-            StationName = null;
+            BoothCode = null;
             ResetDirtyValues();
             IsValid();
         }
 
         public void FetchProperties()
         {
-            stationToUpdate = _tollStationService.Read(_stationId);
-            SelectedLocation = stationToUpdate.Location;
-            SelectedReferent = stationToUpdate.Boss;
-            SelectedSection = _sectionService.getSectionForTollStation(stationToUpdate.Id);
-            var sectionInfo = _sectionInfoService.getSectionInfoForTollStation(stationToUpdate.Id);
-            var priceList = _priceListService.GetActivePricelist(SelectedSection);
-            Distance = sectionInfo.Distance.ToString();
-            Price = _roadTollPriceService.GetBasePriceForTollStation(priceList.Id, stationToUpdate.Id).ToString();
-            OrderNumber = stationToUpdate.OrderNumber.ToString();
-
-            StationName = stationToUpdate.Name;
+            tollBoothToUpdate = _tollBoothService.Read(_boothId);
+            BoothCode = tollBoothToUpdate.Code;
+            IsETC = tollBoothToUpdate.IsETC;
+            IsOpen = tollBoothToUpdate.IsOpen;
+            IsTrafficLightFunctional = tollBoothToUpdate.IsTrafficLightFunctional;
+            IsTollGateFunctional = tollBoothToUpdate.IsTollGateFunctional;
         }
 
 
@@ -178,12 +181,23 @@ namespace TollBoothManagementSystem.GUI.Features.Infrastructure.Dialog
             // IsTrafficLightFunctional
             if (IsTrafficLightFunctional == null && IsDirty(nameof(IsOpen)))
             {
-                IsOpenError.ErrorMessage = "You must select a value.";
+                IsTrafficLightFunctionalError.ErrorMessage = "You must select a value.";
                 valid = false;
             }
             else
             {
-                IsOpenError.ErrorMessage = null;
+                IsTrafficLightFunctionalError.ErrorMessage = null;
+            }
+
+            // IsTollGateFunctional
+            if (IsTollGateFunctional == null && IsDirty(nameof(IsTollGateFunctional)))
+            {
+                IsTollGateFunctionalError.ErrorMessage = "You must select a value.";
+                valid = false;
+            }
+            else
+            {
+                IsTollGateFunctionalError.ErrorMessage = null;
             }
 
             return valid && AllDirty();

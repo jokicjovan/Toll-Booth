@@ -5,6 +5,7 @@ using System.Windows.Input;
 using TollBoothManagementSystem.Core.Features.Infrastructure.Commands;
 using TollBoothManagementSystem.Core.Features.Infrastructure.Model;
 using TollBoothManagementSystem.Core.Features.Infrastructure.Service;
+using TollBoothManagementSystem.Core.Features.UserManagement.Commands;
 using TollBoothManagementSystem.GUI.Utility.Dialog;
 using TollBoothManagementSystem.GUI.Utility.ViewModel;
 
@@ -117,8 +118,8 @@ namespace TollBoothManagementSystem.GUI.Features.Infrastructure
             _tollStation = _tollStationService.Read(tollStationId);
             Search();
 
-            //AddEmployeeCommand = new AddEmployeeCommand(_dialogService, this);
-            //UpdateEmployeeCommand = new UpdateEmployeeCommand(_dialogService, this);
+            AddTollBoothCommand = new AddTollBoothCommand(_dialogService, this, _tollStation);
+            UpdateTollBoothCommand = new UpdateTollBoothCommand(_dialogService, this, _tollStation);
             SearchTollBoothCommand = new SearchCommand(this);
             DeleteTollBoothCommand = new DeleteTollBoothCommand(this);
         }
