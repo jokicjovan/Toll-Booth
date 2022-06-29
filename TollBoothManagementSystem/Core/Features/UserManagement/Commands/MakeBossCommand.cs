@@ -26,7 +26,7 @@ namespace TollBoothManagementSystem.Core.Features.UserManagement.Commands
         public override bool CanExecute(object? parameter)
         {
             return !(_viewModel.SelectedEmployee == null || _viewModel.SelectedEmployee.Role == Role.Manager) && 
-                !(_viewModel.TollStation.Boss == null && _viewModel.TollStation.Boss.Id == _viewModel.SelectedEmployee.Id) 
+                !(_viewModel.TollStation.Boss != null && _viewModel.TollStation.Boss.Id == _viewModel.SelectedEmployee.Id) 
                 && base.CanExecute(parameter);
         }
 
