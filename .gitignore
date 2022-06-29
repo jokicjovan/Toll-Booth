@@ -3,6 +3,16 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+TollBoothConfiguration.txt
+*.db
+*InitialCreate.cs
+*Designer.cs
+*Snapshot.cs
+
+# SQLite specific files
+*.db-shm
+*.db-wal
+
 # User-specific files
 *.rsuser
 *.suo
@@ -348,3 +358,5 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+TollBoothManagementSystem/Migrations/
+TollBoothManagementSystem/Core/Persistence/tollbooth.db
