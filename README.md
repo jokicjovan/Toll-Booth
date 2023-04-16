@@ -1,4 +1,4 @@
-# Introduction
+## Introduction
 Toll-Booth is a desktop-based toll management system that allows toll operators to manage toll booths, collect toll fees, and generate reports. The project is built using the .NET 6 framework and SQLite database for data storage, and uses Material Design for UI.
 
 The main goals of the Toll-Booth project are:
